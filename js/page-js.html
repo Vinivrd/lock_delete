@@ -8,33 +8,21 @@
   } 
 
   function showPage(pageId) {
-
     //selecionar azul
     let elements = document.querySelectorAll('[id*="_option"]');
     elements.forEach(e => {
       //tira o select
-      if(e.id.includes("_selected") && !e.id.includes(pageId) ){
-        e.id = e.id.slice(0,-9);
-      }else if(e.id.includes(pageId) && !e.id.includes("_selected") ){
+      if (e.id.includes("_selected") && !e.id.includes(pageId)) {
+        e.id = e.id.slice(0, -9);
+        e.classList.remove("text-blue-700");
+        e.classList.add("text-gray-900");
+      }else if (e.id.includes(pageId) && !e.id.includes("_selected")) {
+        // Adiciona '_selected' ao ID e a classe 'text-blue-700'
         e.id += "_selected";
-
-        elements.forEach(option=>{
-          if(!option.includes(pageId)){
-            
-            option.classList.add("text-gray-900");
-          }
-        })  
+        e.classList.remove("text-gray-900");
         e.classList.add("text-blue-700");
-
-        console.log(e);
-      }
-      
+      }           
     })
-
-
-    
-
-
 
     var pages = document.getElementsByClassName('content');
     for (var i = 0; i < pages.length; i++) {
