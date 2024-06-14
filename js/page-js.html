@@ -1,0 +1,49 @@
+<script> 
+  
+  function doStuff(e) {
+    var userInfo = {};
+    userInfo.firstName = document.getElementById("fn").value;
+    google.script.run.userClicked(userInfo);
+    document.getElementById("fn").value = "";
+  } 
+
+  function showPage(pageId) {
+
+    //selecionar azul
+    let elements = document.querySelectorAll('[id*="_option"]');
+    elements.forEach(e => {
+      //tira o select
+      if(e.id.includes("_selected") && !e.id.includes(pageId) ){
+        e.id = e.id.slice(0,-9);
+      }else if(e.id.includes(pageId) && !e.id.includes("_selected") ){
+        e.id += "_selected";
+
+        elements.forEach(option=>{
+          if(!option.includes(pageId)){
+            
+            option.classList.add("text-gray-900");
+          }
+        })  
+        e.classList.add("text-blue-700");
+
+        console.log(e);
+      }
+      
+    })
+
+
+    
+
+
+
+    var pages = document.getElementsByClassName('content');
+    for (var i = 0; i < pages.length; i++) {
+      pages[i].classList.add('hidden');
+    }
+  
+  var page = document.getElementById(pageId);
+  page.classList.remove('hidden');
+}
+ 
+
+</script>
