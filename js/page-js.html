@@ -1,5 +1,5 @@
 <script> 
-  
+
   function doStuff(e) {
     var userInfo = {};
     userInfo.firstName = document.getElementById("fn").value;
@@ -8,7 +8,6 @@
   } 
 
   function showPage(pageId) {
-    //selecionar azul
     let elements = document.querySelectorAll('[id*="_option"]');
     elements.forEach(e => {
       //tira o select
@@ -24,14 +23,150 @@
       }           
     })
 
-    var pages = document.getElementsByClassName('content');
-    for (var i = 0; i < pages.length; i++) {
-      pages[i].classList.add('hidden');
-    }
+  var pages = document.getElementsByClassName('content');
+  for (var i = 0; i < pages.length; i++) {
+    pages[i].classList.add('hidden');
+  }
   
   var page = document.getElementById(pageId);
   page.classList.remove('hidden');
 }
- 
+
+document.getElementById('button').addEventListener('click', toggleError)
+  const errMessages = document.querySelectorAll('#error')
+
+  function toggleError() {
+
+    errMessages.forEach((el) => {
+      el.classList.toggle('hidden')
+    })
+
+    const allBorders = document.querySelectorAll('.border-gray-200')
+    const allTexts = document.querySelectorAll('.text-gray-500')
+    allBorders.forEach((el) => {
+      el.classList.toggle('border-red-600')
+    })
+    allTexts.forEach((el) => {
+      el.classList.toggle('text-red-600')
+    })
+  }
+
+
+  //Aqui eu pego todas as displinas
+  const sheets =  [ 
+  "Bacharelado em Ciência de Dados", "Bacharelado em Matemática",
+  "Matemática- Núcleo Geral","Licenciatura em Matemática",
+  "Bacharelado em Estatística e Ciência de Dados","Bacharelado em Sistema de Informação",
+  "Bacharelado em Ciências de Computação","Bacharelado em Matemática Aplicada e Computação Científica"
+  ];
+  
+  let table = new Array(sheets.length);
+  sheets.forEach((curso, index) => {
+   google.script.run.withSuccessHandler((data) => {
+    table[index] = data;
+  }).getDisplinas(curso);
+});
+
+
+  
+  //aqui eu pego o curso, para o usuario aceitar.
+
+  function updateLegend(value) {
+    var legendElement = document.getElementById('legendCurso');
+    var selectElement = document.getElementById('selectCurso');
+    
+    switch (value) {
+      case '1':
+        legendElement.textContent = 'Eu declaro que sou aluno do curso de Bacharelado em Ciência de Dados';
+        break;
+      case '2':
+        legendElement.textContent = 'Eu declaro que sou aluno do curso de Bacharelado em Matemática';
+        break;
+      case '3':
+        legendElement.textContent = 'Eu declaro que sou aluno do curso de Matemática - Núcleo Geral';
+        break;
+      case '4':
+        legendElement.textContent = 'Eu declaro que sou aluno do curso de Licenciatura em Matemática';
+        break;
+      case '5':
+        legendElement.textContent = 'Eu declaro que sou aluno do curso de Bacharelado em Estatística e Ciência de Dados';
+        break;
+      case '6':
+        legendElement.textContent = 'Eu declaro que sou aluno do curso de Bacharelado em Sistema de Informação';
+        break;
+      case '7':
+        legendElement.textContent = 'Eu declaro que sou aluno do curso de Bacharelado em Ciências de Computação';
+        break;
+      case '8':
+        legendElement.textContent = 'Eu declaro que sou aluno do curso de Bacharelado em Matemática Aplicada e Computação Científica';
+        break;
+      default:
+        legendElement.textContent = '';
+        break;
+    }
+  }
+
+  //DISPLINAS
+  let selected_curso = document.getElementById("selectCurso");
+  let select_Displinas = document.getElementById("selectDisplinas");
+  let tot_creditos;
+
+  selected_curso.addEventListener('change',()=> {
+    let selectedOption =  selected_curso.options[selected_curso.selectedIndex];
+    const selectedText = selectedOption.textContent;
+
+    while (select_Displinas.options.length > 1) {
+        select_Displinas.remove(1);
+    }
+
+    renderDisplinas(selectedText)
+  })
+
+  function renderDisplinas(selectedText){
+
+    let index;
+    switch (selectedText) {
+      case "Bacharelado em Ciência de Dados":
+        index = 0;
+        break;
+      case "Bacharelado em Matemática":
+        index = 1;
+        break;
+      case "Matemática- Núcleo Geral":
+        index = 2;
+        break;
+      case "Licenciatura em Matemática":
+        index = 3;
+        break;
+      case "Bacharelado em Estatística e Ciência de Dados":
+        index = 4;
+        break;
+      case "Bacharelado em Sistema de Informação":
+        index = 5;
+        break;
+      case "Bacharelado em Ciências de Computação":
+        index = 6;
+        break;
+      case "Bacharelado em Matemática Aplicada e Computação Científica":
+        index = 7;
+        break;
+      default:
+        break;
+    }
+    if(index >= 0 && index <=7 ){
+      table[index].forEach((displinas,index) => {
+        let optionElement = document.createElement('option');
+       
+        optionElement.value = index;
+        optionElement.text = displinas[2];
+        optionElement.id = displinas[2];
+        optionElement.textContent = `${displinas[0]} ${displinas[1]}`;
+        select_Displinas.appendChild(optionElement);
+        
+      })
+    }
+  }
+  
+
 
 </script>
