@@ -6,9 +6,10 @@
     google.script.run.userClicked(userInfo);
     document.getElementById("fn").value = "";
   } 
-
+  //Aqui eu faço o render da page
   function showPage(pageId) {
     let elements = document.querySelectorAll('[id*="_option"]');
+
     elements.forEach(e => {
       //tira o select
       if (e.id.includes("_selected") && !e.id.includes(pageId)) {
@@ -23,20 +24,20 @@
       }           
     })
 
-  var pages = document.getElementsByClassName('content');
-  for (var i = 0; i < pages.length; i++) {
-    pages[i].classList.add('hidden');
+    let pages = document.getElementsByClassName('content');
+    for (let  i = 0; i < pages.length; i++) {
+      pages[i].classList.add('hidden');
+    }
+    
+    let page = document.getElementById(pageId);
+    page.classList.remove('hidden');
   }
-  
-  var page = document.getElementById(pageId);
-  page.classList.remove('hidden');
-}
 
-document.getElementById('button').addEventListener('click', toggleError)
+  //SEND
+  document.getElementById('button').addEventListener('click', toggleError)
   const errMessages = document.querySelectorAll('#error')
 
   function toggleError() {
-
     errMessages.forEach((el) => {
       el.classList.toggle('hidden')
     })
@@ -52,28 +53,27 @@ document.getElementById('button').addEventListener('click', toggleError)
   }
 
 
-  //Aqui eu pego todas as displinas
+  //Render das displinas no select
   const sheets =  [ 
-  "Bacharelado em Ciência de Dados", "Bacharelado em Matemática",
-  "Matemática- Núcleo Geral","Licenciatura em Matemática",
-  "Bacharelado em Estatística e Ciência de Dados","Bacharelado em Sistema de Informação",
-  "Bacharelado em Ciências de Computação","Bacharelado em Matemática Aplicada e Computação Científica"
+    "Bacharelado em Ciência de Dados", "Bacharelado em Matemática",
+    "Matemática- Núcleo Geral","Licenciatura em Matemática",
+    "Bacharelado em Estatística e Ciência de Dados","Bacharelado em Sistema de Informação",
+    "Bacharelado em Ciências de Computação","Bacharelado em Matemática Aplicada e Computação Científica"
   ];
   
   let table = new Array(sheets.length);
   sheets.forEach((curso, index) => {
-   google.script.run.withSuccessHandler((data) => {
-    table[index] = data;
-  }).getDisplinas(curso);
-});
+    google.script.run.withSuccessHandler(data => {
+      table[index] = data;
+    }).getDisplinas(curso);
+  });
 
 
   
-  //aqui eu pego o curso, para o usuario aceitar.
-
+  //legenda do termo de aceitação
   function updateLegend(value) {
-    var legendElement = document.getElementById('legendCurso');
-    var selectElement = document.getElementById('selectCurso');
+    let legendElement = document.getElementById('legendCurso');
+    let selectElement = document.getElementById('selectCurso');
     
     switch (value) {
       case '1':

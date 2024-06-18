@@ -42,6 +42,7 @@
       </div>
       </div>
     </nav>
+
    <!--Info-->
     <div id="info" class="content block">
       <h1 class="text-2xl font-bold mb-2">Welcome to the SPA</h1>
@@ -51,6 +52,7 @@
 
     <!--Trancar matéria -->
     <div id="trancar" class="content hidden">
+      <!--Content-->
       <div class="min-h-screen p-0 sm:p-12">
         <div class="mx-auto max-w-xl px-8 py-16 bg-white border-0 shadow-lg sm:rounded-3xl">
           <h1 class="text-2xl font-bold mb-8">Trancar matéria </h1>
@@ -132,13 +134,13 @@
               <!--Ano de ingresso-->
               <div class="relative z-0 w-full mb-5">
                 <input
-                type="text"
-                name="ano_ingresso"
-                pattern="[0-9]{4}"
-                placeholder=" "
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
-                maxlength="4"
+                  type="text"
+                  name="ano_ingresso"
+                  pattern="[0-9]{4}"
+                  placeholder=" "
+                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
+                  maxlength="4"
                 />
                 <label for="ano_ingresso" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu ano de ingresso</label>
                 <span class="text-sm text-red-600 hidden" id="error">Digite seu ano de ingresso</span>
@@ -146,10 +148,10 @@
 
               <div class="relative z-0 w-full mb-5">
                 <input
-                type="tel"
-                name="telefone"
-                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                placeholder=" "
+                  type="tel"
+                  name="telefone"
+                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                  placeholder=" "
           
                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)"
                 class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
@@ -164,13 +166,13 @@
               <!--Ano de termino-->
               <div class="relative z-0 w-full mb-5">
                 <input
-                type="text"
-                name="ano_termino"
-                pattern="[0-9]{4}"
-                placeholder=" "
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
-                maxlength="4"
+                  type="text"
+                  name="ano_termino"
+                  pattern="[0-9]{4}"
+                  placeholder=" "
+                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
+                  maxlength="4"
                 />
                 <label for="ano_termino" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu ano do termino </label>
                 <span class="text-sm text-red-600 hidden" id="error">Digite seu ano do termino</span>
@@ -199,13 +201,13 @@
               <!--Tot créditos-->
               <div class="relative z-0 w-full mb-5">
                 <input
-                type="text"
-                name="tot_créditos"
-                pattern="[0-9]{}"
-                placeholder=" "
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 2)"
-                maxlength="8"
+                  type="text"
+                  name="tot_créditos"
+                  pattern="[0-9]{}"
+                  placeholder=" "
+                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 2)"
+                  maxlength="8"
                 />
                 <label for="tot_créditos" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite total de créditos</label>
                 <span class="text-sm text-red-600 hidden" id="error">Digite total de créditos</span>
@@ -286,17 +288,29 @@
                 <option value="2">Problemas com o professor</option>
                 <option value="3">Matriculei-me em créditos a mais para desistir depois</option>
                 <option value="4">Outros</option>
-        
               </select>
               <label for="just_exclusão" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Justificativa para a exclusão</label>
               <span class="text-sm text-red-600 hidden" id="error">Escolha a justificativa</span>
             </div>
             
-            <div class="flex items-center">
-              <input id="link-radio" type="radio" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-              <label for="link-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Radio button with a <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">link inside</a>.</label>
+            <div class="mt-7">
+              <fieldset class="relative z-0 w-full p-px mb-5">
+                <legend class="absolute text-gray-500 transform -top-3 origin-0">Termo de aceitação</legend>
+                <div class="block pt-5 pb-2 space-x-4">
+                  <label>
+                    <input
+                      type="radio"
+                      name="radio_termo"
+                      value="1"
+                      class="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                    />
+                   Estou ciente que ao enviar esse formulário o processo de exclusão será irreversível e que trata-se de exclusão de disciplinas do 1º. semestre de 2024.
+                  </label>
+                </div>
+                <span class="text-sm text-red-600 hidden" id="error">Preencha o termo</span>
+              </fieldset>
             </div>
-
+            
             <button
               id="button"
               type="button"
