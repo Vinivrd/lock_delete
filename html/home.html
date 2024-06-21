@@ -54,79 +54,78 @@
     <div id="excluir" class="content hidden">
       <div class="min-h-screen p-0 sm:p-12">
         <div class="mx-auto max-w-xl px-8 py-16 bg-white border-0 shadow-lg sm:rounded-3xl">
-          <h1 class="text-2xl font-bold mb-8">Excluir displina </h1>
+          <h1 class="text-2xl font-bold mb-8">Excluir displina</h1>
           <!--Inicio do form-->
           <form id="form" novalidate> <!--**-->
-           
+    
             <!--Nome e num usp-->
             <div class="flex flex-row space-x-4">
               <div class="relative z-0 w-full mb-5">
                 <!--Nome-->
                 <input
                   type="text"
-                  name="name"
+                  name="nome"
                   placeholder=" "
                   required
                   class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 />
-                <label for="name" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Coloque seu nome</label>
-                <span class="text-sm text-red-600 hidden" id="error">Digite seu nome completo</span>
+                <label for="nome" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Coloque seu nome</label>
+                <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
               </div>
-
-               <!--Número usp-->
+    
+              <!--Número usp-->
               <div class="relative z-0 w-full mb-5">
                 <input
-                type="text"
-                name="num_usp"
-                pattern="[0-9]{}"
-                placeholder=" "
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8)"
-                maxlength="8"
+                  type="text"
+                  name="num_usp"
+                  pattern="[0-9]{}"
+                  placeholder=" "
+                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8)"
+                  maxlength="8"
                 />
-                <label for="num_usp" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu ano de ingresso</label>
-                <span class="text-sm text-red-600 hidden" id="error">Digite seu ano de ingresso</span>
+                <label for="num_usp" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu número USP</label>
+                <span class="text-sm text-red-600 hidden" id="error-num_usp">Você não digitou seu número USP</span>
               </div>
-              
+    
             </div>
-
+    
             <!--Option-->
             <div class="relative z-0 w-full mb-5">
               <select
                 id="selectCurso"
-                name="select"
+                name="select_curso"
                 value=""
                 onclick="this.setAttribute('value', this.value);"
                 class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
               >
-                
+    
                 <option value="" selected disabled hidden></option>
                 <?for(let i = 0; i < cursos.length; i++){ ?>
                   <option value=<?=i?>><?= cursos[i] ?></option>
                 <? } ?>
-
+    
               </select>
-              <label for="select" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Escolha seu curso</label>
-              <span class="text-sm text-red-600 hidden" id="error">Selecione um curso</span>
+              <label for="select_curso" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Escolha seu curso</label>
+              <span class="text-sm text-red-600 hidden" id="error-select">Você não selecionou um curso</span>
             </div>
-
+    
             <!--Declaro que sou aluno -->
             <fieldset class="relative z-0 w-full p-px mb-5">
               <legend class="absolute text-gray-500 transform -top-3 origin-0">Termo de aceitação</legend>
               <div class="block pt-5 pb-2">
-                  <input
-                    type="radio"
-                    name="term_curso"
-                    value="1"
-                    id="term_curso_id"
-                    class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
-                    onclick="toggleSubmitButton()"
-                  />
+                <input
+                  type="radio"
+                  name="term_curso"
+                  value="1"
+                  id="term_curso_id"
+                  class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                />
                 <label for="term_curso" id="legendCurso">Escolha seu curso</label>
               </div>
-              <span class="text-sm text-red-600 hidden" id="error">Você deve aceitar</span>
+              <span class="text-sm text-red-600 hidden" id="error-term_curso">É necessário aceitar o termo de aceitação</span>
             </fieldset>
-
+    
             <!--ano de ingresso e numero -->
             <div class="flex flex-row space-x-4">
               <!--Ano de ingresso-->
@@ -141,24 +140,24 @@
                   maxlength="4"
                 />
                 <label for="ano_ingresso" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu ano de ingresso</label>
-                <span class="text-sm text-red-600 hidden" id="error">Digite seu ano de ingresso</span>
+                <span class="text-sm text-red-600 hidden" id="error-ano_ingresso">Você não digitou seu ano de ingresso</span>
               </div>
-
+    
               <div class="relative z-0 w-full mb-5">
                 <input
                   type="tel"
                   name="telefone"
                   pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                   placeholder=" "
-          
-                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)"
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+    
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)"
+                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 />
                 <label for="telefone" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu telefone</label>
-                <span class="text-sm text-red-600 hidden" id="error">Digite seu telefone</span>
+                <span class="text-sm text-red-600 hidden" id="error-telefone">Você não digitou seu telefone</span>
               </div>
             </div>
-
+    
             <!--PREVISAO PARA TERMINO ANO E SEMESTRE -->
             <div class="flex flex-row space-x-4">
               <!--Ano de termino-->
@@ -173,25 +172,25 @@
                   maxlength="4"
                 />
                 <label for="ano_termino" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu ano do termino </label>
-                <span class="text-sm text-red-600 hidden" id="error">Digite seu ano do termino</span>
+                <span class="text-sm text-red-600 hidden" id="error-ano_termino">Você não digitou seu ano do termino</span>
               </div>
-
+    
               <div class="relative z-0 w-full mb-5">
                 <select
                   id="select_ano_termino"
                   name="select_semestre"
                   value=""
                   onclick="this.setAttribute('value', this.value);"
-  
+    
                   class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 >
                   <option value="" selected disabled hidden></option>
                   <option value="1_sem">1 semestre</option>
                   <option value="2_sem">2 semestre</option>
-
+    
                 </select>
-                <label for="select_semestre" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Escolha o semestre do seu temrino </label>
-                <span class="text-sm text-red-600 hidden" id="error">Selecione o semestre do seu termino</span>
+                <label for="select_semestre" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Escolha o semestre do seu término </label>
+                <span class="text-sm text-red-600 hidden" id="error-select_semestre">Você não selecionou o semestre de término</span>
               </div>  
             </div>
             <!--Escolha seu curo / tot créditos-->
@@ -201,6 +200,7 @@
                 <input
                   type="text"
                   name="tot_créditos"
+                  id="tot_creditos"
                   pattern="[0-9]{}"
                   placeholder=" "
                   class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
@@ -208,10 +208,10 @@
                   maxlength="8"
                 />
                 <label for="tot_créditos" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite total de créditos</label>
-                <span class="text-sm text-red-600 hidden" id="error">Digite total de créditos</span>
+                <span class="text-sm text-red-600 hidden" id="error-tot_créditos">Você não digitou seu total de créditos</span>
               </div>
             </div>
-            
+    
             <div class="relative z-0 w-full mb-5">
               <select
                 id="selectDisplinas"
@@ -225,12 +225,23 @@
                 <!--Aqui é inserido dados dinamicos -->
               </select>
               <label for="select_Displinas" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Escolha a displina</label>
-              <span class="text-sm text-red-600 hidden" id="error">Escolha a displina</span>
+              <span class="text-sm text-red-600 hidden" id="error-select_Displinas">Você estorou o limite de crédito.</span>
             </div>
-
+    
             <!--Caso a matéria nao esteja na lista-->
-            <h3 class="mb-5">Caso não tenha a matéria na lista</h3>
-            <div class="flex flex-row space-x-4">
+            <div class="block pt-5 pb-2">
+              <input
+                type="radio"
+                name="no_curso"
+                value="1"
+                id = "no_curso_radio"
+                class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                onclick="toggleNocurso()"
+              />
+              <label for="no_curso" id="legendnoCurso">Click aqui se nao tiver seu curso na lista</label>
+            </div>
+            <div class="flex flex-row space-x-4 hidden transition-opacity duration-500 ease-in-out" 
+                 id="curso_fora_da_lista">
               <div class="relative z-0 w-1/4 mb-5">
                 <input
                   type="text"
@@ -241,7 +252,7 @@
                   class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 />
                 <label for="cod_displina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Codigo</label>
-                <span class="text-sm text-red-600 hidden" id="error">Digite o código </span>
+                <span class="text-sm text-red-600 hidden" id="error-codigo_discplina">Você não digitou o código</span>
               </div>
               <div class="relative z-0 w-2/4 mb-5">
                 <input
@@ -252,9 +263,9 @@
                   class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 />
                 <label for="nome_displina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Nome displina</label>
-                <span class="text-sm text-red-600 hidden" id="error">Digite o nome da displina </span>
+                <span class="text-sm text-red-600 hidden" id="error-nome_discplina">Você não digitou o nome da displina</span>
               </div>
-
+    
               <div class="relative z-0 w-1/4 mb-5">
                 <input
                   type="text"
@@ -262,21 +273,22 @@
                   placeholder=" "
                   pattern="[0-9]{4}"
                   maxlength="2"
+                  id="credit_nolist"
                   required
                   class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 />
                 <label for="cred_discplina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Credito</label>
-                <span class="text-sm text-red-600 hidden" id="error">Digite o credito </span>
+                <span class="text-sm text-red-600 hidden" id="error-cred_discplina">Você passou do limite de créditos</span>
               </div>
             </div>
-
+    
             <!--justificafica para a exlcusao-->
             <div class="relative z-0 w-full mb-5">
               <select
                 name="just_exclusão"
                 value=""
                 onclick="this.setAttribute('value', this.value);"
-  
+    
                 class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
               >    
                 <option value="" selected disabled hidden></option>
@@ -287,14 +299,13 @@
                 <option value="4">Outros</option>
               </select>
               <label for="just_exclusão" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Justificativa para a exclusão</label>
-              <span class="text-sm text-red-600 hidden" id="error">Escolha a justificativa</span>
+              <span class="text-sm text-red-600 hidden" id="error-just_exclusão">Você não digitou a justificativa</span>
             </div>
-            
+    
             <div class="mt-10">
               <fieldset class="relative z-0 w-full p-px mb-5">
                 <legend class="absolute text-gray-500 transform -top-3 origin-0">Termo de aceitação</legend>
                 <div class="block pt-5 pb-2">
-                 
                   <input
                     type="radio"
                     name="radio_termo"
@@ -305,10 +316,10 @@
                     Estou ciente que ao enviar esse formulário o processo de exclusão será irreversível e que trata-se de exclusão de disciplinas do 1º. semestre de 2024.
                   </label>
                 </div>
-                <span class="text-sm text-red-600 hidden" id="error">Preencha o termo</span>
+                <span class="text-sm text-red-600 hidden" id="error-radio_termo">Você não aceitou o termo</span>
               </fieldset>
             </div>
-            
+    
             <button
               id="button"
               type="button"
@@ -318,7 +329,9 @@
             </button>
           </form>
         </div>
+      </div>
     </div>
+    
 
     <!--Trancar matéria -->
     <div id="trancar" class="content hidden">

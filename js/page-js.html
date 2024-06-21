@@ -1,10 +1,10 @@
 <script> 
 
   function doStuff(e) {
-    var userInfo = {};
-    userInfo.firstName = document.getElementById("fn").value;
-    google.script.run.userClicked(userInfo);
-    document.getElementById("fn").value = "";
+    //var userInfo = {};
+    //userInfo.firstName = document.getElementById("fn").value;
+    //google.script.run.userClicked(userInfo);
+    //document.getElementById("fn").value = "";
   } 
   //Aqui eu faço o render da page
   function showPage(pageId) {
@@ -140,32 +140,126 @@
         optionElement.value = index;
         optionElement.text = displinas[2];
         optionElement.id = displinas[2];
+        optionElement.className = `${index}-option`;
         optionElement.textContent = `${displinas[0]} ${displinas[1]}`;
         select_Displinas.appendChild(optionElement);    
       })
     }
   }
-  //TOGLE SUBMITE
-  function toggleSubmitButton() {
-    let ele = document.getElementById("term_curso_id");
-    console.log(ele.checked);
+
+  //togle submite quando nao tem o curso na lista
+  
+  function toggleNocurso(){
+    let radio = document.getElementById("no_curso_radio");
+    let div = document.getElementById("curso_fora_da_lista");
+
+    console.log(document.getElementById("selectDisplinas"))
+
+    if (radio.checked) {
+      div.classList.remove("hidden");
+    } else {
+      div.classList.add("hidden");
+    }
   }
+  //calculo total de creditos
+  function cal_totCreditos(){
+    let prev_credit = parseInt(document.getElementById("tot_creditos").value);
+
+    if(document.getElementById("no_curso_radio").checked){
+      let credit_nolist = parseInt(document.getElementById("credit_nolist").value);
+      return prev_credit - credit_nolist;
+    }else{
+      let index = document.getElementById("selectDisplinas").value;
+      let credit_curso = parseInt(document.getElementsByClassName(`${index}-option`)[0].id);
+      return prev_credit - credit_curso;
+    }
+  }
+
   //SEND
   document.getElementById('button').addEventListener('click', toggleError)
   const errMessages = document.querySelectorAll('#error')
 
   function toggleError() {
-    errMessages.forEach((el) => {
-      el.classList.toggle('hidden')
-    })
+  const inputs = document.querySelectorAll('input, select');
+  let hasError = false;
 
-    const allBorders = document.querySelectorAll('.border-gray-200')
-    const allTexts = document.querySelectorAll('.text-gray-500')
-    allBorders.forEach((el) => {
-      el.classList.toggle('border-red-600')
-    })
-    allTexts.forEach((el) => {
-      el.classList.toggle('text-red-600')
-    })
+
+  inputs.forEach((input) => {
+    const errorElement = document.getElementById(`error-${input.name}`);
+    if (input.type === 'radio') {
+      if (!input.checked) {
+        if(!(input.name ==  "no_curso")){
+          showError(errorElement, input);
+          hasError = true;
+        }
+      } else {
+        hideError(errorElement, input);
+      }
+    }else if(cal_totCreditos()< 12){ 
+
+      if(document.getElementById("no_curso_radio").checked){
+
+        let error = document.getElementById(`error-cred_discplina`)
+  
+        showError(error, document.getElementById("credit_nolist"));
+        hasError = true;
+
+      }else{ 
+        let error = document.getElementById(`error-select_Displinas`);
+
+        showError(error, document.getElementById("selectDisplinas"));
+        hasError = true;
+        //hideError(error, document.getElementById("credit_nolist"));
+      }
+
+      
+    }else if (!input.value) {
+      let exception = ["codigo_discplina","nome_discplina","cred_discplina","select_Displinas"];
+
+      if(!exception.includes(input.name)){
+        showError(errorElement, input);
+        hasError = true;
+      }
+    } else {
+      hideError(errorElement, input);
+    }
+  });
+
+  
+
+  if (!hasError) {
+    cal_totCreditos();
+    let userInfos = [];
+    inputs.forEach(input => {
+      userInfos.push(input.value);
+      console.log(input.value)
+    });
+    console.log(cal_totCreditos())
+    userInfos.push(cal_totCreditos());
+    google.script.run.userClicked(userInfos);
+    alert("Dados enviados com sucesso!")
   }
+}
+
+function showError(errorElement, input) {
+  if (errorElement) {
+    errorElement.classList.remove('hidden');
+  }
+  input.classList.add('border-red-600');
+  const label = input.previousElementSibling;
+  if (label) {
+    label.classList.add('text-red-600');
+  }
+}
+
+function hideError(errorElement, input) {
+  if (errorElement) {
+    errorElement.classList.add('hidden');
+  }
+  input.classList.remove('border-red-600');
+  const label = input.previousElementSibling;
+  if (label) {
+    label.classList.remove('text-red-600');
+  }
+}
 </script>
