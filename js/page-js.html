@@ -140,7 +140,7 @@
         optionElement.value = index;
         optionElement.text = displinas[2];
         optionElement.id = displinas[2];
-        optionElement.className = `${index}-option`;
+        optionElement.className = `select_Displinas-${index}`;
         optionElement.textContent = `${displinas[0]} ${displinas[1]}`;
         select_Displinas.appendChild(optionElement);    
       })
@@ -170,7 +170,8 @@
       return prev_credit - credit_nolist;
     }else{
       let index = document.getElementById("selectDisplinas").value;
-      let credit_curso = parseInt(document.getElementsByClassName(`${index}-option`)[0].id);
+      let name = document.getElementById("selectDisplinas").name;
+      let credit_curso = parseInt(document.getElementsByClassName(`${name}-${index}`)[0].id);
       return prev_credit - credit_curso;
     }
   }
@@ -231,10 +232,16 @@
     cal_totCreditos();
     let userInfos = [];
     inputs.forEach(input => {
-      userInfos.push(input.value);
-      console.log(input.value)
+      //aqui eu arrumos os dados de select 
+      if(input.id.includes("select")){
+        userInfos.push(document.getElementsByClassName(`${input.name}-${input.value}`)[0].textContent);
+      }else if(input.type == "radio" && input.value == 1){
+        userInfos.push("Termo aceito");
+      }else{
+        userInfos.push(input.value);
+      }
     });
-    console.log(cal_totCreditos())
+
     userInfos.push(cal_totCreditos());
     google.script.run.userClicked(userInfos);
     alert("Dados enviados com sucesso!")
@@ -251,7 +258,6 @@ function showError(errorElement, input) {
     label.classList.add('text-red-600');
   }
 }
-
 function hideError(errorElement, input) {
   if (errorElement) {
     errorElement.classList.add('hidden');

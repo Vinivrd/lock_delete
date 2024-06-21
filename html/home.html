@@ -102,7 +102,7 @@
     
                 <option value="" selected disabled hidden></option>
                 <?for(let i = 0; i < cursos.length; i++){ ?>
-                  <option value=<?=i?>><?= cursos[i] ?></option>
+                  <option value=<?=i?> class = <?=`select_curso-${i}`?> ><?= cursos[i] ?></option>
                 <? } ?>
     
               </select>
@@ -185,8 +185,8 @@
                   class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 >
                   <option value="" selected disabled hidden></option>
-                  <option value="1_sem">1 semestre</option>
-                  <option value="2_sem">2 semestre</option>
+                  <option value="1" class="select_semestre-1">1 semestre</option>
+                  <option value="2" class="select_semestre-2">2 semestre</option>
     
                 </select>
                 <label for="select_semestre" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Escolha o semestre do seu término </label>
@@ -288,15 +288,15 @@
                 name="just_exclusão"
                 value=""
                 onclick="this.setAttribute('value', this.value);"
-    
+                id="select_motivoExclusao"
                 class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
               >    
                 <option value="" selected disabled hidden></option>
-                <option value="0">Excesso de créditos</option>
-                <option value="1">Excesso de trabalho</option>
-                <option value="2">Problemas com o professor</option>
-                <option value="3">Matriculei-me em créditos a mais para desistir depois</option>
-                <option value="4">Outros</option>
+                <option value="0" class="just_exclusão-0">Excesso de créditos</option>
+                <option value="1" class="just_exclusão-1">Excesso de trabalho</option>
+                <option value="2" class="just_exclusão-2">Problemas com o professor</option>
+                <option value="3" class="just_exclusão-3">Matriculei-me em créditos a mais para desistir depois</option>
+                <option value="4" class="just_exclusão-4">Outros</option>
               </select>
               <label for="just_exclusão" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Justificativa para a exclusão</label>
               <span class="text-sm text-red-600 hidden" id="error-just_exclusão">Você não digitou a justificativa</span>
