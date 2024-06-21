@@ -59,36 +59,36 @@
           <form id="form" novalidate> <!--**-->
     
             <!--Nome e num usp-->
-            <div class="flex flex-row space-x-4">
-              <div class="relative z-0 w-full mb-5">
-                <!--Nome-->
-                <input
-                  type="text"
-                  name="nome"
-                  placeholder=" "
-                  required
-                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                />
-                <label for="nome" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Coloque seu nome</label>
-                <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
-              </div>
-    
-              <!--Número usp-->
-              <div class="relative z-0 w-full mb-5">
-                <input
-                  type="text"
-                  name="num_usp"
-                  pattern="[0-9]{}"
-                  placeholder=" "
-                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                  oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8)"
-                  maxlength="8"
-                />
-                <label for="num_usp" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu número USP</label>
-                <span class="text-sm text-red-600 hidden" id="error-num_usp">Você não digitou seu número USP</span>
-              </div>
-    
+            
+            <div class="relative z-0 w-full mb-5">
+              <!--Nome-->
+              <input
+                type="text"
+                name="nome"
+                placeholder=" "
+                required
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+              />
+              <label for="nome" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Coloque seu nome</label>
+              <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
             </div>
+  
+            <!--Número usp-->
+            <div class="relative z-0 w-full mb-5">
+              <input
+                type="text"
+                name="num_usp"
+                pattern="[0-9]{}"
+                placeholder=" "
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8)"
+                maxlength="8"
+              />
+              <label for="num_usp" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu número USP</label>
+              <span class="text-sm text-red-600 hidden" id="error-num_usp">Você não digitou seu número USP</span>
+            </div>
+    
+           
 
             <!--Email-->
             <div class="relative z-0 w-full mb-5">
@@ -125,7 +125,7 @@
             </div>
     
             <!--Declaro que sou aluno -->
-            <fieldset class="relative z-0 w-full p-px mb-5">
+            <fieldset class="relative z-0 w-full p-px mb-3 mt-6">
               <legend class="absolute text-gray-500 transform -top-3 origin-0">Termo de aceitação</legend>
               <div class="block pt-5 pb-2">
                 <input
@@ -140,37 +140,36 @@
               <span class="text-sm text-red-600 hidden" id="error-term_curso">É necessário aceitar o termo de aceitação</span>
             </fieldset>
     
-            <!--ano de ingresso e numero -->
-            <div class="flex flex-row space-x-4">
-              <!--Ano de ingresso-->
-              <div class="relative z-0 w-full mb-5">
-                <input
-                  type="text"
-                  name="ano_ingresso"
-                  pattern="[0-9]{4}"
-                  placeholder=" "
-                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                  oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
-                  maxlength="4"
-                />
-                <label for="ano_ingresso" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu ano de ingresso</label>
-                <span class="text-sm text-red-600 hidden" id="error-ano_ingresso">Você não digitou seu ano de ingresso</span>
-              </div>
-    
-              <div class="relative z-0 w-full mb-5">
-                <input
-                  type="tel"
-                  name="telefone"
-                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                  placeholder=" "
-    
-                  oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)"
-                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                />
-                <label for="telefone" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu telefone</label>
-                <span class="text-sm text-red-600 hidden" id="error-telefone">Você não digitou seu telefone</span>
-              </div>
+            
+            <!--Ano de ingresso-->
+            <div class="relative z-0 w-full mb-5">
+              <input
+                type="text"
+                name="ano_ingresso"
+                pattern="[0-9]{4}"
+                placeholder=" "
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
+                maxlength="4"
+              />
+              <label for="ano_ingresso" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu ano de ingresso</label>
+              <span class="text-sm text-red-600 hidden" id="error-ano_ingresso">Você não digitou seu ano de ingresso</span>
             </div>
+  
+            <!--Número usp-->
+            <div class="relative z-0 w-full mb-5">
+              <input
+                type="tel"
+                name="telefone"
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                placeholder=" "
+                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+              />
+              <label for="telefone" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu telefone</label>
+              <span class="text-sm text-red-600 hidden" id="error-telefone">Você não digitou seu telefone</span>
+            </div>
+            
     
             <!--PREVISAO PARA TERMINO ANO E SEMESTRE -->
             <div class="flex flex-row space-x-4">
@@ -252,7 +251,7 @@
                 class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
                 onclick="toggleNocurso()"
               />
-              <label for="no_curso" id="legendnoCurso">Click aqui se nao tiver seu curso na lista</label>
+              <label for="no_curso" id="legendnoCurso">Aperte aqui se nao tiver sua displina na lista</label>
             </div>
             <div class="flex flex-row space-x-4 hidden transition-opacity duration-500 ease-in-out" 
                  id="curso_fora_da_lista">
@@ -297,7 +296,7 @@
             </div>
     
             <!--justificafica para a exlcusao-->
-            <div class="relative z-0 w-full mb-5">
+            <div class="relative z-0 w-full mb-5 mt-5">
               <select
                 name="just_exclusão"
                 value=""
