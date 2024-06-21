@@ -227,7 +227,7 @@
   });
 
   
-
+  //formato valores 
   if (!hasError) {
     cal_totCreditos();
     let userInfos = [];
@@ -244,6 +244,7 @@
 
     userInfos.push(cal_totCreditos());
     google.script.run.userClicked(userInfos);
+    
     alert("Dados enviados com sucesso!")
   }
 }
