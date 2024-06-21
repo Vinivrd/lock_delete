@@ -69,5 +69,11 @@ function userClicked(userInfo){
     var ss = SpreadsheetApp.openByUrl(urlSubmit);
     var ws = ss.getSheetByName("userInfos");
     
+    let destinatario = userInfo[2]; 
+    let assunto = "Assunto do e-mail";
+    let corpo = "Conteúdo do e-mail."; 
+
+    MailApp.sendEmail(destinatario, assunto, corpo);
     ws.appendRow(userInfo);
+
 }
