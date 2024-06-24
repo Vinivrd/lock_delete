@@ -186,15 +186,15 @@
 
   //calculo total de creditos
   function cal_totCreditos() { //`${seletor}#`
-    let prev_credit = parseInt(document.querySelector(`${seletor}#tot_creditos`).value);
+    let prev_credit = parseInt(document.getElementById("tot_creditos").value);
 
-    if (document.querySelector(`${seletor}#no_curso_radio`).checked) {
-      let credit_nolist = parseInt(document.querySelector(`${seletor}#credit_nolist`).value);
+    if(document.getElementById("no_curso_radio").checked){
+      let credit_nolist = parseInt(document.getElementById("credit_nolist").value);
       return prev_credit - credit_nolist;
-    } else {
-      let index = document.querySelector(`${seletor}#selectDisplinas`).value;
-      let name = document.querySelector(`${seletor}#selectDisplinas`).name;
-      let credit_curso = parseInt(document.getElementsByClassName(`${seletor}${name}-${index}`)[0].id);
+    }else{
+      let index = document.getElementById("selectDisplinas").value;
+      let name = document.getElementById("selectDisplinas").name;
+      let credit_curso = parseInt(document.getElementsByClassName(`${name}-${index}`)[0].id);
       return prev_credit - credit_curso;
     }
   }
