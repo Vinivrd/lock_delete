@@ -81,9 +81,10 @@ function sendEmailWithAlias(userInfo) {
 
 
 
-function userClicked(userInfo){
+function userClicked(userInfo,seletor){
+
     var ss = SpreadsheetApp.openByUrl(urlSubmit);
-    var ws = ss.getSheetByName("userInfos");
+    var ws = ss.getSheetByName(`userInfo ${seletor}`);
     
     let destinatario = userInfo[2]; 
     let assunto = "Confirmação de Exclusão de Disciplina";

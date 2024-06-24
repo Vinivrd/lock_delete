@@ -1,76 +1,99 @@
-<script> 
+<script>
 
-  function doStuff(e) {
-    //var userInfo = {};
-    //userInfo.firstName = document.getElementById("fn").value;
-    //google.script.run.userClicked(userInfo);
-    //document.getElementById("fn").value = "";
-  } 
 
-  //Aqui eu faço o render da page
+  //var
+  let seletor = ""; //flag para diferenciar as pages 
+  let selected_curso = document.querySelector(`${seletor}#selectCurso`); // curso e o displina, eu to renderizando no começo na página para ficar rápido, pois o google apps script é assincrono
+  let select_Displinas = document.querySelector(`${seletor}#selectDisplinas`);
+  let tot_creditos;
+
+  
   function showPage(pageId) {
     let elements = document.querySelectorAll('[id*="_option"]');
 
     elements.forEach(e => {
-      //tira o select
+      //tira o select das classes
       if (e.id.includes("_selected") && !e.id.includes(pageId)) {
         e.id = e.id.slice(0, -9);
         e.classList.remove("text-blue-700");
         e.classList.add("text-gray-900");
-      }else if (e.id.includes(pageId) && !e.id.includes("_selected")) {
-        // Adiciona '_selected' ao ID e a classe 'text-blue-700'
+      } else if (e.id.includes(pageId) && !e.id.includes("_selected")) {
         e.id += "_selected";
         e.classList.remove("text-gray-900");
         e.classList.add("text-blue-700");
-      }           
+      }
     })
 
     let pages = document.getElementsByClassName('content');
-    for (let  i = 0; i < pages.length; i++) {
+    for (let i = 0; i < pages.length; i++) {
       pages[i].classList.add('hidden');
     }
-    
+
     let page = document.getElementById(pageId);
     page.classList.remove('hidden');
+
+    //Trocar o seletor das páginas 
+    switch (pageId) {
+      case "excluir":
+        seletor = "#excluir ";
+        break;
+      case "trancar":
+        seletor = "#trancar ";
+        break;
+
+      default:
+        break;
+    }
+
+    //LISTENERS
+    selected_curso = document.querySelector(`${seletor}#selectCurso`);
+    if (selected_curso) {
+      selected_curso.addEventListener('change', () => {
+        atualizarDisplinas(selected_curso);
+      });
+    }
   }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Adiciona um listener para mudanças (change event) no documento
+    document.addEventListener('change', function(event) {
+      selected_curso = document.querySelector(`${seletor}#selectCurso`);
+      select_Displinas = document.querySelector(`${seletor}#selectDisplinas`);
+    });
+});
 
   //Incializo tabel.Motivação: uma vez que o web script é assincrono.Assim, estou inicializando ele no start da página 
   //para mudar instantaneamente o select das displinas 
-  const sheets =  [ 
+  const sheets = [
     "Bacharelado em Ciência de Dados", "Bacharelado em Matemática",
-    "Matemática- Núcleo Geral","Licenciatura em Matemática",
-    "Bacharelado em Estatística e Ciência de Dados","Bacharelado em Sistema de Informação",
-    "Bacharelado em Ciências de Computação","Bacharelado em Matemática Aplicada e Computação Científica"
+    "Matemática- Núcleo Geral", "Licenciatura em Matemática",
+    "Bacharelado em Estatística e Ciência de Dados", "Bacharelado em Sistema de Informação",
+    "Bacharelado em Ciências de Computação", "Bacharelado em Matemática Aplicada e Computação Científica"
   ];
-  
+
   let table = new Array(sheets.length);
   sheets.forEach((curso, index) => {
     google.script.run.withSuccessHandler(data => {
       table[index] = data;
     }).getDisplinas(curso);
   });
-
-
-  //DISPLINAS
-  let selected_curso = document.getElementById("selectCurso");
-  let select_Displinas = document.getElementById("selectDisplinas");
-  let tot_creditos;
-
-  selected_curso.addEventListener('change',()=> {
+  //função apra atualizar as displinas 
+  function atualizarDisplinas(curso_selected){
+    select_Displinas = document.querySelector(`${seletor}#selectDisplinas`);
     let value = selected_curso.value;
-    let selectedOption =  selected_curso.options[selected_curso.selectedIndex];
+    let selectedOption = selected_curso.options[selected_curso.selectedIndex];
     const selectedText = selectedOption.textContent;
 
     while (select_Displinas.options.length > 1) {
-        select_Displinas.remove(1);
+      select_Displinas.remove(1);
     }
     updateLegend(value)
     renderDisplinas(selectedText)
-  })
+  }
 
   //legenda do termo de aceitação
   function updateLegend(value) {
-    let legendElement = document.getElementById('legendCurso');
+    let legendElement = document.querySelector(`${seletor}#legendCurso`);
     switch (value) {
       case '0':
         legendElement.textContent = 'Eu declaro que sou aluno do curso de Bacharelado em Ciência de Dados';
@@ -103,7 +126,7 @@
 
   }
 
-  function renderDisplinas(selectedText){
+  function renderDisplinas(selectedText) {
 
     let index;
     switch (selectedText) {
@@ -134,27 +157,25 @@
       default:
         break;
     }
-    if(index >= 0 && index <=7 ){
-      table[index].forEach((displinas,index) => {
+    if (index >= 0 && index <= 7) {
+      table[index].forEach((displinas, index) => {
         let optionElement = document.createElement('option');
-   
+
         optionElement.value = index;
         optionElement.text = displinas[2];
         optionElement.id = displinas[2];
         optionElement.className = `select_Displinas-${index}`;
         optionElement.textContent = `${displinas[0]} ${displinas[1]}`;
-        select_Displinas.appendChild(optionElement);    
+        select_Displinas.appendChild(optionElement);
       })
     }
   }
 
   //togle submite quando nao tem o curso na lista
-  
-  function toggleNocurso(){
-    let radio = document.getElementById("no_curso_radio");
-    let div = document.getElementById("curso_fora_da_lista");
 
-    console.log(document.getElementById("selectDisplinas"))
+  function toggleNocurso() {
+    let radio = document.querySelector(`${seletor}#no_curso_radio`);
+    let div = document.querySelector(`${seletor}#curso_fora_da_lista`);
 
     if (radio.checked) {
       div.classList.remove("hidden");
@@ -162,112 +183,115 @@
       div.classList.add("hidden");
     }
   }
-  //calculo total de creditos
-  function cal_totCreditos(){
-    let prev_credit = parseInt(document.getElementById("tot_creditos").value);
 
-    if(document.getElementById("no_curso_radio").checked){
-      let credit_nolist = parseInt(document.getElementById("credit_nolist").value);
+  //calculo total de creditos
+  function cal_totCreditos() { //`${seletor}#`
+    let prev_credit = parseInt(document.querySelector(`${seletor}#tot_creditos`).value);
+
+    if (document.querySelector(`${seletor}#no_curso_radio`).checked) {
+      let credit_nolist = parseInt(document.querySelector(`${seletor}#credit_nolist`).value);
       return prev_credit - credit_nolist;
-    }else{
-      let index = document.getElementById("selectDisplinas").value;
-      let name = document.getElementById("selectDisplinas").name;
-      let credit_curso = parseInt(document.getElementsByClassName(`${name}-${index}`)[0].id);
+    } else {
+      let index = document.querySelector(`${seletor}#selectDisplinas`).value;
+      let name = document.querySelector(`${seletor}#selectDisplinas`).name;
+      let credit_curso = parseInt(document.getElementsByClassName(`${seletor}${name}-${index}`)[0].id);
       return prev_credit - credit_curso;
     }
   }
 
   //SEND
-  document.getElementById('button').addEventListener('click', toggleError)
-  const errMessages = document.querySelectorAll('#error')
+
+  let sendButton =  document.querySelector(`${seletor}#button`)
+  let errMessages = document.querySelectorAll(`${seletor}#error`)
+  sendButton.addEventListener('click', toggleError);
 
   function toggleError() {
-  const inputs = document.querySelectorAll('#excluir input, #excluir select');
-  let hasError = false;
+    let inputs = document.querySelectorAll(`${seletor}input,${seletor}select`);
+    let hasError = false;
 
 
-  inputs.forEach((input) => {
-    const errorElement = document.getElementById(`error-${input.name}`);
-    if (input.type === 'radio') {
-      if (!input.checked) {
-        if(!(input.name ==  "no_curso")){
+    inputs.forEach((input) => {
+      const errorElement = document.querySelector(`${seletor}#error-${input.name}`);
+      if (input.type === 'radio') {
+        if (!input.checked) {
+          if (!(input.name == "no_curso")) {
+            showError(errorElement, input);
+            hasError = true;
+          }
+        } else {
+          hideError(errorElement, input);
+        }
+      } else if (cal_totCreditos() < 12) { //`${seletor}#
+
+        if (document.querySelector(`${seletor}#no_curso_radio`).checked) {
+
+          let error = document.querySelector(`${seletor}#error-cred_discplina`);
+
+          showError(error, document.querySelector(`${seletor}#credit_nolist`));
+          hasError = true;
+
+        } else {
+          let error = document.querySelector(`${seletor}#error-select_Displinas`);
+
+          showError(error, document.querySelector(`${seletor}#selectDisplinas`));
+          hasError = true;
+          //hideError(error, document.getElementById("credit_nolist"));
+        }
+
+
+      } else if (!input.value) {
+        let exception = ["codigo_discplina", "nome_discplina", "cred_discplina", "select_Displinas"];
+
+        if (!exception.includes(input.name)) {
           showError(errorElement, input);
           hasError = true;
         }
       } else {
         hideError(errorElement, input);
       }
-    }else if(cal_totCreditos()< 12){ 
-
-      if(document.getElementById("no_curso_radio").checked){
-
-        let error = document.getElementById(`error-cred_discplina`)
-  
-        showError(error, document.getElementById("credit_nolist"));
-        hasError = true;
-
-      }else{ 
-        let error = document.getElementById(`error-select_Displinas`);
-
-        showError(error, document.getElementById("selectDisplinas"));
-        hasError = true;
-        //hideError(error, document.getElementById("credit_nolist"));
-      }
-
-      
-    }else if (!input.value) {
-      let exception = ["codigo_discplina","nome_discplina","cred_discplina","select_Displinas"];
-
-      if(!exception.includes(input.name)){
-        showError(errorElement, input);
-        hasError = true;
-      }
-    } else {
-      hideError(errorElement, input);
-    }
-  });
-  
-  //formato valores 
-  if (!hasError) {
-    cal_totCreditos();
-    let userInfos = [];
-    inputs.forEach(input => {
-      //aqui eu arrumos os dados do select que está retornando o value do select 
-      if(input.id.includes("select")){
-        userInfos.push(document.getElementsByClassName(`${input.name}-${input.value}`)[0].textContent);
-      }else if(input.type == "radio" && input.value == 1){
-        userInfos.push("Termo aceito");
-      }else{
-        userInfos.push(input.value);
-      }
-
     });
 
-    userInfos.push(cal_totCreditos());
-    google.script.run.userClicked(userInfos);
-    alert("Dados enviados com sucesso!")
-  }
-}
+    //formato valores 
+    if (!hasError) {
+      cal_totCreditos();
+      let userInfos = [];
+      inputs.forEach(input => {
+        //aqui eu arrumos os dados do select que está retornando o value do select 
+        if (input.id.includes("select")) {
+          userInfos.push(document.getElementsByClassName(`${input.name}-${input.value}`)[0].textContent);
+        } else if (input.type == "radio" && input.value == 1) {
+          userInfos.push("Termo aceito");
+        } else {
+          userInfos.push(input.value);
+        }
 
-function showError(errorElement, input) {
-  if (errorElement) {
-    errorElement.classList.remove('hidden');
+      });
+
+      userInfos.push(cal_totCreditos());
+      google.script.run.userClicked(userInfos,seletor.slice(1, -1));
+      alert("Dados enviados com sucesso!")
+    }
   }
-  input.classList.add('border-red-600');
-  const label = input.previousElementSibling;
-  if (label) {
-    label.classList.add('text-red-600');
+
+  function showError(errorElement, input) {
+    if (errorElement) {
+      errorElement.classList.remove('hidden');
+    }
+    input.classList.add('border-red-600');
+    const label = input.previousElementSibling;
+    if (label) {
+      label.classList.add('text-red-600');
+    }
   }
-}
-function hideError(errorElement, input) {
-  if (errorElement) {
-    errorElement.classList.add('hidden');
+  function hideError(errorElement, input) {
+    if (errorElement) {
+      errorElement.classList.add('hidden');
+    }
+    input.classList.remove('border-red-600');
+    const label = input.previousElementSibling;
+    if (label) {
+      label.classList.remove('text-red-600');
+    }
   }
-  input.classList.remove('border-red-600');
-  const label = input.previousElementSibling;
-  if (label) {
-    label.classList.remove('text-red-600');
-  }
-}
 
 </script>
