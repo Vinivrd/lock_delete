@@ -63,6 +63,22 @@ function get_displinas_date(curso){
   return result;
 }
 
+function sendEmailWithAlias(userInfo) {
+  var emailAlias = "alias@example.com";  
+  var recipient = userInfo[2];  
+  var subject = "Teste Remetente";
+  var body = "Teste de email ";
+
+ 
+  var emailOptions = {
+    name: "Vinicius Test",  
+    from: emailAlias,
+  };
+
+  // Envia o email usando o alias
+  MailApp.sendEmail(recipient, subject, body, emailOptions);
+}
+
 
 
 function userClicked(userInfo){
@@ -70,10 +86,27 @@ function userClicked(userInfo){
     var ws = ss.getSheetByName("userInfos");
     
     let destinatario = userInfo[2]; 
-    let assunto = "Assunto do e-mail";
-    let corpo = "Conteúdo do e-mail."; 
+    let assunto = "Confirmação de Exclusão de Disciplina";
+    let corpo = `
+  Prezado(a) ${userInfo[0]},
 
-    MailApp.sendEmail(destinatario, assunto, corpo);
+  Espero que esta mensagem o(a) encontre bem.
+
+  Recebemos a sua solicitação de exclusão da disciplina ${userInfo[3]} e gostaríamos de confirmar que o pedido foi processado com sucesso. A partir de 28/06/2024, você não estará mais matriculado(a) nesta disciplina.
+
+  Se precisar de assistência adicional ou tiver dúvidas sobre como esta exclusão pode impactar sua grade curricular, por favor, entre em contato com a secretaria acadêmica ou com o seu orientador acadêmico. Estamos à disposição para ajudar no que for necessário.
+
+  Agradecemos a sua compreensão e desejamos sucesso em suas demais disciplinas.
+
+  Atenciosamente,
+
+  [Seu Nome]
+  [Seu Cargo]
+  [Nome da Instituição]
+  [Telefone]
+  [E-mail]`; 
+
+    //MailApp.sendEmail(destinatario, assunto, corpo);
     ws.appendRow(userInfo);
 
 }

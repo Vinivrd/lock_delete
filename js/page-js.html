@@ -6,6 +6,7 @@
     //google.script.run.userClicked(userInfo);
     //document.getElementById("fn").value = "";
   } 
+
   //Aqui eu faço o render da page
   function showPage(pageId) {
     let elements = document.querySelectorAll('[id*="_option"]');
@@ -181,7 +182,7 @@
   const errMessages = document.querySelectorAll('#error')
 
   function toggleError() {
-  const inputs = document.querySelectorAll('input, select');
+  const inputs = document.querySelectorAll('#excluir input, #excluir select');
   let hasError = false;
 
 
@@ -225,14 +226,13 @@
       hideError(errorElement, input);
     }
   });
-
   
   //formato valores 
   if (!hasError) {
     cal_totCreditos();
     let userInfos = [];
     inputs.forEach(input => {
-      //aqui eu arrumos os dados de select 
+      //aqui eu arrumos os dados do select que está retornando o value do select 
       if(input.id.includes("select")){
         userInfos.push(document.getElementsByClassName(`${input.name}-${input.value}`)[0].textContent);
       }else if(input.type == "radio" && input.value == 1){
@@ -240,11 +240,11 @@
       }else{
         userInfos.push(input.value);
       }
+
     });
 
     userInfos.push(cal_totCreditos());
     google.script.run.userClicked(userInfos);
-
     alert("Dados enviados com sucesso!")
   }
 }
@@ -269,4 +269,5 @@ function hideError(errorElement, input) {
     label.classList.remove('text-red-600');
   }
 }
+
 </script>
