@@ -6,8 +6,9 @@
   let selected_curso = document.querySelector(`${seletor}#selectCurso`); // curso e o displina, eu to renderizando no começo na página para ficar rápido, pois o google apps script é assincrono
   let select_Displinas = document.querySelector(`${seletor}#selectDisplinas`);
   let tot_creditos;
-
   
+
+
   function showPage(pageId) {
     let elements = document.querySelectorAll('[id*="_option"]');
 
@@ -46,21 +47,28 @@
     }
 
     //LISTENERS
+    let sendButton = document.querySelector(`${seletor}#button`)
+    let errMessages = document.querySelectorAll(`${seletor}#error`)
     selected_curso = document.querySelector(`${seletor}#selectCurso`);
     if (selected_curso) {
       selected_curso.addEventListener('change', () => {
         atualizarDisplinas(selected_curso);
       });
     }
+    if (sendButton) {
+      sendButton.addEventListener('click', toggleError);
+    }
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     // Adiciona um listener para mudanças (change event) no documento
-    document.addEventListener('change', function(event) {
+    document.addEventListener('change', function (event) {
       selected_curso = document.querySelector(`${seletor}#selectCurso`);
       select_Displinas = document.querySelector(`${seletor}#selectDisplinas`);
+      sendButton = document.querySelector(`${seletor}#button`)
+      errMessages = document.querySelectorAll(`${seletor}#error`)
     });
-});
+  });
 
   //Incializo tabel.Motivação: uma vez que o web script é assincrono.Assim, estou inicializando ele no start da página 
   //para mudar instantaneamente o select das displinas 
@@ -78,7 +86,7 @@
     }).getDisplinas(curso);
   });
   //função apra atualizar as displinas 
-  function atualizarDisplinas(curso_selected){
+  function atualizarDisplinas(curso_selected) {
     select_Displinas = document.querySelector(`${seletor}#selectDisplinas`);
     let value = selected_curso.value;
     let selectedOption = selected_curso.options[selected_curso.selectedIndex];
@@ -172,7 +180,6 @@
   }
 
   //togle submite quando nao tem o curso na lista
-
   function toggleNocurso() {
     let radio = document.querySelector(`${seletor}#no_curso_radio`);
     let div = document.querySelector(`${seletor}#curso_fora_da_lista`);
@@ -185,26 +192,23 @@
   }
 
   //calculo total de creditos
-  function cal_totCreditos() { //`${seletor}#`
-    let prev_credit = parseInt(document.getElementById("tot_creditos").value);
+  function cal_totCreditos() {
+    let prev_credit = parseInt(document.querySelector(`${seletor}#tot_creditos`).value);
 
-    if(document.getElementById("no_curso_radio").checked){
-      let credit_nolist = parseInt(document.getElementById("credit_nolist").value);
+    if (document.getElementById("no_curso_radio").checked) {
+      let credit_nolist = parseInt(document.querySelector(`${seletor}#credit_nolist`).value);
       return prev_credit - credit_nolist;
-    }else{
-      let index = document.getElementById("selectDisplinas").value;
-      let name = document.getElementById("selectDisplinas").name;
+    } else {
+      let index = document.querySelector(`${seletor}#selectDisplinas`).value;
+      let name = document.querySelector(`${seletor}#selectDisplinas`).name;
       let credit_curso = parseInt(document.getElementsByClassName(`${name}-${index}`)[0].id);
       return prev_credit - credit_curso;
     }
   }
 
-  //SEND
 
-  let sendButton =  document.querySelector(`${seletor}#button`)
-  let errMessages = document.querySelectorAll(`${seletor}#error`)
-  sendButton.addEventListener('click', toggleError);
 
+  //FUNÇõeOES PROS ERROS
   function toggleError() {
     let inputs = document.querySelectorAll(`${seletor}input,${seletor}select`);
     let hasError = false;
@@ -221,7 +225,7 @@
         } else {
           hideError(errorElement, input);
         }
-      } else if (cal_totCreditos() < 12) { //`${seletor}#
+      } else if (cal_totCreditos() < 12) {
 
         if (document.querySelector(`${seletor}#no_curso_radio`).checked) {
 
@@ -252,8 +256,8 @@
     });
 
     //formato valores 
+    //SEND
     if (!hasError) {
-      cal_totCreditos();
       let userInfos = [];
       inputs.forEach(input => {
         //aqui eu arrumos os dados do select que está retornando o value do select 
@@ -268,7 +272,8 @@
       });
 
       userInfos.push(cal_totCreditos());
-      google.script.run.userClicked(userInfos,seletor.slice(1, -1));
+      google.script.run.userClicked(userInfos, seletor.slice(1, -1));
+      clearForm()
       alert("Dados enviados com sucesso!")
     }
   }
@@ -293,5 +298,32 @@
       label.classList.remove('text-red-600');
     }
   }
+
+  function clearForm() {
+    let form = document.querySelector(`${seletor}#form`);
+    let inputs = form.querySelectorAll('input');
+    let selects = form.querySelectorAll('select');
+    let radioGroups = form.querySelectorAll('input[type="radio"]');
+
+    // Limpar campos de input
+    inputs.forEach(input => {
+      if (input.type === 'radio' || input.type === 'checkbox') {
+        input.checked = false;
+      } else {
+        input.value = '';
+      }
+    });
+
+    // Limpar campos de select
+    selects.forEach(select => {
+      select.selectedIndex = 0;
+    });
+
+    // Limpar grupos de rádio
+    radioGroups.forEach(radio => {
+      radio.checked = false;
+    });
+  }
+
 
 </script>
