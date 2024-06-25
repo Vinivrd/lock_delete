@@ -88,12 +88,14 @@ function userClicked(userInfo,seletor){
     
     let destinatario = userInfo[2]; 
     let assunto = "Confirmação de Exclusão de Disciplina";
+    let dataAtual = new Date();
+    let dataFormatada = Utilities.formatDate(dataAtual, Session.getScriptTimeZone(), 'dd/MM/yyyy');
     let corpo = `
-Prezado(a) ${userInfo[0]},
+  Prezado(a) ${userInfo[0]},
 
 Espero que esta mensagem o(a) encontre bem.
 
-Recebemos a sua solicitação para ${seletor} a disciplina ${userInfo[3]} e gostaríamos de confirmar que o pedido foi processado com sucesso. A partir de 11/22/2022
+Recebemos a sua solicitação para ${seletor} a disciplina ${userInfo[3]} e gostaríamos de confirmar que o pedido foi processado com sucesso. A partir de ${dataFormatada}
 Se precisar de assistência adicional ou tiver dúvidas sobre como esta exclusão pode impactar sua grade curricular, por favor, entre em contato com a secretaria acadêmica ou com o seu orientador acadêmico. Estamos à disposição para ajudar no que for necessário.
 
 Agradecemos a sua compreensão e desejamos sucesso em suas demais disciplinas.
@@ -106,8 +108,10 @@ Universidade de São Paulo
 11-969238993
 viniciuscmbrr@gmail.com
 `;
+  let cc = "viniciuscmbr@usp.br"
+  let replyTo = 'viniciuscmbr@usp.br';
 
-    MailApp.sendEmail(destinatario, assunto, corpo);
-    ws.appendRow(userInfo);
+  MailApp.sendEmail(destinatario, assunto, corpo);
+  ws.appendRow(userInfo);
 
 }
