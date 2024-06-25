@@ -46,7 +46,7 @@
       default:
         break;
     }
-
+    
     form = document.querySelector(`${seletor}#form`);
 
     //LISTENERS
@@ -204,7 +204,13 @@
     } else {
       let index = form.querySelector(`#selectDisplinas`).value;
       let name = form.querySelector(`#selectDisplinas`).name;
-      let credit_curso = parseInt(form.getElementsByClassName(`${name}-${index}`)[0].id);
+
+      let elem = form.getElementsByClassName(`${name}-${index}`);
+      let credit_curso = 0;
+      if (elem.length > 0) {
+        redit_curso = parseInt(form.getElementsByClassName(`${name}-${index}`)[0].id);     
+      }
+
       return prev_credit - credit_curso;
     }
   }
@@ -242,9 +248,8 @@
 
           showError(error, form.querySelector(`#selectDisplinas`));
           hasError = true;
-          //hideError(error, document.getElementById("credit_nolist"));
+          //hideError(error, form.querySelector("#credit_nolist"));
         }
-
 
       } else if (!input.value) {
         let exception = ["codigo_discplina", "nome_discplina", "cred_discplina", "select_Displinas"];
@@ -284,7 +289,8 @@
       userInfos.push(cal_totCreditos());
       google.script.run.userClicked(userInfos, seletor.slice(1, -1));
       clearForm()
-      alert("Dados enviados com sucesso!")
+      alert("Seu formulario de bom")
+      
     }
   }
 
