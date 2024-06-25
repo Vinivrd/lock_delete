@@ -50,10 +50,9 @@
     form = document.querySelector(`${seletor}#form`);
 
     //LISTENERS
-    
-    let sendButton = form.querySelector('#button');
-    let errMessages = form.querySelector('#error')
-    selected_curso = form.getElementById('selectCurso');
+    let sendButton = form.querySelector(`#button`)
+    let errMessages = form.querySelectorAll(`#error`)
+    selected_curso = form.querySelector(`#selectCurso`);
     if (selected_curso) {
       selected_curso.addEventListener('change', () => {
         atualizarDisplinas(selected_curso);
@@ -67,10 +66,10 @@
   document.addEventListener('DOMContentLoaded', function () {
     // Adiciona um listener para mudanças (change event) no documento
     document.addEventListener('change', function (event) {
-      selected_curso = form.getElementById(`selectCurso`);
-      select_Displinas = form.getElementById(`selectDisplinas`);
-      sendButton = form.getElementById(`button`)
-      errMessages = form.getElementById(`error`)
+      selected_curso = form.querySelector(`#selectCurso`);
+      select_Displinas = form.querySelector(`#selectDisplinas`);
+      sendButton = form.querySelector(`#button`)
+      errMessages = form.querySelectorAll(`#error`)
     });
   });
 
@@ -91,7 +90,7 @@
   });
   //função apra atualizar as displinas 
   function atualizarDisplinas(curso_selected) {
-    select_Displinas = form.getElementById(`selectDisplinas`);
+    select_Displinas = form.querySelector(`#selectDisplinas`);
     let value = selected_curso.value;
     let selectedOption = selected_curso.options[selected_curso.selectedIndex];
     const selectedText = selectedOption.textContent;
@@ -105,7 +104,7 @@
 
   //legenda do termo de aceitação
   function updateLegend(value) {
-    let legendElement = form.getElementById(`legendCurso`);
+    let legendElement = form.querySelector(`#legendCurso`);
     switch (value) {
       case '0':
         legendElement.textContent = 'Eu declaro que sou aluno do curso de Bacharelado em Ciência de Dados';
@@ -185,8 +184,8 @@
 
   //togle submite quando nao tem o curso na lista
   function toggleNocurso() {
-    let radio = form.getElementById(`no_curso_radio`);
-    let div = form.getElementById(`curso_fora_da_lista`);
+    let radio = form.querySelector(`#no_curso_radio`);
+    let div = form.querySelector(`#curso_fora_da_lista`);
 
     if (radio.checked) {
       div.classList.remove("hidden");
@@ -197,14 +196,14 @@
 
   //calculo total de creditos
   function cal_totCreditos() {
-    let prev_credit = parseInt(form.getElementById(`tot_creditos`).value);
+    let prev_credit = parseInt(form.querySelector(`#tot_creditos`).value);
 
-    if ( document.getElementById("no_curso_radio").checked) {
-      let credit_nolist = parseInt(form.getElementById(`credit_nolist`).value);
+    if (form.querySelector("#no_curso_radio").checked) {
+      let credit_nolist = parseInt(form.querySelector(`#credit_nolist`).value);
       return prev_credit - credit_nolist;
     } else {
-      let index = form.getElementById(`selectDisplinas`).value;
-      let name = form.getElementById(`selectDisplinas`).name;
+      let index = form.querySelector(`#selectDisplinas`).value;
+      let name = form.querySelector(`#selectDisplinas`).name;
       let credit_curso = parseInt(form.getElementsByClassName(`${name}-${index}`)[0].id);
       return prev_credit - credit_curso;
     }
@@ -231,17 +230,17 @@
         }
       } else if (cal_totCreditos() < 12) {
 
-        if (form.getElementById(`no_curso_radio`).checked) {
+        if (form.querySelector(`#no_curso_radio`).checked) {
 
-          let error = form.getElementById(`error-cred_discplina`);
+          let error = form.querySelector(`#error-cred_discplina`);
 
-          showError(error, form.getElementById(`credit_nolist`));
+          showError(error, form.querySelector(`#credit_nolist`));
           hasError = true;
 
         } else {
-          let error = form.getElementById(`error-select_Displinas`);
+          let error = form.querySelector(`#error-select_Displinas`);
 
-          showError(error, form.getElementById(`selectDisplinas`));
+          showError(error, form.querySelector(`#selectDisplinas`));
           hasError = true;
           //hideError(error, document.getElementById("credit_nolist"));
         }
@@ -266,8 +265,15 @@
       inputs.forEach(input => {
         //aqui eu arrumos os dados do select que está retornando o value do select 
         if (input.id.includes("select")) {
-          userInfos.push(document.getElementsByClassName(`${input.name}-${input.value}`)[0].textContent);
-        } else if (input.type == "radio" && input.value == 1) {
+          //preciso testar se existi
+          let ele  = form.getElementsByClassName(`${input.name}-${input.value}`)
+          if(ele.length > 0) {
+            userInfos.push(form.getElementsByClassName(`${input.name}-${input.value}`)[0].textContent);
+          }else{
+            userInfos.push("");
+          }
+          
+        } else if (input.type == "radio" && input.value == 1){
           userInfos.push("Termo aceito");
         } else {
           userInfos.push(input.value);
@@ -304,10 +310,9 @@
   }
 
   function clearForm() {
-    let form1 = document.querySelector(`#form`);
-    let inputs = form1.querySelectorAll('input');
-    let selects = form1.querySelectorAll('select');
-    let radioGroups = form1.querySelectorAll('input[type="radio"]');
+    let inputs = form.querySelectorAll('input');
+    let selects = form.querySelectorAll('select');
+    let radioGroups = form.querySelectorAll('input[type="radio"]');
 
     // Limpar campos de input
     inputs.forEach(input => {
