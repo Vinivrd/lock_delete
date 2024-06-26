@@ -7,6 +7,16 @@
   let select_Displinas = document.querySelector(`${seletor}#selectDisplinas`);
   let tot_creditos;
   let form;
+
+  //LISTA de cursos
+  const sheets = [
+    "Bacharelado em Ciência de Dados", "Bacharelado em Matemática",
+    "Matemática- Núcleo Geral", "Licenciatura em Matemática",
+    "Bacharelado em Estatística e Ciência de Dados", "Bacharelado em Sistema de Informação",
+    "Bacharelado em Ciências de Computação", "Bacharelado em Matemática Aplicada e Computação Científica"
+  ];
+
+  let table = new Array(sheets.length);
   
 
 
@@ -75,14 +85,7 @@
 
   //Incializo tabel.Motivação: uma vez que o web script é assincrono.Assim, estou inicializando ele no start da página 
   //para mudar instantaneamente o select das displinas 
-  const sheets = [
-    "Bacharelado em Ciência de Dados", "Bacharelado em Matemática",
-    "Matemática- Núcleo Geral", "Licenciatura em Matemática",
-    "Bacharelado em Estatística e Ciência de Dados", "Bacharelado em Sistema de Informação",
-    "Bacharelado em Ciências de Computação", "Bacharelado em Matemática Aplicada e Computação Científica"
-  ];
-
-  let table = new Array(sheets.length);
+ 
   sheets.forEach((curso, index) => {
     google.script.run.withSuccessHandler(data => {
       table[index] = data;
@@ -98,44 +101,9 @@
     while (select_Displinas.options.length > 1) {
       select_Displinas.remove(1);
     }
-    updateLegend(value)
     renderDisplinas(selectedText)
   }
 
-  //legenda do termo de aceitação
-  function updateLegend(value) {
-    let legendElement = form.querySelector(`#legendCurso`);
-    switch (value) {
-      case '0':
-        legendElement.textContent = 'Eu declaro que sou aluno do curso de Bacharelado em Ciência de Dados';
-        break;
-      case '1':
-        legendElement.textContent = 'Eu declaro que sou aluno do curso de Bacharelado em Matemática';
-        break;
-      case '2':
-        legendElement.textContent = 'Eu declaro que sou aluno do curso de Matemática - Núcleo Geral';
-        break;
-      case '3':
-        legendElement.textContent = 'Eu declaro que sou aluno do curso de Licenciatura em Matemática';
-        break;
-      case '4':
-        legendElement.textContent = 'Eu declaro que sou aluno do curso de Bacharelado em Estatística e Ciência de Dados';
-        break;
-      case '5':
-        legendElement.textContent = 'Eu declaro que sou aluno do curso de Bacharelado em Sistema de Informação';
-        break;
-      case '6':
-        legendElement.textContent = 'Eu declaro que sou aluno do curso de Bacharelado em Ciências de Computação';
-        break;
-      case '7':
-        legendElement.textContent = 'Eu declaro que sou aluno do curso de Bacharelado em Matemática Aplicada e Computação Científica';
-        break;
-      default:
-        legendElement.textContent = '';
-        break;
-    }
-
-  }
 
   function renderDisplinas(selectedText) {
 

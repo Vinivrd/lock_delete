@@ -33,10 +33,10 @@
             <a onclick="showPage('info')" id="info_option_selected" class="cursor-pointer block py-2 px-3 text-blue-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Informações</a>
           </li>
           <li>
-            <a onclick="showPage('excluir')"   id="excluir_option" class="cursor-pointer block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Excluir</a>
+            <a onclick="showPage('excluir')"   id="excluir_option" class="cursor-pointer block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Exclusão de disciplinas</a>
           </li>
           <li>
-            <a onclick="showPage('trancar')" id="trancar_option" class="cursor-pointer block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Trancar</a>
+            <a onclick="showPage('trancar')" id="trancar_option" class="cursor-pointer block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Trancamento de disciplinas</a>
           </li>
         </ul>
       </div>
@@ -54,7 +54,7 @@
     <div id="excluir" class="content hidden">
       <div class="min-h-screen p-0 sm:p-12">
         <div class="mx-auto max-w-xl px-8 py-16 bg-white border-0 shadow-lg sm:rounded-3xl">
-          <h1 class="text-2xl font-bold mb-8">Excluir displina</h1>
+          <h1 class="text-2xl font-bold mb-8">Exclusão de disciplinas</h1>
           <!--Inicio do form-->
           <form id="form" novalidate> <!--**-->
     
@@ -69,7 +69,7 @@
                 required
                 class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
               />
-              <label for="nome" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite seu nome</label>
+              <label for="nome" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Nome completo</label>
               <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
             </div>
   
@@ -84,7 +84,7 @@
                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8)"
                 maxlength="8"
               />
-              <label for="num_usp" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu número USP</label>
+              <label for="num_usp" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Número USP</label>
               <span class="text-sm text-red-600 hidden" id="error-num_usp">Você não digitou seu número USP</span>
             </div>
     
@@ -100,8 +100,8 @@
                 required
                 class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
               />
-              <label for="email" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite seu email</label>
-              <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu email</span>
+              <label for="email" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">E-mail</label>
+              <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu e-mail</span>
             </div>
     
             <!--Option-->
@@ -123,22 +123,7 @@
               <label for="select_curso" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Escolha seu curso</label>
               <span class="text-sm text-red-600 hidden" id="error-select">Você não selecionou um curso</span>
             </div>
-    
-            <!--Declaro que sou aluno -->
-            <fieldset class="relative z-0 w-full p-px mb-3 mt-6">
-              <legend class="absolute text-gray-500 transform -top-3 origin-0">Termo de aceitação</legend>
-              <div class="block pt-5 pb-2">
-                <input
-                  type="radio"
-                  name="term_curso"
-                  value="1"
-                  id="term_curso_id"
-                  class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
-                />
-                <label for="term_curso" id="legendCurso">Escolha seu curso</label>
-              </div>
-              <span class="text-sm text-red-600 hidden" id="error-term_curso">É necessário aceitar o termo de aceitação</span>
-            </fieldset>
+  
     
             
             <!--Ano de ingresso-->
@@ -152,7 +137,7 @@
                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
                 maxlength="4"
               />
-              <label for="ano_ingresso" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu ano de ingresso</label>
+              <label for="ano_ingresso" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Ano de ingresso</label>
               <span class="text-sm text-red-600 hidden" id="error-ano_ingresso">Você não digitou seu ano de ingresso</span>
             </div>
   
@@ -166,7 +151,7 @@
                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)"
                 class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
               />
-              <label for="telefone" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu telefone</label>
+              <label for="telefone" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Telefone(DDD número)</label>
               <span class="text-sm text-red-600 hidden" id="error-telefone">Você não digitou seu telefone</span>
             </div>
             
@@ -180,12 +165,12 @@
                   name="ano_termino"
                   pattern="[0-9]{4}"
                   placeholder=" "
-                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  class="pt-5 pb-6 block w-full px-0 mt-3 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                   oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
                   maxlength="4"
                 />
-                <label for="ano_termino" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu ano do termino </label>
-                <span class="text-sm text-red-600 hidden" id="error-ano_termino">Você não digitou seu ano do termino</span>
+                <label for="ano_termino" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500 mb-8">Previsão de ano de término do curso </label>
+                <span class="text-sm text-red-600 hidden" id="error-ano_termino">Você não digitou seu ano do término</span>
               </div>
     
               <div class="relative z-0 w-full mb-5">
@@ -195,14 +180,14 @@
                   value=""
                   onclick="this.setAttribute('value', this.value);"
     
-                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  class="pt-5 pb-6 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 >
                   <option value="" selected disabled hidden></option>
                   <option value="1" class="select_semestre-1">1 semestre</option>
                   <option value="2" class="select_semestre-2">2 semestre</option>
     
                 </select>
-                <label for="select_semestre" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Escolha o semestre do seu término </label>
+                <label for="select_semestre" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Semestre</label>
                 <span class="text-sm text-red-600 hidden" id="error-select_semestre">Você não selecionou o semestre de término</span>
               </div>  
             </div>
@@ -220,7 +205,7 @@
                   oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 2)"
                   maxlength="8"
                 />
-                <label for="tot_créditos" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite total de créditos</label>
+                <label for="tot_créditos" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Total de créditos-aula em que está matriculado</label>
                 <span class="text-sm text-red-600 hidden" id="error-tot_créditos">Você não digitou seu total de créditos</span>
               </div>
             </div>
@@ -237,7 +222,7 @@
                 <option value="0"  disabled >Escolha um curso para aparecer as displinas</option>
                 <!--Aqui é inserido dados dinamicos -->
               </select>
-              <label for="select_Displinas" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Escolha a displina</label>
+              <label for="select_Displinas" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Selecione a disciplina que deseja excluir</label>
               <span class="text-sm text-red-600 hidden" id="error-select_Displinas">Você estorou o limite de crédito.</span>
             </div>
     
@@ -251,7 +236,7 @@
                 class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
                 onclick="toggleNocurso()"
               />
-              <label for="no_curso" id="legendnoCurso">Aperte aqui se nao tiver sua displina na lista</label>
+              <label for="no_curso" id="legendnoCurso">Indique aqui a disciplina, caso ela não conste na lista</label>
             </div>
             <div class="flex flex-row space-x-4 hidden transition-opacity duration-500 ease-in-out" 
                  id="curso_fora_da_lista">
@@ -264,7 +249,7 @@
                   required
                   class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 />
-                <label for="cod_displina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Codigo</label>
+                <label for="cod_displina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Código</label>
                 <span class="text-sm text-red-600 hidden" id="error-codigo_discplina">Você não digitou o código</span>
               </div>
               <div class="relative z-0 w-2/4 mb-5">
@@ -275,7 +260,7 @@
                   required
                   class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 />
-                <label for="nome_displina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Nome displina</label>
+                <label for="nome_displina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Nome disciplina</label>
                 <span class="text-sm text-red-600 hidden" id="error-nome_discplina">Você não digitou o nome da displina</span>
               </div>
     
@@ -290,7 +275,7 @@
                   required
                   class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 />
-                <label for="cred_discplina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Credito</label>
+                <label for="cred_discplina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Créditos-aula</label>
                 <span class="text-sm text-red-600 hidden" id="error-cred_discplina">Você passou do limite de créditos</span>
               </div>
             </div>
@@ -326,7 +311,7 @@
                     class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
                   />
                   <label for="radio_termo">
-                    Estou ciente que ao enviar esse formulário o processo de exclusão será irreversível e que trata-se de exclusão de disciplinas do 1º. semestre de 2024.
+                    Estou ciente de que este pedido é referente à exclusão de disciplinas do 1º semestre de 2024 e que, ao enviar este formulário, o processo de exclusão será irreversível.
                   </label>
                 </div>
                 <span class="text-sm text-red-600 hidden" id="error-radio_termo">Você não aceitou o termo</span>
@@ -367,7 +352,7 @@
                 required
                 class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
               />
-              <label for="nome" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite seu nome</label>
+              <label for="nome" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Nome completo</label>
               <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
             </div>
   
@@ -382,7 +367,7 @@
                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8)"
                 maxlength="8"
               />
-              <label for="num_usp" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu número USP</label>
+              <label for="num_usp" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Número USP</label>
               <span class="text-sm text-red-600 hidden" id="error-num_usp">Você não digitou seu número USP</span>
             </div>
     
@@ -396,8 +381,8 @@
                 required
                 class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
               />
-              <label for="email" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite seu email</label>
-              <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu email</span>
+              <label for="email" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">E-mail</label>
+              <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu e-mail</span>
             </div>
     
             <!--Option-->
@@ -419,24 +404,7 @@
               <label for="select_curso" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Escolha seu curso</label>
               <span class="text-sm text-red-600 hidden" id="error-select">Você não selecionou um curso</span>
             </div>
-    
-            <!--Declaro que sou aluno -->
-            <fieldset class="relative z-0 w-full p-px mb-3 mt-6">
-              <legend class="absolute text-gray-500 transform -top-3 origin-0">Termo de aceitação</legend>
-              <div class="block pt-5 pb-2">
-                <input
-                  type="radio"
-                  name="term_curso"
-                  value="1"
-                  id="term_curso_id"
-                  class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
-                />
-                <label for="term_curso" id="legendCurso">Escolha seu curso</label>
-              </div>
-              <span class="text-sm text-red-600 hidden" id="error-term_curso">É necessário aceitar o termo de aceitação</span>
-            </fieldset>
-    
-            
+              
             <!--Ano de ingresso-->
             <div class="relative z-0 w-full mb-5">
               <input
@@ -448,7 +416,7 @@
                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
                 maxlength="4"
               />
-              <label for="ano_ingresso" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu ano de ingresso</label>
+              <label for="ano_ingresso" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Ano de ingresso</label>
               <span class="text-sm text-red-600 hidden" id="error-ano_ingresso">Você não digitou seu ano de ingresso</span>
             </div>
   
@@ -462,7 +430,7 @@
                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)"
                 class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
               />
-              <label for="telefone" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu telefone(DD+número)</label>
+              <label for="telefone" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Telefone(DDD número)</label>
               <span class="text-sm text-red-600 hidden" id="error-telefone">Você não digitou seu telefone</span>
             </div>
             
@@ -476,12 +444,12 @@
                   name="ano_termino"
                   pattern="[0-9]{4}"
                   placeholder=" "
-                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  class="pt-5 pb-6 block w-full px-0 mt-3 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                   oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
                   maxlength="4"
                 />
-                <label for="ano_termino" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite o seu ano do termino </label>
-                <span class="text-sm text-red-600 hidden" id="error-ano_termino">Você não digitou seu ano do termino</span>
+                <label for="ano_termino" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500 mb-8">Previsão de ano de término do curso </label>
+                <span class="text-sm text-red-600 hidden" id="error-ano_termino">Você não digitou seu ano do término</span>
               </div>
     
               <div class="relative z-0 w-full mb-5">
@@ -491,14 +459,14 @@
                   value=""
                   onclick="this.setAttribute('value', this.value);"
     
-                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  class="pt-5 pb-6 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 >
                   <option value="" selected disabled hidden></option>
                   <option value="1" class="select_semestre-1">1 semestre</option>
                   <option value="2" class="select_semestre-2">2 semestre</option>
     
                 </select>
-                <label for="select_semestre" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Escolha o semestre do seu término </label>
+                <label for="select_semestre" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Semestre</label>
                 <span class="text-sm text-red-600 hidden" id="error-select_semestre">Você não selecionou o semestre de término</span>
               </div>  
             </div>
@@ -516,7 +484,7 @@
                   oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 2)"
                   maxlength="8"
                 />
-                <label for="tot_créditos" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Digite total de créditos</label>
+                <label for="tot_créditos" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Total de créditos-aula em que está matriculado </label>
                 <span class="text-sm text-red-600 hidden" id="error-tot_créditos">Você não digitou seu total de créditos</span>
               </div>
             </div>
@@ -533,7 +501,7 @@
                 <option value="0"  disabled >Escolha um curso para aparecer as displinas</option>
                 <!--Aqui é inserido dados dinamicos -->
               </select>
-              <label for="select_Displinas" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Escolha a displina</label>
+              <label for="select_Displinas" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Selecione a disciplina que deseja excluir</label>
               <span class="text-sm text-red-600 hidden" id="error-select_Displinas">Você estorou o limite de crédito.</span>
             </div>
     
@@ -547,7 +515,7 @@
                 class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
                 onclick="toggleNocurso()"
               />
-              <label for="no_curso" id="legendnoCurso">Aperte aqui se nao tiver sua displina na lista</label>
+              <label for="no_curso" id="legendnoCurso">Indique aqui a disciplina, caso ela não conste na lista</label>
             </div>
             <div class="flex flex-row space-x-4 hidden transition-opacity duration-500 ease-in-out" 
                  id="curso_fora_da_lista">
@@ -560,7 +528,7 @@
                   required
                   class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 />
-                <label for="cod_displina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Codigo</label>
+                <label for="cod_displina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Código</label>
                 <span class="text-sm text-red-600 hidden" id="error-codigo_discplina">Você não digitou o código</span>
               </div>
               <div class="relative z-0 w-2/4 mb-5">
@@ -571,8 +539,8 @@
                   required
                   class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 />
-                <label for="nome_displina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Nome displina</label>
-                <span class="text-sm text-red-600 hidden" id="error-nome_discplina">Você não digitou o nome da displina</span>
+                <label for="nome_displina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Nome disciplina</label>
+                <span class="text-sm text-red-600 hidden" id="error-nome_discplina">Você não digitou o nome da disciplina</span>
               </div>
     
               <div class="relative z-0 w-1/4 mb-5">
@@ -586,7 +554,7 @@
                   required
                   class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 />
-                <label for="cred_discplina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Credito</label>
+                <label for="cred_discplina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Créditos-aula</label>
                 <span class="text-sm text-red-600 hidden" id="error-cred_discplina">Você passou do limite de créditos</span>
               </div>
             </div>
@@ -622,7 +590,7 @@
                     class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
                   />
                   <label for="radio_termo">
-                    Estou ciente de que, ao enviar este formulário, o processo de trancamento será irreversível e refere-se ao trancamento de disciplinas do 1º semestre de 2024.
+                    Estou ciente de que este pedido é referente ao trancamento de disciplinas do 1º semestre de 2024 e que, ao enviar este formulário, o processo de trancamento será irreversível.
                   </label>
                 </div>
                 <span class="text-sm text-red-600 hidden" id="error-radio_termo">Você não aceitou o termo</span>
