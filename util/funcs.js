@@ -41,10 +41,8 @@ function get_displinas_data(curso){
 }
 
 function userClicked(userInfo,seletor){
-
     var ss = SpreadsheetApp.openByUrl(urlSubmit);
     var ws = ss.getSheetByName(`userInfo ${seletor}`);
-    
     let destinatario = userInfo[2]; 
     let assunto = "Confirmação de Exclusão de Disciplina";
     let dataAtual = new Date();
@@ -68,7 +66,6 @@ Universidade de São Paulo
 11-969238993
 viniciuscmbrr@gmail.com
 `;
-  
 
   ws.appendRow(userInfo);
   MailApp.sendEmail(destinatario, assunto,corpo,{noReply:true});
@@ -77,7 +74,6 @@ viniciuscmbrr@gmail.com
 }
 
 function emailCurso(curso,userInfo){
-
     const emails = {
       "Bacharelado em Ciência de Dados": "viniciuscmbr@usp.br",
       "Bacharelado em Matemática": "secmat@icmc.usp.br",
@@ -93,5 +89,15 @@ function emailCurso(curso,userInfo){
       MailApp.sendEmail(email, `recebemos o e-mail do ${userInfo[0]}`, "teste", { replyTo: userInfo[2] });
     }
 }
+
+function takeIntervalDate(){
+    let ss = SpreadsheetApp.openByUrl(url);
+    let ws = ss.getSheetByName("Data");
+    let dataRange = ws.getRange(2, 1, 1, 2);
+    let interval = dataRange.getValues()[0];
+    return interval;
+}
+
+
 
 

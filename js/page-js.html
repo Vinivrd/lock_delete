@@ -7,6 +7,7 @@
   let select_Displinas = document.querySelector(`${seletor}#selectDisplinas`);
   let tot_creditos;
   let form;
+  let intervalodata = [];
 
   //LISTA de cursos
   //Incializo tabel quando a página é carregada, uma vez que o webscript é assincrono, para mudar instantaneamente o select das displinas
@@ -53,7 +54,7 @@
       })
     }
   }
-
+  disableMenuItems();
   //Mostrar a página selecionada 
   function showPage(pageId) {
     const elements = document.querySelectorAll('[id*="_option"]');
@@ -274,6 +275,33 @@
       radio.checked = false;
     });
   }
+
+  //Datas de ativação
+  function checkDateRange(startDate, endDate) {
+        const currentDate = new Date(); 
+        console.log(startDate)
+        console.log(currentDate);
+        return currentDate >= startDate && currentDate <= endDate;
+  }
+
+  function disableMenuItems() {
+      console.log("estou check data")
+      const excluirOption = document.getElementById('excluir_option');
+      const trancarOption = document.getElementById('trancar_option');
+      const datas = document.getElementById("test").textContent.split(',')
+    
+      const startDate = new Date(datas[0]);
+      const endDate =  new Date(datas[1]);
+
+      if (!checkDateRange(startDate, endDate)) {
+          excluirOption.classList.add('pointer-events-none');
+          trancarOption.classList.add('pointer-events-none');
+          excluirOption.classList.replace('text-gray-900','text-gray-400');
+          trancarOption.classList.replace('text-gray-900','text-gray-400');
+      }
+  }
+
+    
 
 
 </script>

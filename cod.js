@@ -11,6 +11,7 @@ function doGet(e){
   tmp.title = "Curso Especial";
   tmp.cursos = getCourses();
   tmp.displinas = getDisciplinas("Matemática-Núcleo Geral");
+  tmp.datas = takeIntervalDate();
   return  tmp.evaluate();
 }
 
