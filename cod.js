@@ -10,7 +10,7 @@ function doGet(e){
 
   tmp.title = "Curso Especial";
   tmp.cursos = getCourses();
-  tmp.displinas = getDisplinas("Matemática- Núcleo Geral");
+  tmp.displinas = getDisciplinas("Matemática-Núcleo Geral");
   return  tmp.evaluate();
 }
 

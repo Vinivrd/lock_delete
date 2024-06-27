@@ -1,4 +1,15 @@
 
+const courseCodes = {
+  "Bacharelado em Ciência de Dados": "BCD",
+  "Bacharelado em Matemática": "BMA",
+  "Matemática-Núcleo Geral": "MATNG",
+  "Licenciatura em Matemática": "LMA",
+  "Bacharelado em Estatística e Ciência de Dados": "BECD",
+  "Bacharelado em Sistema de Informação": "BSI",
+  "Bacharelado em Ciências de Computação": "BCC",
+  "Bacharelado em Matemática Aplicada e Computação Científica": "BMACC"
+};
+
 function getCourses(){
    let ss = SpreadsheetApp.openByUrl(url);
    let ws = ss.getSheetByName("Cursos");
@@ -6,45 +17,11 @@ function getCourses(){
    return list.map(value => value[0]);
 }
 
-function getDisplinas (curso){
-  let curso_name;
+function getDisciplinas (curso){
+  let curso_name = courseCodes[curso];
   let lista;
-  
-  switch (curso) {
-    case "Bacharelado em Ciência de Dados":
-      curso_name = "BCD";
-      lista = get_displinas_data(curso_name);
-      break;
-    case "Bacharelado em Matemática":
-      curso_name = "BMA";
-      lista = get_displinas_data(curso_name);
-      break;
-    case "Matemática- Núcleo Geral":
-      curso_name = "MATNG";
-      lista = get_displinas_data(curso_name);
-      break;
-    case "Licenciatura em Matemática":
-      curso_name = "LMA";
-      lista = get_displinas_data(curso_name);
-      break;
-    case "Bacharelado em Estatística e Ciência de Dados":
-      curso_name = "BECD";
-      lista = get_displinas_data(curso_name);
-      break;
-    case "Bacharelado em Sistema de Informação":
-      curso_name = "BSI";
-      lista = get_displinas_data(curso_name);
-      break;
-    case "Bacharelado em Ciências de Computação":
-      curso_name = "BCC";
-      lista = get_displinas_data(curso_name);
-      break;
-    case "Bacharelado em Matemática Aplicada e Computação Científica":
-      curso_name = "BMACC";
-      lista = get_displinas_data(curso_name);
-      break;
-    default:
-      break;
+  if (curso_name) {
+    lista =  get_displinas_data(curso_name);
   }
   return lista;
 }
@@ -63,24 +40,6 @@ function get_displinas_data(curso){
   return result;
 }
 
-function sendEmailWithAlias(userInfo) {
-  var emailAlias = "alias@example.com";  
-  var recipient = userInfo[2];  
-  var subject = "Teste Remetente";
-  var body = "Teste de email ";
-
- 
-  var emailOptions = {
-    name: "Vinicius Test",  
-    from: emailAlias,
-  };
-
-  // Envia o email usando o alias
-  MailApp.sendEmail(recipient, subject, body, emailOptions);
-}
-
-
-
 function userClicked(userInfo,seletor){
 
     var ss = SpreadsheetApp.openByUrl(urlSubmit);
@@ -90,13 +49,6 @@ function userClicked(userInfo,seletor){
     let assunto = "Confirmação de Exclusão de Disciplina";
     let dataAtual = new Date();
     let dataFormatada = Utilities.formatDate(dataAtual, Session.getScriptTimeZone(), 'dd/MM/yyyy');
-    let cc = "viniciuscmbr@usp.br"
-    let replyTo = 'viniciuscmbr@usp.br';
-
-    var options = {
-      name: "No Reply",
-      replyTo: "no-reply@example.com"
-    };
     
     let corpo = `
   Prezado(a) ${userInfo[0]},
@@ -125,34 +77,20 @@ viniciuscmbrr@gmail.com
 }
 
 function emailCurso(curso,userInfo){
-    switch (curso) { 
-      case "Bacharelado em Ciência de Dados":
-        MailApp.sendEmail("viniciuscmbr@usp.br",`recebemos o e-mail do ${userInfo[0]}`,"teste",{replyTo:userInfo[2]});
-        break;
-      case "Bacharelado em Matemática":
-        MailApp.sendEmail("secmat@icmc.usp.br ",`recebemos o e-mail do ${userInfo[0]}`,"teste",{replyTo:userInfo[2]});
-        break;
-      case "Matemática- Núcleo Geral":
-        MailApp.sendEmail("secmat@icmc.usp.br",`recebemos o e-mail do ${userInfo[0]}`,"teste",{replyTo:userInfo[2]});
-        break;
-      case "Licenciatura em Matemática":
-        MailApp.sendEmail("secmat@icmc.usp.br",`recebemos o e-mail do ${userInfo[0]}`,"teste",{replyTo:userInfo[2]});
-        break;
-      case "Bacharelado em Estatística e Ciência de Dados":
-        MailApp.sendEmail("secbecd@icmc.usp.br",`recebemos o e-mail do ${userInfo[0]}`,"teste",{replyTo:userInfo[2]});
-        break;
-      case "Bacharelado em Sistema de Informação":
-        MailApp.sendEmail("secbsi@icmc.usp.br",`recebemos o e-mail do ${userInfo[0]}`,"teste",{replyTo:userInfo[2]});
-        break;
-      case "Bacharelado em Ciências de Computação":
-        MailApp.sendEmail("secbcc@icmc.usp.br ",`recebemos o e-mail do ${userInfo[0]}`,"teste",{replyTo:userInfo[2]});
-        break;
-      case "Bacharelado em Matemática Aplicada e Computação Científica":
-        MailApp.sendEmail("secmat@icmc.usp.br",`recebemos o e-mail do ${userInfo[0]}`,"teste",{replyTo:userInfo[2]});
-        break;
-    
-      default:
-        break;
+
+    const emails = {
+      "Bacharelado em Ciência de Dados": "viniciuscmbr@usp.br",
+      "Bacharelado em Matemática": "secmat@icmc.usp.br",
+      "Matemática-Núcleo Geral": "secmat@icmc.usp.br",
+      "Licenciatura em Matemática": "secmat@icmc.usp.br",
+      "Bacharelado em Estatística e Ciência de Dados": "secbecd@icmc.usp.br",
+      "Bacharelado em Sistema de Informação": "secbsi@icmc.usp.br",
+      "Bacharelado em Ciências de Computação": "secbcc@icmc.usp.br",
+      "Bacharelado em Matemática Aplicada e Computação Científica": "secmat@icmc.usp.br"
+    };
+    const email = emails[curso];
+    if (email) {
+      MailApp.sendEmail(email, `recebemos o e-mail do ${userInfo[0]}`, "teste", { replyTo: userInfo[2] });
     }
 }
 

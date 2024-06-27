@@ -9,59 +9,81 @@
   let form;
 
   //LISTA de cursos
+  //Incializo tabel quando a página é carregada, uma vez que o webscript é assincrono, para mudar instantaneamente o select das displinas
   const sheets = [
     "Bacharelado em Ciência de Dados", "Bacharelado em Matemática",
-    "Matemática- Núcleo Geral", "Licenciatura em Matemática",
+    "Matemática-Núcleo Geral", "Licenciatura em Matemática",
     "Bacharelado em Estatística e Ciência de Dados", "Bacharelado em Sistema de Informação",
     "Bacharelado em Ciências de Computação", "Bacharelado em Matemática Aplicada e Computação Científica"
   ];
 
   let table = new Array(sheets.length);
+
+  sheets.forEach((curso, index) => {
+    google.script.run.withSuccessHandler(data => {
+      table[index] = data;
+    }).getDisciplinas(curso);
+  }); 
+
+  function atualizarDisplinas(curso_selected) {
+    select_Displinas = form.querySelector(`#selectDisplinas`);
+    let value = selected_curso.value;
+    let selectedOption = selected_curso.options[selected_curso.selectedIndex];
+    const selectedText = selectedOption.textContent;
+
+    while (select_Displinas.options.length > 1) {
+      select_Displinas.remove(1);
+    }
+    renderDisplinas(selectedText)
+  }
+
+  function renderDisplinas(selectedText) {
+    const index = sheets.indexOf(selectedText);
   
+    if (index !== -1) {
+      table[index].forEach((displinas, index) => {
+        let optionElement = document.createElement('option');
 
+        optionElement.value = index;
+        optionElement.text = displinas[2];
+        optionElement.id = displinas[2];
+        optionElement.className = `select_Displinas-${index}`;
+        optionElement.textContent = `${displinas[0]} ${displinas[1]}`;
+        select_Displinas.appendChild(optionElement);
+      })
+    }
+  }
 
+  //Mostrar a página selecionada 
   function showPage(pageId) {
-    let elements = document.querySelectorAll('[id*="_option"]');
+    const elements = document.querySelectorAll('[id*="_option"]');
 
     elements.forEach(e => {
       //tira o select das classes
       if (e.id.includes("_selected") && !e.id.includes(pageId)) {
         e.id = e.id.slice(0, -9);
-        e.classList.remove("text-blue-700");
-        e.classList.add("text-gray-900");
+        e.classList.replace("text-blue-700", "text-gray-900");
       } else if (e.id.includes(pageId) && !e.id.includes("_selected")) {
         e.id += "_selected";
-        e.classList.remove("text-gray-900");
-        e.classList.add("text-blue-700");
+        e.classList.replace("text-gray-900", "text-blue-700");
       }
     })
 
-    let pages = document.getElementsByClassName('content');
-    for (let i = 0; i < pages.length; i++) {
-      pages[i].classList.add('hidden');
-    }
+    document.querySelectorAll('.content').forEach(page => {
+      page.classList.add('hidden');
+    });
 
-    let page = document.getElementById(pageId);
-    page.classList.remove('hidden');
+    document.getElementById(pageId).classList.remove('hidden');
 
     //Trocar o seletor das páginas 
-    switch (pageId) {
-      case "excluir":
-        seletor = "#excluir ";
-        break;
-      case "trancar":
-        seletor = "#trancar ";
-        break;
 
-      default:
-        break;
-    }
+    pageId === "info" ? seletor = "" : seletor = `#${pageId} `;
     
     form = document.querySelector(`${seletor}#form`);
 
     //LISTENERS
-    let sendButton = form.querySelector(`#button`)
-    let errMessages = form.querySelectorAll(`#error`)
+    const sendButton = form.querySelector(`#button`)
+    const errMessages = form.querySelectorAll(`#error`)
     selected_curso = form.querySelector(`#selectCurso`);
     if (selected_curso) {
       selected_curso.addEventListener('change', () => {
@@ -83,85 +105,6 @@
     });
   });
 
-  //Incializo tabel.Motivação: uma vez que o web script é assincrono.Assim, estou inicializando ele no start da página 
-  //para mudar instantaneamente o select das displinas 
- 
-  sheets.forEach((curso, index) => {
-    google.script.run.withSuccessHandler(data => {
-      table[index] = data;
-    }).getDisplinas(curso);
-  });
-  //função apra atualizar as displinas 
-  function atualizarDisplinas(curso_selected) {
-    select_Displinas = form.querySelector(`#selectDisplinas`);
-    let value = selected_curso.value;
-    let selectedOption = selected_curso.options[selected_curso.selectedIndex];
-    const selectedText = selectedOption.textContent;
-
-    while (select_Displinas.options.length > 1) {
-      select_Displinas.remove(1);
-    }
-    renderDisplinas(selectedText)
-  }
-
-
-  function renderDisplinas(selectedText) {
-
-    let index;
-    switch (selectedText) {
-      case "Bacharelado em Ciência de Dados":
-        index = 0;
-        break;
-      case "Bacharelado em Matemática":
-        index = 1;
-        break;
-      case "Matemática- Núcleo Geral":
-        index = 2;
-        break;
-      case "Licenciatura em Matemática":
-        index = 3;
-        break;
-      case "Bacharelado em Estatística e Ciência de Dados":
-        index = 4;
-        break;
-      case "Bacharelado em Sistema de Informação":
-        index = 5;
-        break;
-      case "Bacharelado em Ciências de Computação":
-        index = 6;
-        break;
-      case "Bacharelado em Matemática Aplicada e Computação Científica":
-        index = 7;
-        break;
-      default:
-        break;
-    }
-    if (index >= 0 && index <= 7) {
-      table[index].forEach((displinas, index) => {
-        let optionElement = document.createElement('option');
-
-        optionElement.value = index;
-        optionElement.text = displinas[2];
-        optionElement.id = displinas[2];
-        optionElement.className = `select_Displinas-${index}`;
-        optionElement.textContent = `${displinas[0]} ${displinas[1]}`;
-        select_Displinas.appendChild(optionElement);
-      })
-    }
-  }
-
-  //togle submite quando nao tem o curso na lista
-  function toggleNocurso() {
-    let radio = form.querySelector(`#no_curso_radio`);
-    let div = form.querySelector(`#curso_fora_da_lista`);
-
-    if (radio.checked) {
-      div.classList.remove("hidden");
-    } else {
-      div.classList.add("hidden");
-    }
-  }
-
   //calculo total de creditos
   function cal_totCreditos() {
     let prev_credit = parseInt(form.querySelector(`#tot_creditos`).value);
@@ -170,19 +113,43 @@
       let credit_nolist = parseInt(form.querySelector(`#credit_nolist`).value);
       return prev_credit - credit_nolist;
     } else {
-      let index = form.querySelector(`#selectDisplinas`).value;
-      let name = form.querySelector(`#selectDisplinas`).name;
+      const index = form.querySelector(`#selectDisplinas`).value;
+      const name = form.querySelector(`#selectDisplinas`).name;
 
-      let elem = form.getElementsByClassName(`${name}-${index}`);
+      const elem = form.getElementsByClassName(`${name}-${index}`);
       let credit_curso = 0;
       if (elem.length > 0) {
-        redit_curso = parseInt(form.getElementsByClassName(`${name}-${index}`)[0].id);     
+        credit_curso = parseInt(form.getElementsByClassName(`${name}-${index}`)[0].id);     
       }
 
       return prev_credit - credit_curso;
     }
   }
 
+
+  //togle submite quando nao tem o curso na lista
+  function toggleNocurso() {
+    const radio1 = form.querySelector(`#div_radioCurso`);
+    const radio2 = form.querySelector(`#div_radioCurso_toDisable`);
+    let div = form.querySelector(`#curso_fora_da_lista`);
+
+    div.classList.remove("hidden");
+    radio1.classList.add("hidden");
+    radio2.classList.remove("hidden");
+  }
+
+  function toggleNocurso_toDisable() {
+    const radio1 = form.querySelector(`#div_radioCurso`);
+    const radio2 = form.querySelector(`#div_radioCurso_toDisable`);
+    let div = form.querySelector(`#curso_fora_da_lista`);
+    let inputs = div.querySelectorAll('input');
+
+    div.classList.add("hidden");
+    radio1.classList.remove("hidden");
+    radio2.classList.add("hidden");
+    inputs.forEach(input => input.value = '');
+    
+  }
 
 
   //FUNÇõeOES PROS ERROS

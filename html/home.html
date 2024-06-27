@@ -149,7 +149,7 @@
                 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 placeholder=" "
                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)"
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                class="pt-5 pb-6 block w-full px-0 mt-3 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
               />
               <label for="telefone" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Telefone(DDD número)</label>
               <span class="text-sm text-red-600 hidden" id="error-telefone">Você não digitou seu telefone</span>
@@ -180,7 +180,7 @@
                   value=""
                   onclick="this.setAttribute('value', this.value);"
     
-                  class="pt-5 pb-6 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  class="pt-5 pb-9 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 >
                   <option value="" selected disabled hidden></option>
                   <option value="1" class="select_semestre-1">1 semestre</option>
@@ -226,8 +226,8 @@
               <span class="text-sm text-red-600 hidden" id="error-select_Displinas">Você estorou o limite de crédito.</span>
             </div>
     
-            <!--Caso a matéria nao esteja na lista-->
-            <div class="block pt-5 pb-2">
+            <!--Caso a matéria nao esteja na lista --excluir -->
+            <div class="block pt-5 pb-2" id="div_radioCurso">
               <input
                 type="radio"
                 name="no_curso"
@@ -238,6 +238,19 @@
               />
               <label for="no_curso" id="legendnoCurso">Indique aqui a disciplina, caso ela não conste na lista</label>
             </div>
+
+            <div class="hidden block pt-5 pb-2" id="div_radioCurso_toDisable">
+              <input
+                type="radio"
+                name="no_curso_to_disable"
+                value="1"
+                id = "no_curso_radio_to_disable"
+                class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                onclick="toggleNocurso_toDisable()"
+              />
+              <label for="no_curso_to_disable" id="legendnoCurso">Desabilitar</label>
+            </div>
+            
             <div class="flex flex-row space-x-4 hidden transition-opacity duration-500 ease-in-out" 
                  id="curso_fora_da_lista">
               <div class="relative z-0 w-1/4 mb-5">
@@ -330,8 +343,6 @@
       </div>
     </div>
     
-
-    <!--Trancar matéria -->
     <!--TRANCAR-->
     <div id="trancar" class="content hidden">
         
@@ -459,7 +470,7 @@
                   value=""
                   onclick="this.setAttribute('value', this.value);"
     
-                  class="pt-5 pb-6 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  class="pt-5 pb-6 block w-full px-0 mt-3 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 >
                   <option value="" selected disabled hidden></option>
                   <option value="1" class="select_semestre-1">1 semestre</option>
@@ -505,8 +516,8 @@
               <span class="text-sm text-red-600 hidden" id="error-select_Displinas">Você estorou o limite de crédito.</span>
             </div>
     
-            <!--Caso a matéria nao esteja na lista-->
-            <div class="block pt-5 pb-2">
+            <!--Caso a matéria nao esteja na lista  Trancar-->
+            <div class="block pt-5 pb-2" id="div_radioCurso">
               <input
                 type="radio"
                 name="no_curso"
@@ -516,6 +527,18 @@
                 onclick="toggleNocurso()"
               />
               <label for="no_curso" id="legendnoCurso">Indique aqui a disciplina, caso ela não conste na lista</label>
+            </div>
+
+            <div class="hidden block pt-5 pb-2" id="div_radioCurso_toDisable">
+              <input
+                type="radio"
+                name="no_curso_to_disable"
+                value="1"
+                id = "no_curso_radio_to_disable"
+                class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                onclick="toggleNocurso_toDisable()"
+              />
+              <label for="no_curso_to_disable" id="legendnoCurso">Desabilitar</label>
             </div>
             <div class="flex flex-row space-x-4 hidden transition-opacity duration-500 ease-in-out" 
                  id="curso_fora_da_lista">
