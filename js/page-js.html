@@ -77,8 +77,14 @@
     document.getElementById(pageId).classList.remove('hidden');
 
     //Trocar o seletor das páginas 
+    if(pageId ==='info'){
+      document.getElementById("info").classList.remove('hidden');
+      seletor = ""
+    }else{
+      seletor = `#${pageId} `;
+      document.getElementById("info").classList.add('hidden');
+    }
 
-    pageId === "info" ? seletor = "" : seletor = `#${pageId} `;
     
     form = document.querySelector(`${seletor}#form`);
 
