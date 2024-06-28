@@ -204,7 +204,6 @@
         hideError(errorElement, input);
       }
     });
-
     //formato valores 
     //SEND
     if (!hasError) {
@@ -299,11 +298,16 @@
       const startDate = new Date(datas[0]);
       const endDate =  new Date(datas[1]);
 
-      if (!checkDateRange(startDate, endDate)) {
-          excluirOption.classList.add('pointer-events-none');
-          trancarOption.classList.add('pointer-events-none');
-          excluirOption.classList.replace('text-gray-900','text-gray-400');
-          trancarOption.classList.replace('text-gray-900','text-gray-400');
+      //excluir
+      if (!checkDateRange(new Date(datas[0]), new Date(datas[1]))) {
+        excluirOption.classList.add('pointer-events-none');
+        excluirOption.classList.replace('text-gray-900','text-gray-400');
+      }
+
+      //trancar
+      if (!checkDateRange(new Date(datas[2]), new Date(datas[3]))) {
+        trancarOption.classList.add('pointer-events-none');
+        trancarOption.classList.replace('text-gray-900','text-gray-400');
       }
   }
 

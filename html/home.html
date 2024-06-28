@@ -67,7 +67,7 @@
                 name="nome"
                 placeholder=" "
                 required
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
               />
               <label for="nome" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Nome completo</label>
               <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
@@ -80,7 +80,7 @@
                 name="num_usp"
                 pattern="[0-9]{}"
                 placeholder=" "
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8)"
                 maxlength="8"
               />
@@ -98,10 +98,10 @@
                 name="email"
                 placeholder=" "
                 required
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
               />
               <label for="email" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">E-mail</label>
-              <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu e-mail</span>
+              <span class="text-sm text-red-600 hidden" id="error-email">Você não digitou seu e-mail</span>
             </div>
     
             <!--Option-->
@@ -111,7 +111,7 @@
                 name="select_curso"
                 value=""
                 onclick="this.setAttribute('value', this.value);"
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
               >
     
                 <option value="" selected disabled hidden></option>
@@ -133,7 +133,7 @@
                 name="ano_ingresso"
                 pattern="[0-9]{4}"
                 placeholder=" "
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
                 maxlength="4"
               />
@@ -149,7 +149,7 @@
                 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 placeholder=" "
                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)"
-                class="pt-5 pb-6 block w-full px-0 mt-3 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                class="pt-5 pb-6 block w-full px-0 mt-3 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
               />
               <label for="telefone" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Telefone(DDD número)</label>
               <span class="text-sm text-red-600 hidden" id="error-telefone">Você não digitou seu telefone</span>
@@ -165,7 +165,7 @@
                   name="ano_termino"
                   pattern="[0-9]{4}"
                   placeholder=" "
-                  class="pt-5 pb-6 block w-full px-0 mt-3 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  class="pt-5 pb-6 block w-full px-0 mt-3 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                   oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
                   maxlength="4"
                 />
@@ -180,7 +180,7 @@
                   value=""
                   onclick="this.setAttribute('value', this.value);"
     
-                  class="pt-5 pb-9 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  class="pt-5 pb-9 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                 >
                   <option value="" selected disabled hidden></option>
                   <option value="1" class="select_semestre-1">1 semestre</option>
@@ -201,7 +201,7 @@
                   id="tot_creditos"
                   pattern="[0-9]{}"
                   placeholder=" "
-                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                   oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 2)"
                   maxlength="8"
                 />
@@ -216,7 +216,7 @@
                 name="select_Displinas"
                 value=""
                 onclick="this.setAttribute('value', this.value);"
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
               >    
                 <option value="" selected disabled hidden></option>
                 <option value="0"  disabled >Escolha um curso para aparecer as displinas</option>
@@ -260,7 +260,7 @@
                   placeholder=" "
                   maxlength="7"
                   required
-                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                 />
                 <label for="cod_displina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Código</label>
                 <span class="text-sm text-red-600 hidden" id="error-codigo_discplina">Você não digitou o código</span>
@@ -271,7 +271,7 @@
                   name="nome_discplina"
                   placeholder=" "
                   required
-                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                 />
                 <label for="nome_displina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Nome disciplina</label>
                 <span class="text-sm text-red-600 hidden" id="error-nome_discplina">Você não digitou o nome da displina</span>
@@ -286,7 +286,7 @@
                   maxlength="2"
                   id="credit_nolist"
                   required
-                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                 />
                 <label for="cred_discplina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Créditos-aula</label>
                 <span class="text-sm text-red-600 hidden" id="error-cred_discplina">Você passou do limite de créditos</span>
@@ -300,7 +300,7 @@
                 value=""
                 onclick="this.setAttribute('value', this.value);"
                 id="select_motivoExclusao"
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
               >    
                 <option value="" selected disabled hidden></option>
                 <option value="0" class="just_exclusão-0">Excesso de créditos</option>
@@ -361,7 +361,7 @@
                 name="nome"
                 placeholder=" "
                 required
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
               />
               <label for="nome" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Nome completo</label>
               <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
@@ -374,7 +374,7 @@
                 name="num_usp"
                 pattern="[0-9]{}"
                 placeholder=" "
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8)"
                 maxlength="8"
               />
@@ -384,16 +384,16 @@
     
             <!--Email-->
             <div class="relative z-0 w-full mb-5">
-              <!--Nome-->
+
               <input
                 type="email"
                 name="email"
                 placeholder=" "
                 required
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
               />
               <label for="email" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">E-mail</label>
-              <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu e-mail</span>
+              <span class="text-sm text-red-600 hidden" id="error-email">Você não digitou seu e-mail</span>
             </div>
     
             <!--Option-->
@@ -403,7 +403,7 @@
                 name="select_curso"
                 value=""
                 onclick="this.setAttribute('value', this.value);"
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
               >
     
                 <option value="" selected disabled hidden></option>
@@ -423,7 +423,7 @@
                 name="ano_ingresso"
                 pattern="[0-9]{4}"
                 placeholder=" "
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
                 maxlength="4"
               />
@@ -439,7 +439,7 @@
                 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 placeholder=" "
                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)"
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
               />
               <label for="telefone" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Telefone(DDD número)</label>
               <span class="text-sm text-red-600 hidden" id="error-telefone">Você não digitou seu telefone</span>
@@ -455,7 +455,7 @@
                   name="ano_termino"
                   pattern="[0-9]{4}"
                   placeholder=" "
-                  class="pt-5 pb-6 block w-full px-0 mt-3 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  class="pt-5 pb-6 block w-full px-0 mt-3 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                   oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
                   maxlength="4"
                 />
@@ -470,7 +470,7 @@
                   value=""
                   onclick="this.setAttribute('value', this.value);"
     
-                  class="pt-5 pb-6 block w-full px-0 mt-3 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  class="pt-5 pb-6 block w-full px-0 mt-3 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                 >
                   <option value="" selected disabled hidden></option>
                   <option value="1" class="select_semestre-1">1 semestre</option>
@@ -491,7 +491,7 @@
                   id="tot_creditos"
                   pattern="[0-9]{}"
                   placeholder=" "
-                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                   oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 2)"
                   maxlength="8"
                 />
@@ -506,7 +506,7 @@
                 name="select_Displinas"
                 value=""
                 onclick="this.setAttribute('value', this.value);"
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
               >    
                 <option value="" selected disabled hidden></option>
                 <option value="0"  disabled >Escolha um curso para aparecer as displinas</option>
@@ -549,7 +549,7 @@
                   placeholder=" "
                   maxlength="7"
                   required
-                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                 />
                 <label for="cod_displina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Código</label>
                 <span class="text-sm text-red-600 hidden" id="error-codigo_discplina">Você não digitou o código</span>
@@ -560,7 +560,7 @@
                   name="nome_discplina"
                   placeholder=" "
                   required
-                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                 />
                 <label for="nome_displina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Nome disciplina</label>
                 <span class="text-sm text-red-600 hidden" id="error-nome_discplina">Você não digitou o nome da disciplina</span>
@@ -575,7 +575,7 @@
                   maxlength="2"
                   id="credit_nolist"
                   required
-                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                  class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                 />
                 <label for="cred_discplina" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Créditos-aula</label>
                 <span class="text-sm text-red-600 hidden" id="error-cred_discplina">Você passou do limite de créditos</span>
@@ -589,7 +589,7 @@
                 value=""
                 onclick="this.setAttribute('value', this.value);"
                 id="select_motivoExclusao"
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
               >    
                 <option value="" selected disabled hidden></option>
                 <option value="0" class="just_exclusão-0">Excesso de créditos</option>

@@ -68,9 +68,9 @@ viniciuscmbrr@gmail.com
 `;
 
   ws.appendRow(userInfo);
-  MailApp.sendEmail(destinatario, assunto,corpo,{noReply:true});
+  //MailApp.sendEmail(destinatario, assunto,corpo,{noReply:true});
 
-  emailCurso(userInfo[3],userInfo);
+  //emailCurso(userInfo[3],userInfo);
 }
 
 function emailCurso(curso,userInfo){
@@ -93,7 +93,7 @@ function emailCurso(curso,userInfo){
 function takeIntervalDate(){
     let ss = SpreadsheetApp.openByUrl(url);
     let ws = ss.getSheetByName("Data");
-    let dataRange = ws.getRange(2, 1, 1, 2);
+    let dataRange = ws.getRange(2, 1, 1, 4);
     let interval = dataRange.getValues()[0];
     return interval;
 }
