@@ -8,12 +8,17 @@ var Route = {};
 function doGet(e){
   let tmp = HtmlService.createTemplateFromFile("html/home");
 
+  var imageUrl = "https://drive.google.com/uc?id=1X1zqIP_Mvki_m5AHCoMBwThsP1st-w0t";
+
+  tmp.picture = imageUrl;
   tmp.title = "Curso Especial";
   tmp.cursos = getCourses();
   tmp.displinas = getDisciplinas("Matemática-Núcleo Geral");
   tmp.datas = takeIntervalDate();
   return  tmp.evaluate();
 }
+
+
 
 
 

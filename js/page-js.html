@@ -8,6 +8,7 @@
   let tot_creditos;
   let form;
   let intervalodata = [];
+  let flagCredito = false;
 
   //LISTA de cursos
   //Incializo tabel quando a página é carregada, uma vez que o webscript é assincrono, para mudar instantaneamente o select das displinas
@@ -24,7 +25,7 @@
     google.script.run.withSuccessHandler(data => {
       table[index] = data;
     }).getDisciplinas(curso);
-  }); 
+  });
 
   function atualizarDisplinas(curso_selected) {
     select_Displinas = form.querySelector(`#selectDisplinas`);
@@ -40,7 +41,7 @@
 
   function renderDisplinas(selectedText) {
     const index = sheets.indexOf(selectedText);
-  
+
     if (index !== -1) {
       table[index].forEach((displinas, index) => {
         let optionElement = document.createElement('option');
@@ -77,26 +78,106 @@
     document.getElementById(pageId).classList.remove('hidden');
 
     //Trocar o seletor das páginas 
-    if(pageId ==='info'){
+    if (pageId === 'info') {
       document.getElementById("info").classList.remove('hidden');
       seletor = ""
-    }else{
+    } else {
       seletor = `#${pageId} `;
       document.getElementById("info").classList.add('hidden');
     }
 
-    
+
     form = document.querySelector(`${seletor}#form`);
 
     //LISTENERS
     const sendButton = form.querySelector(`#button`)
     const errMessages = form.querySelectorAll(`#error`)
+    select_Displinas = form.querySelector(`#selectDisplinas`);
     selected_curso = form.querySelector(`#selectCurso`);
+
+    //Justificativa menos de 12 
+    if (select_Displinas) {
+      select_Displinas.addEventListener('change', () => {
+        let div = form.querySelector(`#just_menosCredito`);
+        if (cal_totCreditos() < 12 && flagCredito == false) {
+          
+          alert("Você está com menos de 12");
+          flagCredito = true;
+          div.classList.toggle('hidden');
+          setTimeout(() => {
+            div.classList.toggle('opacity-0');
+            div.classList.toggle('animate-fadeIn'); // ou 'animate-slideIn' para a animação de deslize
+          }, 20);
+        } else if (flagCredito == true){
+          flagCredito = false;
+          div.classList.remove('animate-fadeIn');
+          div.classList.add('animate-fadeOut');
+          setTimeout(() => {
+            div.classList.add('opacity-0');
+            div.classList.add('hidden');
+            div.classList.remove('animate-fadeOut');
+          }, 1000); // Duração da animação de saída
+        }
+      })
+    }
+
+    
+    // Option outros de quando o cliente tem menos de 12 créditos 
+    let select_menosCredito = form.querySelector("#select_menosCredito")
+    if(select_menosCredito){
+      select_menosCredito.addEventListener('change', ()=> {
+        if(select_menosCredito.value == 4) {
+          form.querySelector("#outrosCreditos").classList.remove("hidden");
+        }else{
+          //form.querySelector("#outrosCreditos").textContent = "";
+          form.querySelector("#outrosCreditos").classList.add("hidden");
+        }
+      })
+    }
+
+     //tot crédito 
+     form.querySelector('#credit_nolist').addEventListener('change', function (e) {
+      let div = form.querySelector(`#just_menosCredito`);
+      if (cal_totCreditos() < 12) {
+        alert("Você está com menos de 12");
+        div.classList.toggle('hidden');
+        setTimeout(() => {
+          div.classList.toggle('opacity-0');
+          div.classList.toggle('animate-fadeIn'); // ou 'animate-slideIn' para a animação de deslize
+        }, 20);
+
+      }else{
+        div.classList.remove('animate-fadeIn');
+        div.classList.add('animate-fadeOut');
+        setTimeout(() => {
+          div.classList.add('opacity-0');
+          div.classList.add('hidden');
+          div.classList.remove('animate-fadeOut');
+        }, 1000); // Duração da animação de saída
+     }
+    });
+    
+    //option outros de quando o cliente coloca outros na justificativa de exclusão 
+    let justificativa = form.querySelector("#select_motivoExclusao");
+    if(justificativa) {
+      justificativa.addEventListener('change',() => {
+        if(justificativa.value == 4) {
+          form.querySelector("#outrosJustificativa").classList.remove("hidden");
+        }else{
+          form.querySelector("#outrosJustificativa").classList.add("hidden");
+        }
+      })
+    }
+
+    
+
+
     if (selected_curso) {
       selected_curso.addEventListener('change', () => {
         atualizarDisplinas(selected_curso);
       });
     }
+
     if (sendButton) {
       sendButton.addEventListener('click', toggleError);
     }
@@ -112,6 +193,7 @@
     });
   });
 
+
   //calculo total de creditos
   function cal_totCreditos() {
     let prev_credit = parseInt(form.querySelector(`#tot_creditos`).value);
@@ -126,13 +208,12 @@
       const elem = form.getElementsByClassName(`${name}-${index}`);
       let credit_curso = 0;
       if (elem.length > 0) {
-        credit_curso = parseInt(form.getElementsByClassName(`${name}-${index}`)[0].id);     
+        credit_curso = parseInt(form.getElementsByClassName(`${name}-${index}`)[0].id);
       }
 
       return prev_credit - credit_curso;
     }
   }
-
 
   //togle submite quando nao tem o curso na lista
   function toggleNocurso() {
@@ -155,7 +236,7 @@
     radio1.classList.remove("hidden");
     radio2.classList.add("hidden");
     inputs.forEach(input => input.value = '');
-    
+
   }
 
 
@@ -167,71 +248,56 @@
 
     inputs.forEach((input) => {
       const errorElement = form.querySelector(`#error-${input.name}`);
-      if (input.type === 'radio') {
-        if (!input.checked) {
-          if (!(input.name == "no_curso")) {
+      if (!input.name.includes("noError")) {
+        if (input.type === 'radio') {
+          if (!input.checked) {
+            if (!(input.name.includes("noError"))) {
+              showError(errorElement, input);
+              hasError = true;
+            }
+          } else {
+            hideError(errorElement, input);
+          }
+        } else if (!input.value) {
+          let exception = ["codigo_discplina", "nome_discplina", "cred_discplina", "select_Displinas"];
+
+          if (!exception.includes(input.name)) {
             showError(errorElement, input);
             hasError = true;
           }
         } else {
           hideError(errorElement, input);
         }
-      } else if (cal_totCreditos() < 12) {
-
-        if (form.querySelector(`#no_curso_radio`).checked) {
-
-          let error = form.querySelector(`#error-cred_discplina`);
-
-          showError(error, form.querySelector(`#credit_nolist`));
-          hasError = true;
-
-        } else {
-          let error = form.querySelector(`#error-select_Displinas`);
-
-          showError(error, form.querySelector(`#selectDisplinas`));
-          hasError = true;
-          //hideError(error, form.querySelector("#credit_nolist"));
-        }
-
-      } else if (!input.value) {
-        let exception = ["codigo_discplina", "nome_discplina", "cred_discplina", "select_Displinas"];
-
-        if (!exception.includes(input.name)) {
-          showError(errorElement, input);
-          hasError = true;
-        }
-      } else {
-        hideError(errorElement, input);
       }
     });
+
     //formato valores 
     //SEND
+    console.log(hasError);
     if (!hasError) {
       let userInfos = [];
       inputs.forEach(input => {
         //aqui eu arrumos os dados do select que está retornando o value do select 
         if (input.id.includes("select")) {
           //preciso testar se existi
-          let ele  = form.getElementsByClassName(`${input.name}-${input.value}`)
-          if(ele.length > 0) {
+          let ele = form.getElementsByClassName(`${input.name}-${input.value}`)
+          if (ele.length > 0) {
             userInfos.push(form.getElementsByClassName(`${input.name}-${input.value}`)[0].textContent);
-          }else{
+          } else {
             userInfos.push("");
           }
-          
-        } else if (input.type == "radio" && input.value == 1){
+
+        } else if (input.type == "radio" && input.value == 1) {
           userInfos.push("Termo aceito");
         } else {
           userInfos.push(input.value);
         }
-
       });
 
       userInfos.push(cal_totCreditos());
       google.script.run.userClicked(userInfos, seletor.slice(1, -1));
       clearForm()
-      alert("Seu formulario de bom")
-      
+      alert("Dados enviados com sucesso!")
     }
   }
 
@@ -283,35 +349,35 @@
 
   //Datas de ativação
   function checkDateRange(startDate, endDate) {
-        const currentDate = new Date(); 
-        console.log(startDate)
-        console.log(currentDate);
-        return currentDate >= startDate && currentDate <= endDate;
+    const currentDate = new Date();
+    console.log(startDate)
+    console.log(currentDate);
+    return currentDate >= startDate && currentDate <= endDate;
   }
 
   function disableMenuItems() {
-      console.log("estou check data")
-      const excluirOption = document.getElementById('excluir_option');
-      const trancarOption = document.getElementById('trancar_option');
-      const datas = document.getElementById("test").textContent.split(',')
-    
-      const startDate = new Date(datas[0]);
-      const endDate =  new Date(datas[1]);
+    console.log("estou check data")
+    const excluirOption = document.getElementById('excluir_option');
+    const trancarOption = document.getElementById('trancar_option');
+    const datas = document.getElementById("test").textContent.split(',')
 
-      //excluir
-      if (!checkDateRange(new Date(datas[0]), new Date(datas[1]))) {
-        excluirOption.classList.add('pointer-events-none');
-        excluirOption.classList.replace('text-gray-900','text-gray-400');
-      }
+    const startDate = new Date(datas[0]);
+    const endDate = new Date(datas[1]);
 
-      //trancar
-      if (!checkDateRange(new Date(datas[2]), new Date(datas[3]))) {
-        trancarOption.classList.add('pointer-events-none');
-        trancarOption.classList.replace('text-gray-900','text-gray-400');
-      }
+    //excluir
+    if (!checkDateRange(new Date(datas[0]), new Date(datas[1]))) {
+      excluirOption.classList.add('pointer-events-none');
+      excluirOption.classList.replace('text-gray-900', 'text-gray-400');
+    }
+
+    //trancar
+    if (!checkDateRange(new Date(datas[2]), new Date(datas[3]))) {
+      trancarOption.classList.add('pointer-events-none');
+      trancarOption.classList.replace('text-gray-900', 'text-gray-400');
+    }
   }
 
-    
+
 
 
 </script>
