@@ -8,7 +8,7 @@
   let tot_creditos;
   let form;
   let intervalodata = [];
-  let flagCredito = false;
+  let flagCredito;
 
   //LISTA de cursos
   //Incializo tabel quando a página é carregada, uma vez que o webscript é assincrono, para mudar instantaneamente o select das displinas
@@ -94,12 +94,12 @@
     const errMessages = form.querySelectorAll(`#error`)
     select_Displinas = form.querySelector(`#selectDisplinas`);
     selected_curso = form.querySelector(`#selectCurso`);
-
+    let flagCredito = false;
     //Justificativa menos de 12 
     if (select_Displinas) {
       select_Displinas.addEventListener('change', () => {
         let div = form.querySelector(`#just_menosCredito`);
-        if (cal_totCreditos() < 12 && flagCredito == false) {
+        if (cal_totCreditos() < 12 && flagCredito != true) {
           
           alert("Você está com menos de 12");
           flagCredito = true;
@@ -108,7 +108,7 @@
             div.classList.toggle('opacity-0');
             div.classList.toggle('animate-fadeIn'); // ou 'animate-slideIn' para a animação de deslize
           }, 20);
-        } else if (flagCredito == true){
+        } else if(cal_totCreditos() >= 12 && flagCredito == true){
           flagCredito = false;
           div.classList.remove('animate-fadeIn');
           div.classList.add('animate-fadeOut');
@@ -350,8 +350,6 @@
   //Datas de ativação
   function checkDateRange(startDate, endDate) {
     const currentDate = new Date();
-    console.log(startDate)
-    console.log(currentDate);
     return currentDate >= startDate && currentDate <= endDate;
   }
 
@@ -363,7 +361,6 @@
 
     const startDate = new Date(datas[0]);
     const endDate = new Date(datas[1]);
-
     //excluir
     if (!checkDateRange(new Date(datas[0]), new Date(datas[1]))) {
       excluirOption.classList.add('pointer-events-none');
