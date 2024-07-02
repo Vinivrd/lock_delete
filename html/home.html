@@ -9,10 +9,11 @@
   </head>
 
   <body>
+
     <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       <a href="https://icmc.usp.br/graduacao" class="flex items-center space-x-3 rtl:space-x-reverse">
-          <!--<img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo">-->
+           <!-- <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo">-->
           <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ICMC</span>
       </a>
 
@@ -43,10 +44,15 @@
     </nav>
 
    <!--Info-->
-    <div id="info" class="block">
-
-      <img src="https://i.imgur.com/6d8tOGn.jpg" alt="Fo">
-      <h2 id="test" class="hidden"><?= datas ?></h2>
+    <div id="info" class="block" >
+      <div class="ml-20">
+        <h1 class="text-3xl lg:text-4xl xl:text-5xl font-medium text-black-600 leading-normal">
+          Informações sobre a página ICMC</h1>
+        <p class="pt-4 text-1xl lg:text-2xl xl:text-3xl text-black-800">Aqui estão todas as datas para trancar e excluir matéria </h2></p>
+      </div>
+      <div class="ml-20">
+        <img src="https://i.imgur.com/6d8tOGn.jpg" class="ml-10 lg:ml-20 mt-4 lg:mt-0 w-4/5 lg:w-2/3" alt="">
+      </div>
     </div>
 
 
@@ -230,25 +236,25 @@
             <div class="block pt-5 pb-2" id="div_radioCurso">
               <input
                 type="radio"
-                name="no_curso_noError"
+                name="no_curso"
                 value="1"
                 id = "no_curso_radio"
                 class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
                 onclick="toggleNocurso()"
               />
-              <label for="no_curso_noError" id="legendnoCurso">Indique aqui a disciplina, caso ela não conste na lista</label>
+              <label for="no_curso" id="legendnoCurso">Indique aqui a disciplina, caso ela não conste na lista</label>
             </div>
 
             <div class="hidden block pt-5 pb-2" id="div_radioCurso_toDisable">
               <input
                 type="radio"
-                name="to_disable_noError"
+                name="no_curso_to_disable"
                 value="1"
                 id = "no_curso_radio_to_disable"
                 class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
                 onclick="toggleNocurso_toDisable()"
               />
-              <label for="to_disable_noError" id="legendnoCurso">Desabilitar</label>
+              <label for="no_curso_to_disable" id="legendnoCurso">Desabilitar</label>
             </div>
             
             <div class="flex flex-row space-x-4 hidden transition-opacity duration-500 ease-in-out" 
@@ -292,40 +298,7 @@
                 <span class="text-sm text-red-600 hidden" id="error-cred_discplina">Você passou do limite de créditos</span>
               </div>
             </div>
-
-            <!--Justificativa para ficar com -12 créditos-->
-            <div class="relative z-0 w-full mb-5 mt-5 hidden opacity-0 transition-all duration-500" id="just_menosCredito">
-              <select
-                name="menosCredito_noError"
-                value=""
-                onclick="this.setAttribute('value', this.value);"
-                id="select_menosCredito"
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
-              >    
-                <option value="" selected disabled hidden></option>
-                <option value="0" class="just_exclusão-0">Sou provável formando</option>
-                <option value="1" class="just_exclusão-1">n tenho requisitos para cursar outras discilinas</option>
-                <option value="2" class="just_exclusão-2">Nao me encaixo nas hipóteses acima, mas desejo prosseguir com o pedido</option>
-                <option value="4" class="just_exclusão-4">Outros</option>
-
-              </select>
-              <label for="menosCredito_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Justificativa para menos Credito</label>
-              <span class="text-sm text-red-600 hidden" id="error-just_exclusão">Você não digitou a justificativa</span>
-            </div>
-            <!--Outros-->
-            <div class="relative z-0 w-full mb-5 hidden" id="outrosCreditos">
-              
-              <input
-                type="text"
-                name="outrosCredito_noError"
-                placeholder=" "
-                required
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
-              />
-              <label for="outrosCredito__noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Outro motivo</label>
-              <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
-            </div>
-            
+    
             <!--justificafica para a exlcusao-->
             <div class="relative z-0 w-full mb-5 mt-5">
               <select
@@ -344,20 +317,6 @@
               </select>
               <label for="just_exclusão" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Justificativa para a exclusão</label>
               <span class="text-sm text-red-600 hidden" id="error-just_exclusão">Você não digitou a justificativa</span>
-            </div>
-
-             <!--Outros-->
-             <div class="relative z-0 w-full mb-5 hidden opacity-0 transition-all duration-500" id="outrosJustificativa">
-              
-              <input
-                type="text"
-                name="outrosJustificativa_noError"
-                placeholder=" "
-                required
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
-              />
-              <label for="outrosJustificativa_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Outro motivo</label>
-              <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
             </div>
     
             <div class="mt-10">
@@ -567,27 +526,26 @@
             <div class="block pt-5 pb-2" id="div_radioCurso">
               <input
                 type="radio"
-                name="no_curso_noError"
+                name="no_curso"
                 value="1"
                 id = "no_curso_radio"
                 class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
                 onclick="toggleNocurso()"
               />
-              <label for="no_curso_noError" id="legendnoCurso">Indique aqui a disciplina, caso ela não conste na lista</label>
+              <label for="no_curso" id="legendnoCurso">Indique aqui a disciplina, caso ela não conste na lista</label>
             </div>
 
             <div class="hidden block pt-5 pb-2" id="div_radioCurso_toDisable">
               <input
                 type="radio"
-                name="to_disable_noError"
+                name="no_curso_to_disable"
                 value="1"
                 id = "no_curso_radio_to_disable"
                 class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
                 onclick="toggleNocurso_toDisable()"
               />
-              <label for="to_disable_noError" id="legendnoCurso">Desabilitar</label>
+              <label for="no_curso_to_disable" id="legendnoCurso">Desabilitar</label>
             </div>
-
             <div class="flex flex-row space-x-4 hidden transition-opacity duration-500 ease-in-out" 
                  id="curso_fora_da_lista">
               <div class="relative z-0 w-1/4 mb-5">
@@ -629,41 +587,7 @@
                 <span class="text-sm text-red-600 hidden" id="error-cred_discplina">Você passou do limite de créditos</span>
               </div>
             </div>
-            
-            <!--Justificativa para ficar com -12 créditos-->
-            <div class="relative z-0 w-full mb-5 mt-5 hidden transition-opacity duration-500 ease-in-out" id="just_menosCredito">
-              <select
-                name="menosCredito_noError"
-                value=""
-                onclick="this.setAttribute('value', this.value);"
-                id="select_menosCredito"
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
-              >    
-                <option value="" selected disabled hidden></option>
-                <option value="0" class="just_exclusão-0">Sou provável formando</option>
-                <option value="1" class="just_exclusão-1">n tenho requisitos para cursar outras discilinas</option>
-                <option value="2" class="just_exclusão-2">Nao me encaixo nas hipóteses acima, mas desejo prosseguir com o pedido</option>
-                <option value="4" class="just_exclusão-4">Outros</option>
-
-              </select>
-              <label for="menosCredito_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Justificativa para menos Credito</label>
-              <span class="text-sm text-red-600 hidden" id="error-just_exclusão">Você não digitou a justificativa</span>
-            </div>
-            
-            <!--Outros-->
-            <div class="relative z-0 w-full mb-5 hidden" id="outrosCreditos">
-              
-              <input
-                type="text"
-                name="outrosCredito_noError"
-                placeholder=" "
-                required
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
-              />
-              <label for="outrosCredito__noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Outro motivo</label>
-              <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
-            </div>
-
+    
             <!--justificafica para a exlcusao-->
             <div class="relative z-0 w-full mb-5 mt-5">
               <select
@@ -682,19 +606,6 @@
               </select>
               <label for="just_exclusão" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Justificativa para a exclusão</label>
               <span class="text-sm text-red-600 hidden" id="error-just_exclusão">Você não digitou a justificativa</span>
-            </div>
-
-            <div class="relative z-0 w-full mb-5 hidden" id="outrosJustificativa">
-              
-              <input
-                type="text"
-                name="outrosJustificativa_noError"
-                placeholder=" "
-                required
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
-              />
-              <label for="outrosJustificativa_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Outro motivo</label>
-              <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
             </div>
     
             <div class="mt-10">
