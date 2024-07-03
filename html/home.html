@@ -189,8 +189,8 @@
                   class="pt-5 pb-9 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                 >
                   <option value="" selected disabled hidden></option>
-                  <option value="1" class="select_semestre-1">1 semestre</option>
-                  <option value="2" class="select_semestre-2">2 semestre</option>
+                  <option value="1" class="select_semestre-1">1° semestre</option>
+                  <option value="2" class="select_semestre-2">2° semestre</option>
     
                 </select>
                 <label for="select_semestre" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Semestre</label>
@@ -214,6 +214,40 @@
                 <label for="tot_créditos" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Total de créditos-aula em que está matriculado</label>
                 <span class="text-sm text-red-600 hidden" id="error-tot_créditos">Você não digitou seu total de créditos</span>
               </div>
+            </div>
+            
+            <!--justificafica para a exlcusao-->
+            <div class="relative z-0 w-full mb-5 mt-5">
+              <select
+                name="just_exclusão"
+                value=""
+                onclick="this.setAttribute('value', this.value);"
+                id="select_motivoExclusao"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
+              >    
+                <option value="" selected disabled hidden></option>
+                <option value="0" class="just_exclusão-0">Excesso de créditos</option>
+                <option value="1" class="just_exclusão-1">Excesso de trabalho</option>
+                <option value="2" class="just_exclusão-2">Problemas com o professor</option>
+                <option value="3" class="just_exclusão-3">Matriculei-me em créditos a mais para desistir depois</option>
+                <option value="4" class="just_exclusão-4">Outros</option>
+              </select>
+              <label for="just_exclusão" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Justificativa para a exclusão</label>
+              <span class="text-sm text-red-600 hidden" id="error-just_exclusão">Você não digitou a justificativa</span>
+            </div>
+
+             <!--Outros-->
+             <div class="relative z-0 w-full mb-5 hidden" id="outrosJustificativa">
+              
+              <input
+                type="text"
+                name="outrosJustificativa_noError"
+                placeholder=" "
+                required
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
+              />
+              <label for="outrosJustificativa_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Outra justificativa</label>
+              <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
             </div>
     
             <div class="relative z-0 w-full mb-5">
@@ -309,13 +343,13 @@
                 class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
               >    
                 <option value="" selected disabled hidden></option>
-                <option value="0" class="just_exclusão-0">Sou provável formando</option>
-                <option value="1" class="just_exclusão-1">n tenho requisitos para cursar outras discilinas</option>
-                <option value="2" class="just_exclusão-2">Nao me encaixo nas hipóteses acima, mas desejo prosseguir com o pedido</option>
-                <option value="4" class="just_exclusão-4">Outros</option>
+                <option value="0" class="select_menosCredito-0">Sou provavel formando</option>
+                <option value="1" class="select_menosCredito-1">Não tenho requisitos para cursar outras disciplinas</option>
+                <option value="2" class="select_menosCredito-2">Não me encaixo nas hipóteses acima, mas desejo prosseguir com o pedido</option>
+                <option value="4" class="select_menosCredito-4">Outros</option>
 
               </select>
-              <label for="menosCredito_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Justificativa para menos Credito</label>
+              <label for="menosCredito_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Justificativa para ficar com menos de 12 créditos-aula</label>
               <span class="text-sm text-red-600 hidden" id="error-just_exclusão">Você não digitou a justificativa</span>
             </div>
             <!--Outros-->
@@ -328,43 +362,10 @@
                 required
                 class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
               />
-              <label for="outrosCredito__noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Outro motivo</label>
+              <label for="outrosCredito__noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Outra justificativa</label>
               <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
             </div>
             
-            <!--justificafica para a exlcusao-->
-            <div class="relative z-0 w-full mb-5 mt-5">
-              <select
-                name="just_exclusão"
-                value=""
-                onclick="this.setAttribute('value', this.value);"
-                id="select_motivoExclusao"
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
-              >    
-                <option value="" selected disabled hidden></option>
-                <option value="0" class="just_exclusão-0">Excesso de créditos</option>
-                <option value="1" class="just_exclusão-1">Excesso de trabalho</option>
-                <option value="2" class="just_exclusão-2">Problemas com o professor</option>
-                <option value="3" class="just_exclusão-3">Matriculei-me em créditos a mais para desistir depois</option>
-                <option value="4" class="just_exclusão-4">Outros</option>
-              </select>
-              <label for="just_exclusão" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Justificativa para a exclusão</label>
-              <span class="text-sm text-red-600 hidden" id="error-just_exclusão">Você não digitou a justificativa</span>
-            </div>
-
-             <!--Outros-->
-             <div class="relative z-0 w-full mb-5 hidden" id="outrosJustificativa">
-              
-              <input
-                type="text"
-                name="outrosJustificativa_noError"
-                placeholder=" "
-                required
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
-              />
-              <label for="outrosJustificativa_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Outro motivo</label>
-              <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
-            </div>
     
             <div class="mt-10">
               <fieldset class="relative z-0 w-full p-px mb-5">
@@ -526,8 +527,8 @@
                   class="pt-5 pb-6 block w-full px-0 mt-3 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                 >
                   <option value="" selected disabled hidden></option>
-                  <option value="1" class="select_semestre-1">1 semestre</option>
-                  <option value="2" class="select_semestre-2">2 semestre</option>
+                  <option value="1" class="select_semestre-1">1° semestre</option>
+                  <option value="2" class="select_semestre-2">2° semestre</option>
     
                 </select>
                 <label for="select_semestre" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Semestre</label>
@@ -552,6 +553,40 @@
                 <span class="text-sm text-red-600 hidden" id="error-tot_créditos">Você não digitou seu total de créditos</span>
               </div>
             </div>
+
+            <!--justificafica para a exlcusao-->
+            <div class="relative z-0 w-full mb-5 mt-5">
+              <select
+                name="just_exclusão"
+                value=""
+                onclick="this.setAttribute('value', this.value);"
+                id="select_motivoExclusao"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
+              >    
+                <option value="" selected disabled hidden></option>
+                <option value="0" class="just_exclusão-0">Excesso de créditos</option>
+                <option value="1" class="just_exclusão-1">Excesso de trabalho</option>
+                <option value="2" class="just_exclusão-2">Problemas com o professor</option>
+                <option value="3" class="just_exclusão-3">Matriculei-me em créditos a mais para desistir depois</option>
+                <option value="4" class="just_exclusão-4">Outros</option>
+              </select>
+              <label for="just_exclusão" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Justificativa para o trancamento</label>
+              <span class="text-sm text-red-600 hidden" id="error-just_exclusão">Você não digitou a justificativa</span>
+            </div>
+
+             <!--Outros-->
+             <div class="relative z-0 w-full mb-5 hidden" id="outrosJustificativa">
+              
+              <input
+                type="text"
+                name="outrosJustificativa_noError"
+                placeholder=" "
+                required
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
+              />
+              <label for="outrosJustificativa_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Outra justificativa</label>
+              <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
+            </div>
     
             <div class="relative z-0 w-full mb-5">
               <select
@@ -565,7 +600,7 @@
                 <option value="0"  disabled >Escolha um curso para aparecer as displinas</option>
                 <!--Aqui é inserido dados dinamicos -->
               </select>
-              <label for="select_Displinas" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Selecione a disciplina que deseja excluir</label>
+              <label for="select_Displinas" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Selecione a disciplina que deseja trancar</label>
               <span class="text-sm text-red-600 hidden" id="error-select_Displinas">Você estorou o limite de crédito.</span>
             </div>
     
@@ -646,13 +681,13 @@
                 class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
               >    
                 <option value="" selected disabled hidden></option>
-                <option value="0" class="just_exclusão-0">Sou provável formando</option>
-                <option value="1" class="just_exclusão-1">n tenho requisitos para cursar outras discilinas</option>
-                <option value="2" class="just_exclusão-2">Nao me encaixo nas hipóteses acima, mas desejo prosseguir com o pedido</option>
-                <option value="4" class="just_exclusão-4">Outros</option>
+                <option value="0" class="select_menosCredito-0">Sou provavel formando</option>
+                <option value="1" class="select_menosCredito-1">Não tenho requisitos para cursar outras disciplinas</option>
+                <option value="2" class="select_menosCredito-2">Não me encaixo nas hipóteses acima, mas desejo prosseguir com o pedido</option>
+                <option value="4" class="select_menosCredito-4">Outros</option>
 
               </select>
-              <label for="menosCredito_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Justificativa para menos Credito</label>
+              <label for="menosCredito_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Justificativa para ficar com menos de 12 créditos-aula</label>
               <span class="text-sm text-red-600 hidden" id="error-just_exclusão">Você não digitou a justificativa</span>
             </div>
             
@@ -666,42 +701,10 @@
                 required
                 class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
               />
-              <label for="outrosCredito__noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Outro motivo</label>
+              <label for="outrosCredito__noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Outra justificativa</label>
               <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
             </div>
 
-            <!--justificafica para a exlcusao-->
-            <div class="relative z-0 w-full mb-5 mt-5">
-              <select
-                name="just_exclusão"
-                value=""
-                onclick="this.setAttribute('value', this.value);"
-                id="select_motivoExclusao"
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
-              >    
-                <option value="" selected disabled hidden></option>
-                <option value="0" class="just_exclusão-0">Excesso de créditos</option>
-                <option value="1" class="just_exclusão-1">Excesso de trabalho</option>
-                <option value="2" class="just_exclusão-2">Problemas com o professor</option>
-                <option value="3" class="just_exclusão-3">Matriculei-me em créditos a mais para desistir depois</option>
-                <option value="4" class="just_exclusão-4">Outros</option>
-              </select>
-              <label for="just_exclusão" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Justificativa para a exclusão</label>
-              <span class="text-sm text-red-600 hidden" id="error-just_exclusão">Você não digitou a justificativa</span>
-            </div>
-
-            <div class="relative z-0 w-full mb-5 hidden" id="outrosJustificativa">
-              
-              <input
-                type="text"
-                name="outrosJustificativa_noError"
-                placeholder=" "
-                required
-                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
-              />
-              <label for="outrosJustificativa_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Outro motivo</label>
-              <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
-            </div>
     
             <div class="mt-10">
               <fieldset class="relative z-0 w-full p-px mb-5">

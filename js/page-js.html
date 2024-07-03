@@ -101,7 +101,7 @@
         let div = form.querySelector(`#just_menosCredito`);
         if (cal_totCreditos() < 12 && flagCredito != true) {
           
-          alert("Você está com menos de 12");
+          alert("Você ficará com menos de 12 créditos-aula");
           flagCredito = true;
           div.classList.toggle('hidden');
           setTimeout(() => {
@@ -139,7 +139,7 @@
      form.querySelector('#credit_nolist').addEventListener('change', function (e) {
       let div = form.querySelector(`#just_menosCredito`);
       if (cal_totCreditos() < 12) {
-        alert("Você está com menos de 12");
+        alert("Você ficará com menos de 12 créditos-aula");
         div.classList.toggle('hidden');
         setTimeout(() => {
           div.classList.toggle('opacity-0');

@@ -51,31 +51,22 @@ function userClicked(userInfo,seletor){
     let corpo = `
   Prezado(a) ${userInfo[0]},
 
-Espero que esta mensagem o(a) encontre bem.
+  Recebemos a sua solicitação para ${seletor} a disciplina ${userInfo[11] == ''? userInfo[15]:userInfo[11]} e informamos que ela será analisada em breve.
+  Se precisar de assistência adicional ou tiver dúvidas sobre como esta exclusão pode impactar sua grade curricular, por favor, entre em contato com o Serviço de Graduação ou com o coordenador do curso.
 
-Recebemos a sua solicitação para ${seletor} a disciplina ${userInfo[10]} e gostaríamos de confirmar que o pedido foi processado com sucesso. A partir de ${dataFormatada}
-Se precisar de assistência adicional ou tiver dúvidas sobre como esta exclusão pode impactar sua grade curricular, por favor, entre em contato com a secretaria acadêmica ou com o seu orientador acadêmico. Estamos à disposição para ajudar no que for necessário.
+  Atenciosamente.
 
-Agradecemos a sua compreensão e desejamos sucesso em suas demais disciplinas.
-
-Atenciosamente,
-
-Vinicius Diniz
-Programador
-Universidade de São Paulo
-11-969238993
-viniciuscmbrr@gmail.com
-`;
+  Serviço de Graduação do ICMC/USP`;
 
   ws.appendRow(userInfo);
-  //MailApp.sendEmail(destinatario, assunto,corpo,{noReply:true});
+  MailApp.sendEmail(destinatario, assunto,corpo,{noReply:true});
 
-  //emailCurso(userInfo[3],userInfo);
+  emailCurso(userInfo[3],userInfo);
 }
 
 function emailCurso(curso,userInfo){
     const emails = {
-      "Bacharelado em Ciência de Dados": "viniciuscmbr@usp.br",
+      "Bacharelado em Ciência de Dados": "secbcdados@icmc.usp.br",
       "Bacharelado em Matemática": "secmat@icmc.usp.br",
       "Matemática-Núcleo Geral": "secmat@icmc.usp.br",
       "Licenciatura em Matemática": "secmat@icmc.usp.br",
@@ -86,7 +77,16 @@ function emailCurso(curso,userInfo){
     };
     const email = emails[curso];
     if (email) {
-      MailApp.sendEmail(email, `recebemos o e-mail do ${userInfo[0]}`, "teste", { replyTo: userInfo[2] });
+      let corpo = `
+        ${userInfo[0]}
+        ${userInfo[1]}
+        ${userInfo[2]}
+        ${userInfo[3]}
+        ${userInfo[11] === '' ? userInfo[15] : userInfo[11]}
+        ${userInfo[8]}
+        ${userInfo[20]}
+      `;  
+      MailApp.sendEmail(email, `Solicitação para ${seletor} da disciplina`, corpo, { replyTo: userInfo[2] });
     }
 }
 
