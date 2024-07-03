@@ -197,21 +197,20 @@
   //calculo total de creditos
   function cal_totCreditos() {
     let prev_credit = parseInt(form.querySelector(`#tot_creditos`).value);
-
-    if (form.querySelector("#no_curso_radio").checked) {
-      let credit_nolist = parseInt(form.querySelector(`#credit_nolist`).value);
-      return prev_credit - credit_nolist;
+    let credit_curso = 0;
+    if (form.querySelector("#no_curso_radio").checked == true) {
+      credit_curso = parseInt(form.querySelector(`#credit_nolist`).value);
+      return prev_credit - credit_curso;
     } else {
-      const index = form.querySelector(`#selectDisplinas`).value;
-      const name = form.querySelector(`#selectDisplinas`).name;
+      let index = form.querySelector(`#selectDisplinas`).value;
+      let name = form.querySelector(`#selectDisplinas`).name;
 
       const elem = form.getElementsByClassName(`${name}-${index}`);
-      let credit_curso = 0;
+
       if (elem.length > 0) {
         credit_curso = parseInt(form.getElementsByClassName(`${name}-${index}`)[0].id);
+        return prev_credit - credit_curso;
       }
-
-      return prev_credit - credit_curso;
     }
   }
 
@@ -219,9 +218,12 @@
   function toggleNocurso() {
     const radio1 = form.querySelector(`#div_radioCurso`);
     const radio2 = form.querySelector(`#div_radioCurso_toDisable`);
+    const buttonRadio = form.querySelector("#no_curso_radio_to_disable");
     let div = form.querySelector(`#curso_fora_da_lista`);
 
+
     div.classList.remove("hidden");
+    buttonRadio.checked = true;
     radio1.classList.add("hidden");
     radio2.classList.remove("hidden");
   }
@@ -229,9 +231,10 @@
   function toggleNocurso_toDisable() {
     const radio1 = form.querySelector(`#div_radioCurso`);
     const radio2 = form.querySelector(`#div_radioCurso_toDisable`);
+    const buttonRadio =  form.querySelector("#no_curso_radio");
     let div = form.querySelector(`#curso_fora_da_lista`);
     let inputs = div.querySelectorAll('input');
-
+    buttonRadio.checked = false;
     div.classList.add("hidden");
     radio1.classList.remove("hidden");
     radio2.classList.add("hidden");
@@ -273,7 +276,7 @@
 
     //formato valores 
     //SEND
-    console.log(hasError);
+
     if (!hasError) {
       let userInfos = [];
       inputs.forEach(input => {
@@ -297,6 +300,7 @@
       userInfos.push(cal_totCreditos());
       google.script.run.userClicked(userInfos, seletor.slice(1, -1));
       clearForm()
+    
       alert("Dados enviados com sucesso!")
     }
   }
@@ -354,7 +358,6 @@
   }
 
   function disableMenuItems() {
-    console.log("estou check data")
     const excluirOption = document.getElementById('excluir_option');
     const trancarOption = document.getElementById('trancar_option');
     const datas = document.getElementById("data_to_get").textContent.split(',')

@@ -58,13 +58,13 @@ function userClicked(userInfo, seletor) {
     Serviço de Graduação do ICMC/USP`;
 
   ws.appendRow(userInfo);
-  MailApp.sendEmail(destinatario, assunto, corpo, {noReply: true});
+ // MailApp.sendEmail(destinatario, assunto, corpo, {noReply: true});
 
   Logger.log(`userInfo: ${JSON.stringify(userInfo)}`);
   Logger.log(`Curso: ${userInfo[3]}`);
   Logger.log(`Seletor: ${seletor}`);
   
-  emailCurso(userInfo[3], userInfo, seletor);
+  //emailCurso(userInfo[3], userInfo, seletor);
 }
 
 function emailCurso(curso, userInfo, seletor) {
