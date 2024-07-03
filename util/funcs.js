@@ -74,7 +74,7 @@ function emailCurso(curso, userInfo, seletor) {
     "Matemática-Núcleo Geral": "secmat@icmc.usp.br",
     "Licenciatura em Matemática": "secmat@icmc.usp.br",
     "Bacharelado em Estatística e Ciência de Dados": "secbecd@icmc.usp.br",
-    "Bacharelado em Sistema de Informação": "viniciuscmbr@usp.br", //secbsi@icmc.usp.br
+    "Bacharelado em Sistema de Informação": "secbsi@icmc.usp.br", //secbsi@icmc.usp.br
     "Bacharelado em Ciências de Computação": "secbcc@icmc.usp.br",
     "Bacharelado em Matemática Aplicada e Computação Científica": "secmat@icmc.usp.br"
   };
