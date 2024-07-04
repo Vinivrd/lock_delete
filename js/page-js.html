@@ -1,7 +1,7 @@
 <script>
 
 
-  //var
+  //variáveis 
   let seletor = ""; //flag para diferenciar as pages 
   let selected_curso = document.querySelector(`${seletor}#selectCurso`); // curso e o displina, eu to renderizando no começo na página para ficar rápido, pois o google apps script é assincrono
   let select_Displinas = document.querySelector(`${seletor}#selectDisplinas`);
@@ -41,11 +41,9 @@
 
   function renderDisplinas(selectedText) {
     const index = sheets.indexOf(selectedText);
-
     if (index !== -1) {
       table[index].forEach((displinas, index) => {
         let optionElement = document.createElement('option');
-
         optionElement.value = index;
         optionElement.text = displinas[2];
         optionElement.id = displinas[2];
@@ -56,10 +54,10 @@
     }
   }
   disableMenuItems();
+
   //Mostrar a página selecionada 
   function showPage(pageId) {
     const elements = document.querySelectorAll('[id*="_option"]');
-
     elements.forEach(e => {
       //tira o select das classes
       if (e.id.includes("_selected") && !e.id.includes(pageId)) {
@@ -71,12 +69,12 @@
       }
     })
 
+    // Deixo hidden todos content
     document.querySelectorAll('.content').forEach(page => {
       page.classList.add('hidden');
     });
 
     document.getElementById(pageId).classList.remove('hidden');
-
     //Trocar o seletor das páginas 
     if (pageId === 'info') {
       document.getElementById("info").classList.remove('hidden');
@@ -85,31 +83,68 @@
       seletor = `#${pageId} `;
       document.getElementById("info").classList.add('hidden');
     }
-
-
     form = document.querySelector(`${seletor}#form`);
 
     //LISTENERS
-    const sendButton = form.querySelector(`#button`)
-    const errMessages = form.querySelectorAll(`#error`)
-    select_Displinas = form.querySelector(`#selectDisplinas`);
-    selected_curso = form.querySelector(`#selectCurso`);
-    let flagCredito = false;
-    //Justificativa menos de 12 
-    if (select_Displinas) {
-      select_Displinas.addEventListener('change', () => {
+    if(pageId == "excluir" || pageId == "trancar"){
+      
+      const sendButton = form.querySelector(`#button`)
+      const errMessages = form.querySelectorAll(`#error`)
+      select_Displinas = form.querySelector(`#selectDisplinas`);
+      selected_curso = form.querySelector(`#selectCurso`);
+      let flagCredito = false;
+
+      //Justificativa menos de 12 
+      if (select_Displinas) {
+        select_Displinas.addEventListener('change', () => {
+          let div = form.querySelector(`#just_menosCredito`);
+          if (cal_totCreditos() < 12 && flagCredito != true) {
+            
+            alert("Você ficará com menos de 12 créditos-aula");
+            flagCredito = true;
+            div.classList.toggle('hidden');
+            setTimeout(() => {
+              div.classList.toggle('opacity-0');
+              div.classList.toggle('animate-fadeIn'); // ou 'animate-slideIn' para a animação de deslize
+            }, 20);
+          } else if(cal_totCreditos() >= 12 && flagCredito == true){
+            flagCredito = false;
+            div.classList.remove('animate-fadeIn');
+            div.classList.add('animate-fadeOut');
+            setTimeout(() => {
+              div.classList.add('opacity-0');
+              div.classList.add('hidden');
+              div.classList.remove('animate-fadeOut');
+            }, 1000); // Duração da animação de saída
+          }
+        })
+      }
+
+      // Option outros de quando o cliente tem menos de 12 créditos 
+      let select_menosCredito = form.querySelector("#select_menosCredito")
+      if(select_menosCredito){
+        select_menosCredito.addEventListener('change', ()=> {
+          if(select_menosCredito.value == 4) {
+            form.querySelector("#outrosCreditos").classList.remove("hidden");
+          }else{
+            //form.querySelector("#outrosCreditos").textContent = "";
+            form.querySelector("#outrosCreditos").classList.add("hidden");
+          }
+        })
+      }
+
+      //tot crédito 
+      form.querySelector('#credit_nolist').addEventListener('change', function (e) {
         let div = form.querySelector(`#just_menosCredito`);
-        if (cal_totCreditos() < 12 && flagCredito != true) {
-          
+        if (cal_totCreditos() < 12) {
           alert("Você ficará com menos de 12 créditos-aula");
-          flagCredito = true;
           div.classList.toggle('hidden');
           setTimeout(() => {
             div.classList.toggle('opacity-0');
             div.classList.toggle('animate-fadeIn'); // ou 'animate-slideIn' para a animação de deslize
           }, 20);
-        } else if(cal_totCreditos() >= 12 && flagCredito == true){
-          flagCredito = false;
+
+        }else{
           div.classList.remove('animate-fadeIn');
           div.classList.add('animate-fadeOut');
           setTimeout(() => {
@@ -117,69 +152,30 @@
             div.classList.add('hidden');
             div.classList.remove('animate-fadeOut');
           }, 1000); // Duração da animação de saída
-        }
-      })
-    }
-
-    
-    // Option outros de quando o cliente tem menos de 12 créditos 
-    let select_menosCredito = form.querySelector("#select_menosCredito")
-    if(select_menosCredito){
-      select_menosCredito.addEventListener('change', ()=> {
-        if(select_menosCredito.value == 4) {
-          form.querySelector("#outrosCreditos").classList.remove("hidden");
-        }else{
-          //form.querySelector("#outrosCreditos").textContent = "";
-          form.querySelector("#outrosCreditos").classList.add("hidden");
-        }
-      })
-    }
-
-     //tot crédito 
-     form.querySelector('#credit_nolist').addEventListener('change', function (e) {
-      let div = form.querySelector(`#just_menosCredito`);
-      if (cal_totCreditos() < 12) {
-        alert("Você ficará com menos de 12 créditos-aula");
-        div.classList.toggle('hidden');
-        setTimeout(() => {
-          div.classList.toggle('opacity-0');
-          div.classList.toggle('animate-fadeIn'); // ou 'animate-slideIn' para a animação de deslize
-        }, 20);
-
-      }else{
-        div.classList.remove('animate-fadeIn');
-        div.classList.add('animate-fadeOut');
-        setTimeout(() => {
-          div.classList.add('opacity-0');
-          div.classList.add('hidden');
-          div.classList.remove('animate-fadeOut');
-        }, 1000); // Duração da animação de saída
-     }
-    });
-    
-    //option outros de quando o cliente coloca outros na justificativa de exclusão 
-    let justificativa = form.querySelector("#select_motivoExclusao");
-    if(justificativa) {
-      justificativa.addEventListener('change',() => {
-        if(justificativa.value == 4) {
-          form.querySelector("#outrosJustificativa").classList.remove("hidden");
-        }else{
-          form.querySelector("#outrosJustificativa").classList.add("hidden");
-        }
-      })
-    }
-
-    
-
-
-    if (selected_curso) {
-      selected_curso.addEventListener('change', () => {
-        atualizarDisplinas(selected_curso);
+      }
       });
-    }
+      
+      //option (outros) de quando o cliente coloca outros na justificativa de exclusão 
+      let justificativa = form.querySelector("#select_motivoExclusao");
+      if(justificativa) {
+        justificativa.addEventListener('change',() => {
+          if(justificativa.value == 4) {
+            form.querySelector("#outrosJustificativa").classList.remove("hidden");
+          }else{
+            form.querySelector("#outrosJustificativa").classList.add("hidden");
+          }
+        })
+      }
 
-    if (sendButton) {
-      sendButton.addEventListener('click', toggleError);
+      if (selected_curso) {
+        selected_curso.addEventListener('change', () => {
+          atualizarDisplinas(selected_curso);
+        });
+      }
+
+      if (sendButton) {
+        sendButton.addEventListener('click', toggleError);
+      }
     }
   }
 
@@ -239,15 +235,12 @@
     radio1.classList.remove("hidden");
     radio2.classList.add("hidden");
     inputs.forEach(input => input.value = '');
-
   }
-
 
   //FUNÇõeOES PROS ERROS
   function toggleError() {
     let inputs = form.querySelectorAll(`input,select`);
     let hasError = false;
-
 
     inputs.forEach((input) => {
       const errorElement = form.querySelector(`#error-${input.name}`);
@@ -376,8 +369,5 @@
       trancarOption.classList.replace('text-gray-900', 'text-gray-400');
     }
   }
-
-
-
 
 </script>
