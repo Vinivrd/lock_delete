@@ -46,7 +46,6 @@ function userClicked(userInfo, seletor) {
   let assunto = "Confirmação de Exclusão de Disciplina";
   let dataAtual = new Date();
   let dataFormatada = Utilities.formatDate(dataAtual, Session.getScriptTimeZone(), 'dd/MM/yyyy');
-  
   let corpo = `
     Prezado(a) ${userInfo[0]},
 
@@ -56,14 +55,8 @@ function userClicked(userInfo, seletor) {
     Atenciosamente,
 
     Serviço de Graduação do ICMC/USP`;
-
   ws.appendRow(userInfo);
- // MailApp.sendEmail(destinatario, assunto, corpo, {noReply: true});
-
-  Logger.log(`userInfo: ${JSON.stringify(userInfo)}`);
-  Logger.log(`Curso: ${userInfo[3]}`);
-  Logger.log(`Seletor: ${seletor}`);
-  
+  // MailApp.sendEmail(destinatario, assunto, corpo, {noReply: true});
   //emailCurso(userInfo[3], userInfo, seletor);
 }
 
