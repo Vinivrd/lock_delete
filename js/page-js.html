@@ -86,6 +86,7 @@
     form = document.querySelector(`${seletor}#form`);
 
     //LISTENERS
+
     if(pageId == "excluir" || pageId == "trancar"){
       
       const sendButton = form.querySelector(`#button`)
@@ -132,6 +133,8 @@
           }
         })
       }
+     
+
 
       //tot crédito 
       form.querySelector('#credit_nolist').addEventListener('change', function (e) {
@@ -177,6 +180,14 @@
         sendButton.addEventListener('click', toggleError);
       }
     }
+    //==========================>trancamento total do curso <=================================
+    if(pageId == "lock_curso"){
+      form.querySelector("#uploadButton").addEventListener('click', function(event) {
+        toggleError("lock_curso");
+        sendArquivo();
+      });
+    }
+
   }
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -188,6 +199,7 @@
       errMessages = form.querySelectorAll(`#error`)
     });
   });
+
 
 
   //calculo total de creditos
@@ -238,7 +250,7 @@
   }
 
   //FUNÇõeOES PROS ERROS
-  function toggleError() {
+  function toggleError(pageId) {
     let inputs = form.querySelectorAll(`input,select`);
     let hasError = false;
 
@@ -266,36 +278,60 @@
         }
       }
     });
+    if(!hasError && pageId != "lock_curso"){
+      if (!hasError) {
+        let userInfos = [];
+        inputs.forEach(input => {
+          //aqui eu arrumos os dados do select que está retornando o value do select 
+          if (input.id.includes("select")) {
+            //preciso testar se existi
+            let ele = form.getElementsByClassName(`${input.name}-${input.value}`)
+            if (ele.length > 0) {
+              userInfos.push(form.getElementsByClassName(`${input.name}-${input.value}`)[0].textContent);
+            } else {
+              userInfos.push("");
+            }
 
-    //formato valores 
-    //SEND
+          } else if (input.type == "radio" && input.value == 1) {
+            userInfos.push("Termo aceito");
+          } else {
+            userInfos.push(input.value);
+          }
+        });
 
-    if (!hasError) {
+        userInfos.push(cal_totCreditos());
+        google.script.run.userClicked(userInfos, seletor.slice(1, -1));
+        clearForm()
+      
+        alert("Dados enviados com sucesso!")
+      }
+    }else if(pageId == "lock_curso" && !hasError){
       let userInfos = [];
       inputs.forEach(input => {
-        //aqui eu arrumos os dados do select que está retornando o value do select 
-        if (input.id.includes("select")) {
-          //preciso testar se existi
-          let ele = form.getElementsByClassName(`${input.name}-${input.value}`)
-          if (ele.length > 0) {
-            userInfos.push(form.getElementsByClassName(`${input.name}-${input.value}`)[0].textContent);
+          //aqui eu arrumos os dados do select que está retornando o value do select 
+          if (input.id.includes("select")) {
+            //preciso testar se existi
+            let ele = form.getElementsByClassName(`${input.name}-${input.value}`)
+            if (ele.length > 0) {
+              userInfos.push(form.getElementsByClassName(`${input.name}-${input.value}`)[0].textContent);
+            } else {
+              userInfos.push("");
+            }
+
+          } else if (input.type == "radio") {
+            if(input.value == 1 && input.checked == true) {
+              userInfos.push("Já tranquei anteriormente")
+            }else if(input.value == 2 && input.checked == true){
+              userInfos.push("Nunca tranquei")
+            }
           } else {
-            userInfos.push("");
+            userInfos.push(input.value);
           }
-
-        } else if (input.type == "radio" && input.value == 1) {
-          userInfos.push("Termo aceito");
-        } else {
-          userInfos.push(input.value);
-        }
-      });
-
-      userInfos.push(cal_totCreditos());
-      google.script.run.userClicked(userInfos, seletor.slice(1, -1));
-      clearForm()
-    
-      alert("Dados enviados com sucesso!")
+        });
+        console.log(userInfos)
     }
+
+
   }
 
   function showError(errorElement, input) {
@@ -369,5 +405,41 @@
       trancarOption.classList.replace('text-gray-900', 'text-gray-400');
     }
   }
+
+  //======================== Trancamento do curso ===================================//
+  function displaySelect(indice){
+    if(indice > 0 && indice <= 3){
+      let divSelect =  document.getElementById(`ano_termino-${indice+1}`);
+      if(divSelect.classList.contains("hidden")){
+        divSelect.classList.remove("hidden");
+      }
+    }
+  }
+
+  //enviar arquivo
+  function sendArquivo(){
+    var fileInput = form.querySelector('#formFileSm');
+    var file = fileInput.files[0];
+    var reader = new FileReader();
+
+    if (!file) {
+        form.querySelector('#status').innerText = "Por favor, selecione um arquivo.";
+        return;
+    }
+
+    reader.onload = function(e) {
+      var data = {
+        name: file.name,
+        mimeType: file.type,
+        bytes: [...new Uint8Array(e.target.result)]
+      };
+
+      google.script.run.withSuccessHandler(function(response) {
+        form.querySelector('#status').innerText = response;
+      }).uploadFile(data);
+    };
+
+    reader.readAsArrayBuffer(file);
+ }
 
 </script>

@@ -102,3 +102,14 @@ function takeIntervalDate() {
   let interval = dataRange.getValues()[0];
   return interval;
 }
+
+function uploadFile(file) {
+  try {
+    var folder = DriveApp.getFolderById('1KBRAw4hk1rJGD8g6NGQNOwZcbceflYKX'); // Coloque o ID da pasta desejada aqui
+    var blob = Utilities.newBlob(file.bytes, file.mimeType, file.name);
+    var file = folder.createFile(blob);
+    return "Arquivo enviado com sucesso!";
+  } catch (e) {
+    return "Erro: " + e.toString();
+  }
+}
