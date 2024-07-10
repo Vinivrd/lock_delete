@@ -96,7 +96,7 @@ function takeIntervalDate() {
   return interval;
 }
 
-function upload File(file,file2,nome) {
+function uploadFile(file,file2,nome) {
   try {
     var mainFolder  = DriveApp.getFolderById('1KBRAw4hk1rJGD8g6NGQNOwZcbceflYKX');
 
