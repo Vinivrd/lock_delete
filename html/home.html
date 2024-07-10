@@ -88,7 +88,7 @@
               <input
                 type="text"
                 name="num_usp"
-                pattern="[0-9]{}"
+                pattern="[0-9]{8}"
                 placeholder=" "
                 class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8)"
@@ -235,7 +235,7 @@
             </div>
 
              <!--Outros-->
-             <div class="relative z-0 w-full mb-5 hidden" id="outrosJustificativa">
+            <div class="relative z-0 w-full mb-5 hidden" id="outrosJustificativa">
               <input
                 type="text"
                 name="outrosJustificativa_noError"
@@ -399,7 +399,7 @@
         
       <div class="min-h-screen p-0 sm:p-12">
         <div class="mx-auto max-w-xl px-8 py-16 bg-white border-0 shadow-lg sm:rounded-3xl">
-          <h1 class="text-2xl font-bold mb-8">Trancar displina</h1>
+          <h1 class="text-2xl font-bold mb-8">Trancamento displina</h1>
           <!--Inicio do form-->
           <form id="form" novalidate> <!--**-->
     
@@ -423,7 +423,7 @@
               <input
                 type="text"
                 name="num_usp"
-                pattern="[0-9]{}"
+                pattern="[0-9]{8}"
                 placeholder=" "
                 class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8)"
@@ -758,7 +758,7 @@
               <input
                 type="text"
                 name="num_usp"
-                pattern="[0-9]{}"
+                pattern="[0-9]{8}"
                 placeholder=" "
                 class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8)"
@@ -844,7 +844,7 @@
                   oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 3)"
                   maxlength="8"
                 />
-                <label for="tot_créditos" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Nº crédito-aula total cumprido até o momento</label>
+                <label for="tot_créditos" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Número total de créditos-aula cumprido até o momento</label>
                 <span class="text-sm text-red-600 hidden" id="error-tot_créditos">Você não digitou seu total de créditos</span>
               </div>
             </div>
@@ -879,7 +879,7 @@
             <div class="block mt-5">
               <p class="">Indique o semestre e o ano que pretende trancrar</p>
               
-              <div class="flex flex-row space-x-4 mt-4" id="ano_termino-1">
+              <div class="flex flex-row items-center space-x-4 mt-4" id="ano_termino-1">
                 <!--Ano de termino-->
                 <!--1-->
                 <div class="relative z-0 w-full mb-5">
@@ -913,9 +913,10 @@
                   <label for="select_semestre1" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Semestre</label>
                   <span class="text-sm text-red-600 hidden" id="error-select_semestre">Você não selecionou o semestre de término</span>
                 </div>  
+
               </div>
               <!--2-->
-              <div class="flex flex-row space-x-4 hidden" id="ano_termino-2">
+              <div class="flex flex-row space-x-4 items-center hidden" id="ano_termino-2">
                 <!--Ano de termino-->
                 <div class="relative z-0 w-full mb-5">
                   <input
@@ -948,10 +949,16 @@
                   <label for="select_semestre2" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Semestre</label>
                   <span class="text-sm text-red-600 hidden" id="error-select_semestre">Você não selecionou o semestre de término</span>
                 </div>  
+
+                <div class="flex justify-center items-center h-full cursor-pointer" onclick="trashIcon(2)">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 448 512">
+                    <path d="M135.2 17.7l7.4-14.8C147.2 1.2 155.1 0 162.3 0h123.4c7.2 0 15.1 1.2 19.7 2.9l7.4 14.8c1.3 2.6 3.9 4.1 6.7 4.1H432c8.8 0 16 7.2 16 16s-7.2 16-16 16h-16V96c0 17.7-14.3 32-32 32H64c-17.7 0-32-14.3-32-32V48H16c-8.8 0-16-7.2-16-16s7.2-16 16-16h90.9c2.7 0 5.3-1.5 6.7-4.1zM80 112V48H368v64H80zM32 144c0-8.8 7.2-16 16-16H400c8.8 0 16 7.2 16 16v320c0 26.5-21.5 48-48 48H80c-26.5 0-48-21.5-48-48V144zm48 48v256c0 8.8 7.2 16 16 16s16-7.2 16-16V192c0-8.8-7.2-16-16-16s-16 7.2-16 16zm96 0v256c0 8.8 7.2 16 16 16s16-7.2 16-16V192c0-8.8-7.2-16-16-16s-16 7.2-16 16zm96 0v256c0 8.8 7.2 16 16 16s16-7.2 16-16V192c0-8.8-7.2-16-16-16s-16 7.2-16 16zm96 0v256c0 8.8 7.2 16 16 16s16-7.2 16-16V192c0-8.8-7.2-16-16-16s-16 7.2-16 16z"/>
+                  </svg>                
+                </div>
               </div>
               <!--3-->
 
-              <div class="flex flex-row space-x-4 hidden" id="ano_termino-3">
+              <div class="flex flex-row space-x-4  items-center hidden" id="ano_termino-3">
                 <!--Ano de termino-->
                 <div class="relative z-0 w-full mb-5">
                   <input
@@ -984,10 +991,16 @@
                   <label for="select_semestre3" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Semestre</label>
                   <span class="text-sm text-red-600 hidden" id="error-select_semestre">Você não selecionou o semestre de término</span>
                 </div>  
+
+                <div class="flex justify-center items-center h-full cursor-pointer" onclick="trashIcon(3)">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 448 512">
+                    <path d="M135.2 17.7l7.4-14.8C147.2 1.2 155.1 0 162.3 0h123.4c7.2 0 15.1 1.2 19.7 2.9l7.4 14.8c1.3 2.6 3.9 4.1 6.7 4.1H432c8.8 0 16 7.2 16 16s-7.2 16-16 16h-16V96c0 17.7-14.3 32-32 32H64c-17.7 0-32-14.3-32-32V48H16c-8.8 0-16-7.2-16-16s7.2-16 16-16h90.9c2.7 0 5.3-1.5 6.7-4.1zM80 112V48H368v64H80zM32 144c0-8.8 7.2-16 16-16H400c8.8 0 16 7.2 16 16v320c0 26.5-21.5 48-48 48H80c-26.5 0-48-21.5-48-48V144zm48 48v256c0 8.8 7.2 16 16 16s16-7.2 16-16V192c0-8.8-7.2-16-16-16s-16 7.2-16 16zm96 0v256c0 8.8 7.2 16 16 16s16-7.2 16-16V192c0-8.8-7.2-16-16-16s-16 7.2-16 16zm96 0v256c0 8.8 7.2 16 16 16s16-7.2 16-16V192c0-8.8-7.2-16-16-16s-16 7.2-16 16zm96 0v256c0 8.8 7.2 16 16 16s16-7.2 16-16V192c0-8.8-7.2-16-16-16s-16 7.2-16 16z"/>
+                  </svg>                
+                </div>
               </div>
 
               <!--4-->
-              <div class="flex flex-row space-x-4 hidden" id="ano_termino-4">
+              <div class="flex flex-row space-x-4 items-center hidden" id="ano_termino-4">
                 <!--Ano de termino-->
                 <div class="relative z-0 w-full mb-5">
                   <input
@@ -1021,7 +1034,46 @@
                   <span class="text-sm text-red-600 hidden" id="error-select_semestre">Você não selecionou o semestre de término</span>
               
                 </div>  
+
+                <div class="flex justify-center items-center h-full cursor-pointer" onclick="trashIcon(4)">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 448 512">
+                    <path d="M135.2 17.7l7.4-14.8C147.2 1.2 155.1 0 162.3 0h123.4c7.2 0 15.1 1.2 19.7 2.9l7.4 14.8c1.3 2.6 3.9 4.1 6.7 4.1H432c8.8 0 16 7.2 16 16s-7.2 16-16 16h-16V96c0 17.7-14.3 32-32 32H64c-17.7 0-32-14.3-32-32V48H16c-8.8 0-16-7.2-16-16s7.2-16 16-16h90.9c2.7 0 5.3-1.5 6.7-4.1zM80 112V48H368v64H80zM32 144c0-8.8 7.2-16 16-16H400c8.8 0 16 7.2 16 16v320c0 26.5-21.5 48-48 48H80c-26.5 0-48-21.5-48-48V144zm48 48v256c0 8.8 7.2 16 16 16s16-7.2 16-16V192c0-8.8-7.2-16-16-16s-16 7.2-16 16zm96 0v256c0 8.8 7.2 16 16 16s16-7.2 16-16V192c0-8.8-7.2-16-16-16s-16 7.2-16 16zm96 0v256c0 8.8 7.2 16 16 16s16-7.2 16-16V192c0-8.8-7.2-16-16-16s-16 7.2-16 16zm96 0v256c0 8.8 7.2 16 16 16s16-7.2 16-16V192c0-8.8-7.2-16-16-16s-16 7.2-16 16z"/>
+                  </svg>                
+                </div>
               </div>
+            </div>
+
+            <div class="relative z-0 w-full mb-5 mt-5">
+              <select
+                name="just_exclusão"
+                value=""
+                onclick="this.setAttribute('value', this.value);"
+                id="select_motivoExclusao"
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
+              >    
+                <option value="" selected disabled hidden></option>
+                <option value="0" class="just_exclusão-0">Excesso de créditos</option>
+                <option value="1" class="just_exclusão-1">Excesso de trabalho</option>
+                <option value="2" class="just_exclusão-2">Problemas com o professor</option>
+                <option value="3" class="just_exclusão-3">Matriculei-me em créditos a mais para desistir depois</option>
+                <option value="4" class="just_exclusão-4">Outros</option>
+              </select>
+              <label for="just_exclusão" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Justificativa para o trancamento</label>
+              <span class="text-sm text-red-600 hidden" id="error-just_exclusão">Você não digitou a justificativa</span>
+            </div>
+            
+            <!--Outros-->
+            <div class="relative z-0 w-full mb-5 hidden" id="outrosJustificativa">
+              
+              <input
+                type="text"
+                name="outrosJustificativa_noError"
+                placeholder=" "
+                required
+                class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
+              />
+              <label for="outrosJustificativa_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Outra justificativa</label>
+              <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
             </div>
 
             <!--Histórico escolar  -->
@@ -1030,7 +1082,7 @@
                 <label
                   for="formFileSm"
                   class="mb-2 inline-block text-neutral-500 dark:text-neutral-400"
-                  >Mande seu histórico no formato de pdf</label
+                  >Anexe seu histórico escolar em formato pdf</label
                 >
                 <input
                   class="relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none dark:border-white/70 dark:text-white  file:dark:text-white"
@@ -1046,13 +1098,32 @@
                 <label
                   for="formFileSm2"
                   class="mb-2 inline-block text-neutral-500 dark:text-neutral-400"
-                  >Deixe aqui outro documento se necessário</label
+                  >Anexe aqui outro documento, se necessário</label
                 >
                 <input
                   class="relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none dark:border-white/70 dark:text-white  file:dark:text-white"
                   id="formFileSm2"
-                  type="file" />
+                  type="file"
+                  name="noError" />
               </div>
+            </div>
+
+            <div class="mt-10">
+              <fieldset class="relative z-0 w-full p-px mb-5">
+                <legend class="absolute text-gray-500 transform -top-3 origin-0">Termo de aceitação</legend>
+                <div class="block pt-5 pb-2">
+                  <input
+                    type="radio"
+                    name="radio_termo"
+                    value="1"
+                    class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                  />
+                  <label for="radio_termo">
+                    Estou ciente de que este pedido é......
+                  </label>
+                </div>
+                <span class="text-sm text-red-600 hidden" id="error-radio_termo">Você não aceitou o termo</span>
+              </fieldset>
             </div>
 
             <button
@@ -1063,6 +1134,7 @@
               Enviar
             </button>
             <div id="status" class="mt-3 text-center text-green-500"></div>
+            
             
 
           </form>

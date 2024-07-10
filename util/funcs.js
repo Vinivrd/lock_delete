@@ -95,18 +95,29 @@ function takeIntervalDate() {
   let interval = dataRange.getValues()[0];
   return interval;
 }
-
-function uploadFile(file,file2,nome) {
+//AQUI EU CARREGO OS ARQUIVOS E MANDO UM EMAIL
+function uploadFile(file,file2,userInfo) {
   try {
     var mainFolder  = DriveApp.getFolderById('1KBRAw4hk1rJGD8g6NGQNOwZcbceflYKX');
-
-    var newFolder =  mainFolder.createFolder(`Dados de ${nome}`);
-
+    var newFolder =  mainFolder.createFolder(`Dados de ${userInfo[0]}`);
+  
     var blob = Utilities.newBlob(file.bytes, file.mimeType, file.name);
     var blob2 = Utilities.newBlob(file2.bytes, file2.mimeType, file2.name);
 
+    //DADOS dos email
+    var emailAddress = userInfo[4];
+    var subject = 'Assunto do E-mail';
+    var message = 'Mensagem do corpo do e-mail.';
+
     var file = newFolder.createFile(blob);
     var file2 = newFolder.createFile(blob2);
+
+    MailApp.sendEmail({
+      to: emailAddress,
+      subject: subject,
+      body: message,
+      attachments: [blob,blob2]
+    });
 
     return "Arquivo enivado com sucesso!";
   } catch (e) {

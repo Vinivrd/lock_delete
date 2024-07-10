@@ -134,8 +134,6 @@
         })
       }
      
-
-
       //tot crédito 
       form.querySelector('#credit_nolist').addEventListener('change', function (e) {
         let div = form.querySelector(`#just_menosCredito`);
@@ -157,18 +155,6 @@
           }, 1000); // Duração da animação de saída
       }
       });
-      
-      //option (outros) de quando o cliente coloca outros na justificativa de exclusão 
-      let justificativa = form.querySelector("#select_motivoExclusao");
-      if(justificativa) {
-        justificativa.addEventListener('change',() => {
-          if(justificativa.value == 4) {
-            form.querySelector("#outrosJustificativa").classList.remove("hidden");
-          }else{
-            form.querySelector("#outrosJustificativa").classList.add("hidden");
-          }
-        })
-      }
 
       if (selected_curso) {
         selected_curso.addEventListener('change', () => {
@@ -180,6 +166,18 @@
         sendButton.addEventListener('click', toggleError);
       }
     }
+    //option (outros) de quando o cliente coloca outros na justificativa de exclusão 
+    let justificativa = form.querySelector("#select_motivoExclusao");
+      if(justificativa) {
+        justificativa.addEventListener('change',() => {
+          if(justificativa.value == 4) {
+            form.querySelector("#outrosJustificativa").classList.remove("hidden");
+          }else{
+            form.querySelector("#outrosJustificativa").classList.add("hidden");
+          }
+        })
+      }
+
     //==========================>trancamento total do curso <=================================
     if(pageId == "lock_curso"){
       form.querySelector("#uploadButton").addEventListener('click', function(event) {
@@ -328,7 +326,7 @@
           }
         });
         console.log(userInfos)
-        sendArquivo(userInfos[0]);
+        sendArquivo(userInfos);
         google.script.run.userClicked(userInfos, seletor.slice(1, -1));
         if(pageId == "lock_curso"){
           alert("Aguarde um momento até o seu arquivo ser enviado.")
@@ -421,9 +419,16 @@
       }
     }
   }
+  function trashIcon(indice){
+    let divSelect =  document.getElementById(`ano_termino-${indice}`);
+    if(indice > 0 && indice < 5) {
+      divSelect.classList.add("hidden");
+    }
+
+  }
 
   //enviar arquivo
-  function sendArquivo(nome) {
+  function sendArquivo(userInfo) {
     var fileInput = form.querySelector('#formFileSm');
     var fileInput2 = form.querySelector('#formFileSm2');
 
@@ -470,7 +475,7 @@
             form.querySelector('#status').innerText = response;
             alert("Seus dados foi enviado com sucesso")
             clearForm();
-        }).uploadFile(data1, data2,nome);
+        }).uploadFile(data1, data2,userInfo);
     }
 }
 
