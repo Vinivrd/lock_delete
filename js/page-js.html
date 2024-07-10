@@ -184,7 +184,6 @@
     if(pageId == "lock_curso"){
       form.querySelector("#uploadButton").addEventListener('click', function(event) {
         toggleError("lock_curso");
-        sendArquivo();
       });
     }
 
@@ -329,10 +328,13 @@
           }
         });
         console.log(userInfos)
+        sendArquivo(userInfos[0]);
         google.script.run.userClicked(userInfos, seletor.slice(1, -1));
-        clearForm()
-      
-        alert("Dados enviados com sucesso!");
+        if(pageId == "lock_curso"){
+          alert("Aguarde um momento até o seu arquivo ser enviado.")
+        }else{
+          alert("Dados enviados com sucesso!");
+        }
     }
 
 
@@ -421,29 +423,56 @@
   }
 
   //enviar arquivo
-  function sendArquivo(){
+  function sendArquivo(nome) {
     var fileInput = form.querySelector('#formFileSm');
-    var file = fileInput.files[0];
-    var reader = new FileReader();
+    var fileInput2 = form.querySelector('#formFileSm2');
 
-    if (!file) {
-        form.querySelector('#status').innerText = "Por favor, selecione um arquivo.";
+    var file = fileInput.files[0];
+    var file2 = fileInput2.files[0];
+
+    if (!file || !file2) {
+        form.querySelector('#status').innerText = "Por favor, selecione os dois arquivos.";
         return;
     }
 
-    reader.onload = function(e) {
-      var data = {
-        name: file.name,
-        mimeType: file.type,
-        bytes: [...new Uint8Array(e.target.result)]
-      };
+    var reader1 = new FileReader();
+    var reader2 = new FileReader();
 
-      google.script.run.withSuccessHandler(function(response) {
-        form.querySelector('#status').innerText = response;
-      }).uploadFile(data);
+    var data1, data2;
+
+    reader1.onload = function(e) {
+        data1 = {
+            name: file.name,
+            mimeType: file.type,
+            bytes: [...new Uint8Array(e.target.result)]
+        };
+        if (data2) { // verifica se ambos os dados estão prontos
+            sendToServer(data1, data2);
+        }
     };
 
-    reader.readAsArrayBuffer(file);
- }
+    reader2.onload = function(e) {
+        data2 = {
+            name: file2.name,
+            mimeType: file2.type,
+            bytes: [...new Uint8Array(e.target.result)]
+        };
+        if (data1) { // verifica se ambos os dados estão prontos
+            sendToServer(data1, data2);
+        }
+    };
+
+    reader1.readAsArrayBuffer(file);
+    reader2.readAsArrayBuffer(file2);
+
+    function sendToServer(data1, data2) {
+        google.script.run.withSuccessHandler(function(response) {
+            form.querySelector('#status').innerText = response;
+            alert("Seus dados foi enviado com sucesso")
+            clearForm();
+        }).uploadFile(data1, data2,nome);
+    }
+}
+
 
 </script>

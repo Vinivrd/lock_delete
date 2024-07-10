@@ -96,12 +96,19 @@ function takeIntervalDate() {
   return interval;
 }
 
-function uploadFile(file) {
+function uploadFile(file,file2,nome) {
   try {
-    var folder = DriveApp.getFolderById('1KBRAw4hk1rJGD8g6NGQNOwZcbceflYKX'); // Coloque o ID da pasta desejada aqui
+    var mainFolder  = DriveApp.getFolderById('1KBRAw4hk1rJGD8g6NGQNOwZcbceflYKX');
+
+    var newFolder =  mainFolder.createFolder(`Dados de ${nome}`);
+
     var blob = Utilities.newBlob(file.bytes, file.mimeType, file.name);
-    var file = folder.createFile(blob);
-    return "Arquivo enviado com sucesso!";
+    var blob2 = Utilities.newBlob(file2.bytes, file2.mimeType, file2.name);
+
+    var file = newFolder.createFile(blob);
+    var file2 = newFolder.createFile(blob2);
+
+    return "Arquivo enivado com sucesso!";
   } catch (e) {
     return "Erro: " + e.toString();
   }
