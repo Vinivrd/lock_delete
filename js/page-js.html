@@ -1,6 +1,4 @@
 <script>
-
-
   //variáveis 
   let seletor = ""; //flag para diferenciar as pages 
   let selected_curso = document.querySelector(`${seletor}#selectCurso`); // curso e o displina, eu to renderizando no começo na página para ficar rápido, pois o google apps script é assincrono
@@ -27,7 +25,7 @@
     }).getDisciplinas(curso);
   });
 
-  function atualizarDisplinas(curso_selected) {
+  function atualizarDisciplinas(curso_selected) {
     select_Displinas = form.querySelector(`#selectDisplinas`);
     let value = selected_curso.value;
     let selectedOption = selected_curso.options[selected_curso.selectedIndex];
@@ -158,7 +156,7 @@
 
       if (selected_curso) {
         selected_curso.addEventListener('change', () => {
-          atualizarDisplinas(selected_curso);
+          atualizarDisciplinas(selected_curso);
         });
       }
 
@@ -184,6 +182,12 @@
         toggleError("lock_curso");
       });
     }
+    //==========================>Matricula<=================================
+    if(pageId == "matricula"){
+      form.querySelector("#uploadButton").addEventListener('click', function(event) {
+        toggleError("matricula");
+      });
+    }
 
   }
 
@@ -196,7 +200,6 @@
       errMessages = form.querySelectorAll(`#error`)
     });
   });
-
 
 
   //calculo total de creditos
@@ -246,7 +249,7 @@
     inputs.forEach(input => input.value = '');
   }
 
-  //FUNÇõeOES PROS ERROS
+  //Enviar dados
   function toggleError(pageId) {
     let inputs = form.querySelectorAll(`input,select`);
     let hasError = false;
@@ -275,7 +278,9 @@
         }
       }
     });
-    if(!hasError && pageId != "lock_curso"){
+    
+    console.log("bora ver o erro " + pageId +" "+  hasError);
+    if(!hasError && pageId != "lock_curso" &&  pageId != "matricula" ){
       if (!hasError) {
         let userInfos = [];
         inputs.forEach(input => {
@@ -320,12 +325,13 @@
               userInfos.push("Já tranquei anteriormente")
             }else if(input.value == 2 && input.checked == true){
               userInfos.push("Nunca tranquei")
+            }else if((input.value == 3 || input.value == 4) && input.checked == true){
+              userInfos.push("Termo aceito")
             }
           } else {
             userInfos.push(input.value);
           }
         });
-        console.log(userInfos)
         sendArquivo(userInfos);
         google.script.run.userClicked(userInfos, seletor.slice(1, -1));
         if(pageId == "lock_curso"){
@@ -333,9 +339,38 @@
         }else{
           alert("Dados enviados com sucesso!");
         }
+    }else if(pageId == "matricula" && !hasError){
+      let userInfos = [];
+      inputs.forEach(input => {
+          //aqui eu arrumos os dados do select que está retornando o value do select 
+          if (input.id.includes("select")) {
+            //preciso testar se existi
+            let ele = form.getElementsByClassName(`${input.name}-${input.value}`)
+            if (ele.length > 0) {
+              userInfos.push(form.getElementsByClassName(`${input.name}-${input.value}`)[0].textContent);
+            } else {
+              userInfos.push("");
+            }
+          } else if (input.type == "radio") {
+            if(input.value == 1 && input.checked == true) {
+              userInfos.push("Menos de 12 créditos-aulas no semestre")
+            }else if(input.value == 2 && input.checked == true){
+              userInfos.push("Mais de 40 créditos-aulas no semestre")
+            }else if(input.value == 3 && input.checked == true){
+              userInfos.push("Termo aceito")
+            }
+          } else {
+            userInfos.push(input.value);
+          }
+        });
+        sendArquivo1(userInfos);
+        google.script.run.userClicked(userInfos, seletor.slice(1, -1));
+        if(pageId == "matricula"){
+          alert("Aguarde um momento até o seu arquivo ser enviado.")
+        }else{
+          alert("Dados enviados com sucesso!");
+        }
     }
-
-
   }
 
   function showError(errorElement, input) {
@@ -348,6 +383,7 @@
       label.classList.add('text-red-600');
     }
   }
+
   function hideError(errorElement, input) {
     if (errorElement) {
       errorElement.classList.add('hidden');
@@ -372,12 +408,10 @@
         input.value = '';
       }
     });
-
     // Limpar campos de select
     selects.forEach(select => {
       select.selectedIndex = 0;
     });
-
     // Limpar grupos de rádio
     radioGroups.forEach(radio => {
       radio.checked = false;
@@ -427,23 +461,23 @@
 
   }
 
-  //enviar arquivo
+  //enviar 2 arquivo
   function sendArquivo(userInfo) {
-    var fileInput = form.querySelector('#formFileSm');
-    var fileInput2 = form.querySelector('#formFileSm2');
+    let fileInput = form.querySelector('#formFileSm');
+    let fileInput2 = form.querySelector('#formFileSm2');
 
-    var file = fileInput.files[0];
-    var file2 = fileInput2.files[0];
-
+    let file = fileInput.files[0];
+    let file2 = fileInput2.files[0];
+    
     if (!file || !file2) {
-        form.querySelector('#status').innerText = "Por favor, selecione os dois arquivos.";
-        return;
+      form.querySelector('#status').innerText = "Por favor, selecione os dois arquivos.";
+      return;
     }
 
-    var reader1 = new FileReader();
-    var reader2 = new FileReader();
+    let reader1 = new FileReader();
+    let reader2 = new FileReader();
 
-    var data1, data2;
+    let data1, data2;
 
     reader1.onload = function(e) {
         data1 = {
@@ -477,7 +511,39 @@
             clearForm();
         }).uploadFile(data1, data2,userInfo);
     }
-}
+    
+  }
 
+  //======================== MATRICULA ===================================//
+  function sendArquivo1(userInfo){
+    let fileInput = form.querySelector('#formFileSm');
+    let file = fileInput.files[0];
+
+      if (!file) {
+        form.querySelector('#status').innerText = "Por favor, selecione os dois arquivos.";
+        return;
+      }
+      let reader1 = new FileReader();
+      let data1;
+
+      reader1.onload = function(e) {
+          data1 = {
+              name: file.name,
+              mimeType: file.type,
+              bytes: [...new Uint8Array(e.target.result)]
+          };
+          sendToServer(data1);
+      };
+
+      reader1.readAsArrayBuffer(file);
+
+      function sendToServer(data1) {
+          google.script.run.withSuccessHandler(function(response) {
+              form.querySelector('#status').innerText = response;
+              alert("Seus dados foi enviado com sucesso")
+              clearForm();
+          }).uploadFile1(data1,userInfo);
+      }
+  }
 
 </script>

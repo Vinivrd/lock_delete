@@ -64,7 +64,7 @@
     <!--Excluir-->
     <div id="excluir" class="content hidden">
       <div class="min-h-screen p-0 sm:p-12">
-        <div class="mx-auto max-w-xl px-8 py-16 bg-white border-0 shadow-lg sm:rounded-3xl">
+        <div class="mx-auto max-w-2xl px-8 py-16 bg-white border-0 shadow-lg sm:rounded-3xl">
           <h1 class="text-2xl font-bold mb-8">Exclusão de disciplinas</h1>
           <!--Inicio do form-->
           <form id="form" novalidate> <!--**-->
@@ -375,7 +375,7 @@
                     class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
                   />
                   <label for="radio_termo">
-                    Estou ciente de que este pedido é referente à exclusão de disciplinas do 1º semestre de 2024 e que, ao enviar este formulário, o processo de exclusão será irreversível.
+                    Estou ciente de que este pedido será analisado e poderá ser indeferido, pois de acordo com o artigo 73 do Regimento Geral da USP, a carga horária mínima não poderá ser inferior a 12 créditos-aula semanais, excetuados os casos de matrículas para conclusão de curso e os de impedimento decorrente de reprovações em “disciplinas requisito”.
                   </label>
                 </div>
                 <span class="text-sm text-red-600 hidden" id="error-radio_termo">Você não aceitou o termo</span>
@@ -398,8 +398,8 @@
     <div id="trancar" class="content hidden">
         
       <div class="min-h-screen p-0 sm:p-12">
-        <div class="mx-auto max-w-xl px-8 py-16 bg-white border-0 shadow-lg sm:rounded-3xl">
-          <h1 class="text-2xl font-bold mb-8">Trancamento displina</h1>
+        <div class="mx-auto max-w-2xl px-8 py-16 bg-white border-0 shadow-lg sm:rounded-3xl">
+          <h1 class="text-2xl font-bold mb-8">Trancamento de discliplina</h1>
           <!--Inicio do form-->
           <form id="form" novalidate> <!--**-->
     
@@ -737,7 +737,7 @@
     <!--Trancamento total do curso-->
     <div id="lock_curso" class="content hidden">
       <div class="min-h-screen p-0 sm:p-12">
-        <div class="mx-auto max-w-xl px-8 py-16 bg-white border-0 shadow-lg sm:rounded-3xl">
+        <div class="mx-auto max-w-2xl px-8 py-16 bg-white border-0 shadow-lg sm:rounded-3xl">
           <h1 class="text-2xl font-bold mb-8">Trancamento total do curso </h1>
           <form id="form" novalidate>
             <!--Nome-->
@@ -855,7 +855,7 @@
               <div class="block">
                 <input
                   type="radio"
-                  name="no_curso_noError"
+                  name="no_cursor_noError"
                   value="1"
                   id = "no_curso_radio"
                   class="text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
@@ -896,7 +896,7 @@
                   <span class="text-sm text-red-600 hidden" id="error-ano_termino">Você não digitou seu ano do término</span>
                 </div>
         
-                <div class="relative z-0 w-full mb-5">
+                <div class="relative z-0 w-full mb-5 mr-10">
                   <select
                     id="select_ano_termino1"
                     name="select_semestre1"
@@ -921,21 +921,21 @@
                 <div class="relative z-0 w-full mb-5">
                   <input
                     type="text"
-                    name="ano_termino2"
+                    name="ano_termino2_noError"
                     pattern="[0-9]{4}"
                     placeholder=" "
                     class="pt-5 pb-6 block w-full px-0 mt-3 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                     oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
                     maxlength="4"
                   />
-                  <label for="ano_termino2" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500 mb-8">Previsão de ano de término do curso </label>
+                  <label for="ano_termino2_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500 mb-8">Previsão de ano de término do curso </label>
                   <span class="text-sm text-red-600 hidden" id="error-ano_termino">Você não digitou seu ano do término</span>
                 </div>
         
                 <div class="relative z-0 w-full mb-5">
                   <select
                     id="select_ano_termino2"
-                    name="select_semestre2"
+                    name="select_semestre2_noError"
                     value=""
                     onclick="this.setAttribute('value', this.value); displaySelect(2);"
         
@@ -946,7 +946,7 @@
                     <option value="2" class="select_semestre2-2">2° semestre</option>
         
                   </select>
-                  <label for="select_semestre2" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Semestre</label>
+                  <label for="select_semestre2_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Semestre</label>
                   <span class="text-sm text-red-600 hidden" id="error-select_semestre">Você não selecionou o semestre de término</span>
                 </div>  
 
@@ -963,21 +963,21 @@
                 <div class="relative z-0 w-full mb-5">
                   <input
                     type="text"
-                    name="ano_termino3"
+                    name="ano_termino3_noError"
                     pattern="[0-9]{4}"
                     placeholder=" "
                     class="pt-5 pb-6 block w-full px-0 mt-3 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                     oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
                     maxlength="4"
                   />
-                  <label for="ano_termino3" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500 mb-8">Previsão de ano de término do curso </label>
+                  <label for="ano_termino3_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500 mb-8">Previsão de ano de término do curso </label>
                   <span class="text-sm text-red-600 hidden" id="error-ano_termino">Você não digitou seu ano do término</span>
                 </div>
         
                 <div class="relative z-0 w-full mb-5">
                   <select
                     id="select_ano_termino"
-                    name="select_semestre3"
+                    name="select_semestre3_noError"
                     value=""
                     onclick="this.setAttribute('value', this.value); displaySelect(3);"
         
@@ -988,7 +988,7 @@
                     <option value="2" class="select_semestre3-2">2° semestre</option>
         
                   </select>
-                  <label for="select_semestre3" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Semestre</label>
+                  <label for="select_semestre3_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Semestre</label>
                   <span class="text-sm text-red-600 hidden" id="error-select_semestre">Você não selecionou o semestre de término</span>
                 </div>  
 
@@ -1005,21 +1005,21 @@
                 <div class="relative z-0 w-full mb-5">
                   <input
                     type="text"
-                    name="ano_termino4"
+                    name="ano_termino4_noError"
                     pattern="[0-9]{4}"
                     placeholder=" "
                     class="pt-5 pb-6 block w-full px-0 mt-3 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
                     oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
                     maxlength="4"
                   />
-                  <label for="ano_termino4" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500 mb-8">Previsão de ano de término do curso </label>
+                  <label for="ano_termino4_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500 mb-8">Previsão de ano de término do curso </label>
                   <span class="text-sm text-red-600 hidden" id="error-ano_termino">Você não digitou seu ano do término</span>
                 </div>
         
                 <div class="relative z-0 w-full mb-5">
                   <select
                     id="select_ano_termino"
-                    name="select_semestre4"
+                    name="select_semestre4_noError"
                     value=""
                     onclick="this.setAttribute('value', this.value);"
         
@@ -1030,7 +1030,7 @@
                     <option value="2" class="select_semestre4-2">2° semestre</option>
         
                   </select>
-                  <label for="select_semestre4" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Semestre</label>
+                  <label for="select_semestre4_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Semestre</label>
                   <span class="text-sm text-red-600 hidden" id="error-select_semestre">Você não selecionou o semestre de término</span>
               
                 </div>  
@@ -1043,7 +1043,8 @@
               </div>
             </div>
 
-            <div class="relative z-0 w-full mb-5 mt-5">
+            <!--Justificativa para exclusão-->
+            <div class="relative z-0 w-full mb-5 mt-2">
               <select
                 name="just_exclusão"
                 value=""
@@ -1108,18 +1109,37 @@
               </div>
             </div>
 
+            <!--Radio-->
             <div class="mt-10">
               <fieldset class="relative z-0 w-full p-px mb-5">
                 <legend class="absolute text-gray-500 transform -top-3 origin-0">Termo de aceitação</legend>
                 <div class="block pt-5 pb-2">
                   <input
                     type="radio"
-                    name="radio_termo"
-                    value="1"
+                    name="radio_termo_1"
+                    value="3"
                     class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
                   />
-                  <label for="radio_termo">
-                    Estou ciente de que este pedido é......
+                  <label for="radio_termo_1">
+                    Estou ciente de que, de acordo com com o artigo 2º da Resolução CoG nº 3761/1990, o trancamento não será efetuado se eu não tiver, pelo menos, 24 créditos cumpridos até o momento e se eu já estiver reprovado por faltas em disciplinas cuja soma de créditos ultrapasse 25% do total de créditos em que estou matriculado neste semestre.
+                  </label>
+                </div>
+                <span class="text-sm text-red-600 hidden" id="error-radio_termo">Você não aceitou o termo</span>
+              </fieldset>
+            </div>
+            
+            <div class="mt-10">
+              <fieldset class="relative z-0 w-full p-px mb-5">
+                <legend class="absolute text-gray-500 transform -top-3 origin-0">Termo de aceitação</legend>
+                <div class="block pt-5 pb-2">
+                  <input
+                    type="radio"
+                    name="radio_termo_2"
+                    value="4"
+                    class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                  />
+                  <label for="radio_termo_2">
+                    Estou ciente de que este pedido será analisado e poderá ser indeferido, pois de acordo com o artigo 73 do Regimento Geral da USP, a carga horária mínima não poderá ser inferior a 12 créditos-aula semanais, excetuados os casos de matrículas para conclusão de curso e os de impedimento decorrente de reprovações em “disciplinas requisito”.
                   </label>
                 </div>
                 <span class="text-sm text-red-600 hidden" id="error-radio_termo">Você não aceitou o termo</span>
@@ -1134,16 +1154,246 @@
               Enviar
             </button>
             <div id="status" class="mt-3 text-center text-green-500"></div>
-            
-            
-
           </form>
         </div>
       </div>
     </div>
 
+    <!--Matricula-->
     <div id="matricula" class="content hidden">
-      <h1>Matricula</h1>
+      <div class="mt-12 mx-auto max-w-2xl px-8 py-16 bg-white border-0 shadow-lg sm:rounded-3xl">
+        <h1 class="text-2xl font-bold mb-8">Trancamento total do curso </h1>
+        <form id="form" novalidate>
+          <!--Nome-->
+          <div class="relative z-0 w-full mb-5">
+            <input
+              type="text"
+              name="nome"
+              placeholder=" "
+              required
+              class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
+              />
+              <label for="nome" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Nome completo</label>
+              <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
+          </div>
+
+          <!--Número usp-->
+          <div class="relative z-0 w-full mb-5">
+            <input
+              type="text"
+              name="num_usp"
+              pattern="[0-9]{8}"
+              placeholder=" "
+              class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
+              oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8)"
+              maxlength="8"
+            />
+            <label for="num_usp" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Número USP</label>
+            <span class="text-sm text-red-600 hidden" id="error-num_usp">Você não digitou seu número USP</span>
+          </div>
+
+          <!--Option Curso-->
+          <div class="relative z-0 w-full mb-5">
+            <select
+              id="selectCurso"
+              name="select_curso"
+              value=""
+              onclick="this.setAttribute('value', this.value);"
+              class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
+            >
+    
+              <option value="" selected disabled hidden></option>
+              <?for(let i = 0; i < cursos.length; i++){ ?>
+                <option value=<?=i?> class = <?=`select_curso-${i}`?> ><?= cursos[i] ?></option>
+              <? } ?>
+    
+            </select>
+            <label for="select_curso" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Escolha seu curso</label>
+            <span class="text-sm text-red-600 hidden" id="error-select">Você não selecionou um curso</span>
+          </div>
+
+          <!--Ano de ingresso-->
+          <div class="relative z-0 w-full mb-5">
+            <input
+              type="text"
+              name="ano_ingresso"
+              pattern="[0-9]{4}"
+              placeholder=" "
+              class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
+              oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
+              maxlength="4"
+            />
+            <label for="ano_ingresso" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Ano de ingresso</label>
+            <span class="text-sm text-red-600 hidden" id="error-ano_ingresso">Você não digitou seu ano de ingresso</span>
+          </div>
+
+          <!--E-MAIL-->
+          <div class="relative z-0 w-full mb-5">
+            <input
+              type="email"
+              name="email"
+              placeholder=" "
+              required
+              class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
+            />
+            <label for="email" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">E-mail</label>
+            <span class="text-sm text-red-600 hidden" id="error-email">Você não digitou seu e-mail</span>
+          </div>
+
+          <!--Telefone-->
+          <div class="relative z-0 w-full mb-5">
+            <input
+              type="tel"
+              name="telefone"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              placeholder=" "
+              oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)"
+              class="pt-5 pb-6 block w-full px-0 mt-3 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
+            />
+            <label for="telefone" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Telefone(DDD número)</label>
+            <span class="text-sm text-red-600 hidden" id="error-telefone">Você não digitou seu telefone</span>
+          </div>
+          <div class="flex flex-row items-center space-x-4 mt-4" id="ano_termino-1">
+
+            <div class="relative z-0 w-full mb-5">
+              <input
+                type="text"
+                name="ano_termino1"
+                pattern="[0-9]{4}"
+                placeholder=" "
+                class="pt-5 pb-6 block w-full px-0 mt-3 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
+                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
+                maxlength="4"
+              />
+              <label for="ano_termino1" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500 mb-8">Previsão de ano de término do curso </label>
+              <span class="text-sm text-red-600 hidden" id="error-ano_termino">Você não digitou seu ano do término</span>
+            </div>
+    
+            <div class="relative z-0 w-full mb-5">
+              <select
+                id="select_ano_termino1"
+                name="select_semestre1"
+                value=""
+                onclick="this.setAttribute('value', this.value); displaySelect(1);"
+    
+                class="pt-5 pb-9 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
+              >
+                <option value="" selected disabled hidden></option>
+                <option value="1" class="select_semestre1-1">1° semestre</option>
+                <option value="2" class="select_semestre1-2">2° semestre</option>
+    
+              </select>
+              <label for="select_semestre1" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Semestre</label>
+              <span class="text-sm text-red-600 hidden" id="error-select_semestre">Você não selecionou o semestre de término</span>
+            </div>
+
+          </div>
+
+          <!--< 12  CREDITO OU > 40 CRED-->
+          <p class="text-gray-500">Solicito autorização para ficar com: </p>
+          <div class="flex space-x-5 pt-5 pb-2 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200">
+            <div class="block">
+              <input
+                type="radio"
+                name="no_curso_noError"
+                value="1"
+                id = "no_curso_radio"
+                class="text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+              />
+              <label for="no_curso_noError" id="legendnoCurso">Menos de 12 créditos-aula no semestre</label>
+            </div>
+
+            <div class="block">
+              <input
+                type="radio"
+                name="no_curso_noError"
+                value="2"
+                id = "no_curso_radio"
+                class="text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+              />
+              <label for="no_curso_noError" id="legendnoCurso">Mais de 40 créditos-aula no semestre</label>
+            </div>
+          </div>
+
+          <!--Justificativa para exclusão-->
+          <div class="relative z-0 w-full mb-5 mt-6">
+            <select
+              name="just_exclusão"
+              value=""
+              onclick="this.setAttribute('value', this.value);"
+              id="select_motivoExclusao"
+              class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
+            >    
+              <option value="" selected disabled hidden></option>
+              <option value="0" class="just_exclusão-0">Excesso de créditos</option>
+              <option value="1" class="just_exclusão-1">Excesso de trabalho</option>
+              <option value="2" class="just_exclusão-2">Problemas com o professor</option>
+              <option value="3" class="just_exclusão-3">Matriculei-me em créditos a mais para desistir depois</option>
+              <option value="4" class="just_exclusão-4">Outros</option>
+            </select>
+            <label for="just_exclusão" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Justificativa para o trancamento</label>
+            <span class="text-sm text-red-600 hidden" id="error-just_exclusão">Você não digitou a justificativa</span>
+          </div>
+          
+          <!--Outros-->
+          <div class="relative z-0 w-full mb-5 hidden" id="outrosJustificativa">
+            
+            <input
+              type="text"
+              name="outrosJustificativa_noError"
+              placeholder=" "
+              required
+              class="pt-5 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200"
+            />
+            <label for="outrosJustificativa_noError" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Outra justificativa</label>
+            <span class="text-sm text-red-600 hidden" id="error-name">Você não digitou seu nome</span>
+          </div>
+
+          <!--Histórico escolar  -->
+          <div class="mt-3 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 border-gray-200">
+            <div class="mb-3">
+              <label
+                for="formFileSm"
+                class="mb-4 inline-block text-neutral-500 dark:text-neutral-400 text-gray-500"
+                >Anexe seu histórico escolar em formato pdf</label
+              >
+              <input
+                class="relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-xs font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none dark:border-white/70 dark:text-white  file:dark:text-white"
+                id="formFileSm"
+                type="file"
+                accept=".pdf" />
+            </div>
+          </div>
+
+          <div class="mt-10">
+            <fieldset class="relative z-0 w-full p-px mb-5">
+              <legend class="absolute text-gray-500 transform -top-3 origin-0">Termo de aceitação</legend>
+              <div class="block pt-5 pb-2">
+                <input
+                  type="radio"
+                  name="radio_termo_1"
+                  value="3"
+                  class="mr-1 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
+                />
+                <label for="radio_termo_1">
+                  Estou ciente de que, de acordo com o artigo 73 do Regimento Geral da USP, a carga horária mínima não poderá ser inferior a 12 créditos-aula semanais, excetuados os casos de matrículas para conclusão de curso e os de impedimento decorrente de reprovações em “disciplinas requisito” e que, de acordo com o artigo 2.º da Resolução CoG nº 3903, não poderá ser superior a 40 horas.
+                </label>
+              </div>
+              <span class="text-sm text-red-600 hidden" id="error-radio_termo">Você não aceitou o termo</span>
+            </fieldset>
+          </div>
+
+          <button
+            id="uploadButton"
+            type="button"
+            class="w-full px-6 py-3 mt-3 text-lg text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-blue-700 hover:bg-blue-800 hover:shadow-lg focus:outline-none"
+            >
+              Enviar
+            </button>
+            <div id="status" class="mt-3 text-center text-green-500"></div>
+
+        </form>
+      </div>
     </div>
 
     <?!= include("js/page-js"); ?>

@@ -40,8 +40,8 @@ function get_displinas_data(curso) {
 }
 
 function userClicked(userInfo, seletor) {
-  var ss = SpreadsheetApp.openByUrl(urlSubmit);
-  var ws = ss.getSheetByName(`userInfo ${seletor}`);
+  let ss = SpreadsheetApp.openByUrl(urlSubmit);
+  let ws = ss.getSheetByName(`userInfo ${seletor}`);
   let destinatario = userInfo[2]; 
   let assunto = "Confirmação de Exclusão de Disciplina";
   let dataAtual = new Date();
@@ -56,13 +56,13 @@ function userClicked(userInfo, seletor) {
 
     Serviço de Graduação do ICMC/USP`;
   ws.appendRow(userInfo);
-  // MailApp.sendEmail(destinatario, assunto, corpo, {noReply: true});
-  //emailCurso(userInfo[3], userInfo, seletor);
+  MailApp.sendEmail(destinatario, assunto, corpo, {noReply: true});
+  emailCurso(userInfo[3], userInfo, seletor);
 }
 
-function emailCurso(curso, userInfo, seletor) {
+function getEmailbyCourse(curso){
   const emails = {
-    "Bacharelado em Ciência de Dados": "secbcdados@icmc.usp.br",
+    "Bacharelado em Ciência de Dados": "viniciuscmbr@usp.br", //secbcdados@icmc.usp.br
     "Bacharelado em Matemática": "secmat@icmc.usp.br",
     "Matemática-Núcleo Geral": "secmat@icmc.usp.br",
     "Licenciatura em Matemática": "secmat@icmc.usp.br",
@@ -71,7 +71,11 @@ function emailCurso(curso, userInfo, seletor) {
     "Bacharelado em Ciências de Computação": "secbcc@icmc.usp.br",
     "Bacharelado em Matemática Aplicada e Computação Científica": "secmat@icmc.usp.br"
   };
-  const email = emails[curso];
+  return emails[curso];
+}
+function emailCurso(curso, userInfo, seletor) {
+  
+  const email = getEmailbyCourse(curso);
   if (email) {
     let corpo = `
       Nome: ${userInfo[0]}
@@ -96,28 +100,90 @@ function takeIntervalDate() {
   return interval;
 }
 //AQUI EU CARREGO OS ARQUIVOS E MANDO UM EMAIL
-function uploadFile(file,file2,userInfo) {
+function uploadFile(file,file2,userInfo) { //para o trancamento do curso 
+  const email = getEmailbyCourse(userInfo[2]);
+
+  //DADOS dos email
+  let emailAddress = userInfo[4];
+  let subject = 'Trancamento do curso';
+  let messagetoUser = `Prezado(a) ${userInfo[0]},\n
+  Recebemos sua solicitação de trancamento total do curso. Estamos processando seu pedido e você\n será notificado(a) assim que a solicitação for concluída.`;
+  let messageToUs = 
+    `Nome: ${userInfo[0]}
+      Curso: ${userInfo[2]}
+      Email: ${userInfo[4]}
+      Já trancou: ${userInfo[7]}
+      `
+
   try {
-    var mainFolder  = DriveApp.getFolderById('1KBRAw4hk1rJGD8g6NGQNOwZcbceflYKX');
-    var newFolder =  mainFolder.createFolder(`Dados de ${userInfo[0]}`);
+    let mainFolder  = DriveApp.getFolderById('1KBRAw4hk1rJGD8g6NGQNOwZcbceflYKX');
+    let newFolder =  mainFolder.createFolder(`Dados de ${userInfo[0]}`);
   
-    var blob = Utilities.newBlob(file.bytes, file.mimeType, file.name);
-    var blob2 = Utilities.newBlob(file2.bytes, file2.mimeType, file2.name);
+    let blob = Utilities.newBlob(file.bytes, file.mimeType, file.name);
+    let blob2 = Utilities.newBlob(file2.bytes, file2.mimeType, file2.name);
 
-    //DADOS dos email
-    var emailAddress = userInfo[4];
-    var subject = 'Assunto do E-mail';
-    var message = 'Mensagem do corpo do e-mail.';
+    newFolder.createFile(blob);
+    newFolder.createFile(blob2);
 
-    var file = newFolder.createFile(blob);
-    var file2 = newFolder.createFile(blob2);
+    //send e-mail
+    MailApp.sendEmail({
+      to: email,
+      subject: subject,
+      body: messageToUs,
+      attachments: [blob,blob2],
+      replyTo: emailAddress
+    });
+    MailApp.sendEmail({
+      to:emailAddress,
+      subject: subject,
+      body:messagetoUser,
+      attachments: [blob,blob2],
+    })
+    return "Arquivo enivado com sucesso!";
+  } catch (e) {
+    return "Erro: " + e.toString();
+  }
+}
+function uploadFile1(file,userInfo) { //para matricula 
+  const email = getEmailbyCourse(userInfo[2]);
+  //DADOS dos email
+  let emailAddress = userInfo[4];
+
+  let subject = 'Trancamento do curso';
+  let messagetoUser = `Prezado(a) ${userInfo[0]},\n
+  Recebemos sua solicitação de trancamento total do curso. Estamos processando seu pedido e você será notificado(a) assim que a solicitação for concluída.`;
+  let messageToUs = `
+      Nome: ${userInfo[0]}
+      Curso: ${userInfo[1]}
+      Email: ${userInfo[2]}
+      Menos de 12 ou mais de 40: ${userInfo[9]}
+      `
+
+  try {
+    let mainFolder  = DriveApp.getFolderById('1UMJmnpkGgcxPDbFF0h_ohbd30G1ZG76c');
+    let newFolder =  mainFolder.createFolder(`Dados de ${userInfo[0]}`);
+    let blob = Utilities.newBlob(file.bytes, file.mimeType, file.name);    
+
+    newFolder.createFile(blob);
 
     MailApp.sendEmail({
-      to: emailAddress,
+      to: email,
       subject: subject,
-      body: message,
-      attachments: [blob,blob2]
+      body: messageToUs,
+      attachments: [blob],
+      replyTo: emailAddress
     });
+
+    //Utilities.sleep(100);
+
+    MailApp.sendEmail({
+      to:emailAddress,
+      subject: subject,
+      body:messagetoUser,
+      attachments:[blob],
+      noReply: true
+    })
+  
 
     return "Arquivo enivado com sucesso!";
   } catch (e) {
