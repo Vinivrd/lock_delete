@@ -200,7 +200,7 @@ function textEmail(seletor,userInfo){
           Disciplina que requer a exclusão: ${userInfo[11] === '' ? userInfo[14]+"-"+userInfo[15] : userInfo[11]}
           Justificativa: ${userInfo[9]}
           Créditos-aula matriculado: ${userInfo[8]}
-          Créditos-aula em que ficará matriculado após a exclusão ${userInfo[20]}`
+          Créditos-aula em que ficará matriculado após a exclusão: ${userInfo[20]}`
 
       break;
     case "lock_curso":
