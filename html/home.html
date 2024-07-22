@@ -49,17 +49,94 @@
     </nav>
 
    <!--Info-->
-   <div id="info" class="content flex items-center justify-center mt-24 ml-24"> 
-        <h2 id="data_to_get" class="hidden"><?=datas?></h2>
-        <div class="ml-20">
-        <h1 class="text-3xl lg:text-4xl xl:text-5xl font-medium text-black-600 leading-normal">
-            Informações sobre a página ICMC</h1>
-        <p class="pt-4 text-1xl lg:text-2xl xl:text-3xl text-black-800">Aqui estão todas as datas para trancar e excluir matéria </h2></p>
+   <div id="info" class="mt-0 mx-0 lg:mx-24"> 
+    <div class="w-full h-screen flex flex-col lg:flex-row items-center lg:justify-center">
+      <div class="flex-1 px-4 py-8 lg:px-8 lg:py-16 text-center lg:text-left">
+          <h1 class="text-3xl lg:text-4xl xl:text-5xl font-medium text-gray-800 leading-normal">
+              Informações sobre a página ICMC
+          </h1>
+          <p class="pt-4 text-xl lg:text-2xl xl:text-3xl text-gray-600">
+            Confira os prazos e procedimentos para trancar ou excluir disciplinas
+          </p>
+      </div>
+      <div class="flex-1 flex justify-center lg:justify-end">
+          <img src="https://i.imgur.com/6d8tOGn.jpg" class="w-full max-w-4xl lg:max-w-5xl" alt="">
+      </div>
+    </div>
+
+    <div class="flex flex-col lg:flex-row lg:space-x-4 mt-8 lg:mt-16 px-4 lg:px-0">
+        <!-- Exclusão -->
+        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow mb-4 lg:mb-0 lg:flex-1">
+            <a href="#">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 h-24">Exclusão de disciplinas</h5>
+            </a>
+            <p class="mb-3 font-normal text-gray-700 h-40 overflow-auto h-80">A solicitação de exclusão de disciplinas do 2º semestre/2024 poderá ser feita de 25/07 a 30/08.
+                De acordo com o artigo 73 do Regimento Geral da USP, a carga horária mínima não poderá ser inferior a 12 créditos-aula semanais.
+                Casos excepcionais serão analisados.
+            </p>
+            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                formulário
+                <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                </svg>
+            </a>
         </div>
-        <div class="ml-20">
-            <img src="https://i.imgur.com/6d8tOGn.jpg" class="ml-10 lg:ml-20 mt-4 lg:mt-0 w-4/5 lg:w-2/3" alt="">
+        
+        <!-- Trancamento de disciplinas -->
+        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow mb-4 lg:mb-0 lg:flex-1">
+            <a href="#">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 h-24">Trancamento de disciplinas</h5>
+            </a>
+            <p class="mb-3 font-normal text-gray-700 h-40 overflow-auto h-80">A solicitação de trancamento de disciplinas do 2º semestre/2024 poderá ser feita de 31/08 a 16/09.
+                De acordo com o artigo 73 do Regimento Geral da USP, a carga horária mínima não poderá ser inferior a 12 créditos-aula semanais.
+                Casos excepcionais serão analisados.
+            </p>
+            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                formulário
+                <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                </svg>
+            </a>
+        </div>
+        
+        <!-- Matrícula em menos de 12 créditos-aula / em mais de 40 créditos-aula -->
+        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow mb-4 lg:mb-0 lg:flex-1">
+            <a href="#">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 h-24">Matrícula em menos de 12 créditos-aula / em mais de 40 créditos-aula</h5>
+            </a>
+            <p class="mb-3 font-normal text-gray-700 h-40 overflow-auto h-80">De acordo com o artigo 73 do Regimento Geral da USP, a carga horária mínima não poderá ser inferior a 12 créditos-aula semanais e, de acordo com o artigo 2.º da Resolução CoG nº 3903, não poderá ser superior a 40 horas.
+                Exceção: Alunos que são prováveis formandos e aqueles que não conseguem se inscrever em mais disciplinas por falta de requisitos.
+            </p>
+            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                formulário
+                <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                </svg>
+            </a>
+        </div>
+
+        <!-- Trancamento total do curso -->
+        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow mb-4 lg:mb-0 lg:flex-1">
+            <a href="#">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 h-24">Trancamento total do curso</h5>
+            </a>
+            <p class="mb-3 font-normal text-gray-700 h-40 overflow-auto h-80">A solicitação de trancamento total do curso pode ser feita em qualquer momento do semestre desde que o aluno já tenha obtido, pelo menos, 24 créditos em seu currículo (equivalências não são consideradas).
+                É possível solicitar o trancamento total por até 4 semestres, com a possibilidade de prorrogação por mais 2 semestres.
+                O período em que o aluno estiver legalmente afastado não será computado nos cálculos relativos ao cancelamento de matrícula.
+                Para retornar à atividade no curso, o aluno deve entrar em contato com o Serviço de Graduação via e-mail e solicitar o destrancamento do curso.
+            </p>
+            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                formulário
+                <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                </svg>
+            </a>
         </div>
     </div>
+
+   </div>
+
+
 
     <!--Excluir-->
     <div id="excluir" class="content hidden">
