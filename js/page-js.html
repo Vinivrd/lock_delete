@@ -176,13 +176,13 @@
         })
       }
 
-    //==========================>trancamento total do curso <=================================
+    // ==========================>trancamento total do curso <=================================
     if(pageId == "lock_curso"){
       form.querySelector("#uploadButton").addEventListener('click', function(event) {
         toggleError("lock_curso");
       });
     }
-    //==========================>Matricula<=================================
+    // ==========================>Matricula<=================================
     if(pageId == "matricula"){
       form.querySelector("#uploadButton").addEventListener('click', function(event) {
         toggleError("matricula");
@@ -279,7 +279,6 @@
       }
     });
     
-    console.log("bora ver o erro " + pageId +" "+  hasError);
     if(!hasError && pageId != "lock_curso" &&  pageId != "matricula" ){
       if (!hasError) {
         let userInfos = [];
@@ -322,9 +321,9 @@
 
           } else if (input.type == "radio") {
             if(input.value == 1 && input.checked == true) {
-              userInfos.push("Já tranquei anteriormente")
+              userInfos.push("Sim")
             }else if(input.value == 2 && input.checked == true){
-              userInfos.push("Nunca tranquei")
+              userInfos.push("Não")
             }else if((input.value == 3 || input.value == 4) && input.checked == true){
               userInfos.push("Termo aceito")
             }
@@ -333,7 +332,7 @@
           }
         });
         sendArquivo(userInfos);
-        google.script.run.userClicked(userInfos, seletor.slice(1, -1));
+        //google.script.run.userClicked(userInfos, seletor.slice(1, -1));
         if(pageId == "lock_curso"){
           alert("Aguarde um momento até o seu arquivo ser enviado.")
         }else{
@@ -346,6 +345,8 @@
           if (input.id.includes("select")) {
             //preciso testar se existi
             let ele = form.getElementsByClassName(`${input.name}-${input.value}`)
+            console.log(ele);
+
             if (ele.length > 0) {
               userInfos.push(form.getElementsByClassName(`${input.name}-${input.value}`)[0].textContent);
             } else {
@@ -534,9 +535,8 @@
           };
           sendToServer(data1);
       };
-
+      
       reader1.readAsArrayBuffer(file);
-
       function sendToServer(data1) {
           google.script.run.withSuccessHandler(function(response) {
               form.querySelector('#status').innerText = response;
