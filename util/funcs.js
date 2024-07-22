@@ -54,18 +54,9 @@ function userClicked(userInfo, seletor) {
   let ws = ss.getSheetByName(`userInfo ${seletor}`);
 
   //dados email
-  let destinatario = userInfo[2]; 
-  let assunto = seletor == "trancar" ? "Solicitação de trancamento de disciplina" : "Confirmação de exclusão de Disciplina";
-
-  let corpo = `
-    Prezado(a) ${userInfo[0]},\n
-    Recebemos a sua solicitação para ${seletor} a disciplina ${userInfo[11] === '' ? userInfo[14]+"-"+userInfo[15] : userInfo[11]} e informamos que ela será analisada em breve.\nSe precisar de assistência adicional ou tiver dúvidas sobre como essa exclusão pode impactar sua grade curricular, por favor, entre em contato com o Serviço de Graduação ou com o coordenador do curso.
-    \nAtenciosamente,
-    \nServiço de Graduação do ICMC/USP`;
+  const { assunto, messageTous, messageToUser, destinatario } = textEmail(seletor, userInfo);
   
   ws.appendRow(userInfo);
-  MailApp.sendEmail(destinatario, assunto, corpo, {noReply: true});
-  emailCurso(userInfo[3], userInfo, seletor);
 }
 
 function emailCurso(curso, userInfo, seletor) {
@@ -162,10 +153,13 @@ function textEmail(seletor,userInfo){
 
   switch (seletor) {
     case "trancar":
+      destinatario = userInfo[2];
+
       assunto = "Solicitação de trancamento de disciplina";
+
       messageTous = `
         Prezado(a) ${userInfo[0]},\n
-        Recebemos a sua solicitação para ${seletor} a disciplina ${userInfo[11] === '' ? userInfo[14]+"-"+userInfo[15] : userInfo[11]} e informamos que ela será analisada em breve.\nSe precisar de assistência adicional ou tiver dúvidas sobre como essa exclusão pode impactar sua grade curricular, por favor, entre em contato com o Serviço de Graduação ou com o coordenador do curso.
+        Recebemos a sua solicitação para trancar a disciplina ${userInfo[11] === '' ? userInfo[14]+"-"+userInfo[15] : userInfo[11]} e informamos que ela será analisada em breve.\nSe precisar de assistência adicional ou tiver dúvidas sobre como essa exclusão pode impactar sua grade curricular, por favor, entre em contato com o Serviço de Graduação ou com o coordenador do curso.
         \nAtenciosamente,
         \nServiço de Graduação do ICMC/USP`;
 
@@ -181,12 +175,18 @@ function textEmail(seletor,userInfo){
           Créditos-aula matriculado: ${userInfo[8]}
           Créditos-aula em que ficará matriculado após o trancamento ${userInfo[20]}
         `;  
+        MailApp.sendEmail(destinatario, assunto, messageToUser, {noReply: true});
+        emailCurso(userInfo[3], userInfo, seletor);
+
       break;
     case "excluir":
+      destinatario = userInfo[2];
+
       assunto = "Solicitação de exclusão de disciplina";
+
       messageTous = `
         Prezado(a) ${userInfo[0]},\n
-        Recebemos a sua solicitação para ${seletor} a disciplina ${userInfo[11] === '' ? userInfo[14]+"-"+userInfo[15] : userInfo[11]} e informamos que ela será analisada em breve.\nSe precisar de assistência adicional ou tiver dúvidas sobre como essa exclusão pode impactar sua grade curricular, por favor, entre em contato com o Serviço de Graduação ou com o coordenador do curso.
+        Recebemos a sua solicitação para exclusão da disciplina ${userInfo[11] === '' ? userInfo[14]+"-"+userInfo[15] : userInfo[11]} e informamos que ela será analisada em breve.\nSe precisar de assistência adicional ou tiver dúvidas sobre como essa exclusão pode impactar sua grade curricular, por favor, entre em contato com o Serviço de Graduação ou com o coordenador do curso.
         \nAtenciosamente,
         \nServiço de Graduação do ICMC/USP`;
 
@@ -202,18 +202,53 @@ function textEmail(seletor,userInfo){
           Créditos-aula matriculado: ${userInfo[8]}
           Créditos-aula em que ficará matriculado após a exclusão: ${userInfo[20]}`
 
+          MailApp.sendEmail(destinatario, assunto, messageToUser, {noReply: true});
+          emailCurso(userInfo[3], userInfo, seletor);
       break;
     case "lock_curso":
-      
+      destinatario =  userInfo[4];
+
+      assunto =  "solicitação de trancamento total do curso";
+
+      messageTous = `
+        Nome: ${ userInfo[0]}
+        Curso: ${ userInfo[2] }
+        Número USP: ${ userInfo[1] }
+        Email: ${ userInfo[4] }
+        Total de créditos: ${ userInfo[6] }
+        Já trancou o curso anteriormente: ${ userInfo[7] }
+        Cumprindo plano de término de curso: ${ userInfo[8] }
+        Previsão de término: semestre / ano ${ userInfo[10] }/${userInfo[9]}
+        Justificativa: ${ userInfo[17] }`;
+
+      messageToUser = `Prezado(a) ${ userInfo[0]}, \n
+        Recebemos sua solicitação de trancamento total do curso.
+        ${ messageTous }\nEm breve ela será analisada\nAtenciosamente.\nServiço de Graduação do ICMC / USP`;
       break;
+
     case "matricula":
-      
+      destinatario = userInfo[4];
+
+      assunto = "Solicitação de matrícula em menos de 12 créditos-aula/mais de 40 créditos-aula";
+      messageTous = ` 
+      Nome: ${ userInfo[0]}
+      Curso: ${ userInfo[2] }
+      Número USP: ${ userInfo[1] }
+      Email: ${ userInfo[4] }
+      Previsão de término: semestre / ano ${ userInfo[7] }/${userInfo[6]} 
+      Menos de 12 ou mais de 40: ${ userInfo[8] }
+      Justificativa: ${ userInfo[9] }
+      `
+
+      messageToUser = `Prezado(a) ${ userInfo[0]},\nRecebemos sua solicitação de matrícula em menos de 12 créditos - aula / mais de 40 créditos - aula.
+        ${messageTous}\nEm breve ela será analisada\nAtenciosamente.\nServiço de Graduação do ICMC / USP.`;
       break;
   
     default:
       break;
   }
 
+  return {assunto,messageTous,messageToUser,destinatario};
 }
 
 
